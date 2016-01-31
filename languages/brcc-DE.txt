@@ -1,0 +1,113 @@
+LOGIN=Anmelden
+LOGOUT=Abmelden
+
+HOME=Zuhause
+ABOUT=&uuml;ber
+SIGNUP=Einschreiben
+RELEASEHISTORY=Ver&ouml;ffentlichung Historie
+CONTACT=Umgang
+HELP=Helfen Sie
+TUTORIALS=Lernprogramm
+FAQS=FAQs
+MANAGER=Manager
+DASHBOARD=Armaturenbrett
+COMPONENTS=Komponente
+
+VERSION=Version
+VERSION_LC=version
+
+NOTAMEMBER=Noch kein Mitglied?
+CREATEANACCOUNT=Erstellen Sie ein Konto
+
+BRCC=Black Rabbit Component Creator
+
+TIRED=M&uuml;de von der Erstellung der Datei-Struktur jedes Mal, wenn eine neue Komponente f&uuml;r Joomla? Lassen Sie uns es f&uuml;r Sie tun! Diese <strong>einfach zu bedienende </strong> Tool erstellt eine installierbare Komponente Paket aus den Konfigurationen, die Sie aufgef&uuml;hrt. W&auml;hlen Sie einfach die <strong>Joomla-Version</strong> Sie wollen, dass es zu installieren und zu erhalten, um mit der Eingabe. Kein Zeichen-up erforderlich!
+
+GETSTARTED=Starten
+COMPONENTDEV=Komponente Entwicklung Beispiele
+HELLOWORLDDESC=Both the following components were built with just this tool from the configuration options below.
+DOWNLOADEX=Download Example
+
+FUNSTATS=Fun Stats
+FUNSTATSHISTORY=History of the component creator and how it has helped others
+
+TOTALLINESCREATED=Total Lines of Code Created
+TOTALCOMPSCREATED=Total Components Created
+TOTALFILESCREATED=Total Number of Files Created
+TOTALTIMESCREATED=Total Time Saved In All
+
+STATSSINCE=stats since
+SECONDSALLOC=seconds allocated per line of code
+
+COMPCREATECONFIG=Component Creator Config
+COMPCREATEFORM=Component Creator Form
+PROGRESS=Progress
+INSTALLDETAILS=Install Details
+AUTHOR=Author
+VIEWS=Views
+TABLES=Tables
+IMAGES=Images
+
+COMPNAME=Component Name
+COMPFILE=Component File Name
+DESC=Description
+COPYRIGHT=Copyright
+LICENSE=License
+
+AUTHORINFO=Author Info
+AUTHOREMAIL=Author E-mail
+AUTHORURL=Author URL
+
+ADDCATVIEW=Add Category View
+MAINVIEW=Main View
+SINGLEVIEWVERB=Single View Verbiage
+ADDVIEW=Add View
+
+USEDATABASE=Use Database
+
+YES=Yes
+NO=No
+
+NEEDHELP=Need a little help?
+SURE=Sure
+GOTITTHANKS=Got it, thanks.
+
+ALITTLEMORE=A little help then
+ALITTLEMOREONE=<strong>No need to add an ID!</strong> That is automatically added for each table that is created.
+ALITTLEMORETWO=<strong>Please Note</strong> The first field of each database table will be the field used in the link creation, unless an alias field is present!
+ALITTLEMORETHREE=Please use the default/values box for select options for a <strong>select / radio</strong> list. Separated by a comma (,) with the default in [brackets]. Example: apples, oranges, [pears], pineapple.
+ALITTLEMOREFOUR=For an integers field list, set the start number and end number only. (Example: 1##100 and place that into the default/values field.)
+ALITTLEMOREFIVE=Confused on the tables tab? Check out the "What does the table tab mean and how do I use it?" section on the
+PAGE=page
+ALITTLEMORESIX=Video tutorial on just using the table side of this tool coming soon!
+
+USERCREATEDMODIFIED=User Erstellt / Ge&auml;ndert
+DATECREATEDMODIFIED=Erstellungsdatum / Modified
+
+IMAGEHEIGHT=Bildh&ouml;he
+IMAGEWIDTH=Bildbreite
+IMAGETHUMBHEIGHTWIDTH=Bilder Standbild H/W
+
+FIELDNAME=Field Name & Type
+DEFAULTVALUES=Default/Values
+CALENDAR=Calendar
+CATEGORY=Category
+CHECKBOX=Checkbox
+CONTENTEDITOR=Content Editor
+FILEIMAGEUPLOAD=Image Upload
+HIDDEN=Hidden
+NUMBERS=Numbers
+INTEGER=Integer
+LIST=List
+RADIO=Radio
+TEXTBOX=Text Box
+TEXTAREA=Text Area
+
+SHOWONMANAGER=Show on Manager View
+REQUIRED=Required
+ADDFIELD=Add Field
+
+BRANDYOURCOMPONENT=Brand your component with images for each view!
+CREATECOMPONENT=Create Component
+
+MODULES=Modules

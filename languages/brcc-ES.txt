@@ -1,0 +1,112 @@
+LOGIN=Login
+LOGOUT=Salir
+
+HOME=Casa
+ABOUT=Acerca de
+SIGNUP=Reg&iacute;strate
+RELEASEHISTORY=Historial de Versiones
+CONTACT=Contacto
+HELP=Ayudar
+TUTORIALS=Tutoriales
+FAQS=FAQs
+MANAGER=Gerente
+DASHBOARD=Salpicadero
+COMPONENTS=Componentes
+
+VERSION=Versi&oacute;n
+VERSION_LC=versi&oacute;n
+
+NOTAMEMBER=&iquest;No eres miembro?
+CREATEANACCOUNT=Crear una cuenta
+
+BRCC=Black Rabbit Component Creator
+
+TIRED=&iquest;Cansado de crear una estructura de archivos cada vez que se crea un nuevo componente para Joomla? Vamos a hacer por usted! Este <strong>f&aacute;cil de usar</strong> herramienta crea un paquete de componente instalable de las configuraciones que ha establecido a continuaci&oacute;n. S&oacute;lo tienes que seleccionar el que <strong>Joomla versi&oacute;n</strong> que desea que se instale y para llegar a escribir. No sign-up necesario!
+
+GETSTARTED=Comenzar
+COMPONENTDEV=Ejemplos de desarrollo de componentes
+HELLOWORLDDESC=Tanto los siguientes componentes fueron construidos con s&oacute;lo esta herramienta desde las opciones de configuraci&oacute;n a continuaci&oacute;n.
+DOWNLOADEX=Descarga Ejemplo
+
+FUNSTATS=Fun Estad&iacute;sticas
+FUNSTATSHISTORY=Historia del creador de los componentes y la forma en que ha ayudado a otros
+
+TOTALLINESCREATED=Total de l&iacute;neas de c&oacute;digo creado
+TOTALCOMPSCREATED=Componentes total creado
+TOTALFILESCREATED=N&uacute;mero total de archivos creados
+TOTALTIMESCREATED=Tiempo total Guardado En Todo
+
+STATSSINCE=estad&iacute;sticas desde
+SECONDSALLOC=segundos asignados por cada l&iacute;nea de c&oacute;digo
+
+COMPCREATECONFIG=Config Creador componentes
+COMPCREATEFORM=Component Creator Form
+PROGRESS=Progreso
+INSTALLDETAILS=Instale Detalles
+AUTHOR=Autor
+VIEWS=Vistas
+TABLES=Tablas
+IMAGES=Im&aacute;genes
+
+COMPNAME=Nombre del Componente
+COMPFILE=Componente Nombre de archivo
+DESC=Descripci&oacute;n
+COPYRIGHT=Derechos de autor
+LICENSE=Licencia
+
+AUTHORINFO=Informaci&oacute;n del Autor
+AUTHOREMAIL=Autor E-mail
+AUTHORURL=Autor URL
+
+ADDCATVIEW=A&ntilde;adir vista por categor&iacute;as
+MAINVIEW=Vista principal
+SINGLEVIEWVERB=vista &uacute;nica verborrea
+ADDVIEW=A&ntilde;adir Ver
+
+USEDATABASE=Utilizar base de datos
+
+YES=S&iacute;
+NO=No
+
+NEEDHELP=&iquest;Necesitas un poco de ayuda?
+SURE=de verdad
+GOTITTHANKS=Lo tengo, gracias.
+
+ALITTLEMORE=Un poco de ayuda y luego
+ALITTLEMOREONE=<strong>No es necesario a&ntilde;adir un ID!</strong> Que se agrega autom&aacute;ticamente para cada tabla que se crea.
+ALITTLEMORETWO=<strong>Por favor Nota</strong> El primer campo de cada tabla de la base ser&aacute; el campo que se utiliza en la creaci&oacute;n de enlaces, a menos que un campo de alias est&aacute; presente!
+ALITTLEMORETHREE=Utilice el cuadro de valores default / para seleccionar opciones de <strong> select / radio </strong>. Separados por una coma (,) con el valor por defecto entre [corchetes]. Ejemplo: manzanas, naranjas, [peras], pi&ntilde;a.
+ALITTLEMOREFOUR=Para una lista de campos enteros, establezca el n&uacute;mero de inicio y finalizaci&oacute;n n&uacute;mero &uacute;nico. (Ejemplo: 1 ## 100 y el lugar que en el default / campo de valores.)
+ALITTLEMOREFIVE=&iquest;Confundido en la ficha tablas? Echa un vistazo a la secci&oacute;n "&iquest;Qu&eacute; significa la pesta&ntilde;a de mesa y c&oacute;mo lo uso?" secci&oacute;n sobre el
+PAGE=p&aacute;gina
+ALITTLEMORESIX=Video tutorial sobre el uso de s&oacute;lo el lado de la mesa de esta herramienta muy pronto!
+
+USERCREATEDMODIFIED=Usuario Creado / Modificado
+DATECREATEDMODIFIED=Fecha de creaci&oacute;n / modificaci&oacute;n
+
+IMAGEHEIGHT=Altura de la Imagen
+IMAGEWIDTH=Ancho de la Imagen
+IMAGETHUMBHEIGHTWIDTH=Imagen Colocación de H/W
+
+FIELDNAME=Nombre del campo &amp; Tipo
+DEFAULTVALUES=
+CALENDAR=Calendario
+CATEGORY=Categor&itilde;a
+CHECKBOX=Casilla de Verificaci&oacute;n
+CONTENTEDITOR=Editor de Contenido
+FILEIMAGEUPLOAD=Imagen Subir
+HIDDEN=Oculto
+NUMBERS=N&uacute;meros
+INTEGER=Entero
+LIST=Lista
+RADIO=Radio
+TEXTBOX=Cuadro de Texto
+TEXTAREA=&aacute;rea de Texto
+SHOWONMANAGER=Mostrar en el Administrador de Vistas
+REQUIRED=Necesario
+ADDFIELD=A&ntilde;adir Campo
+
+BRANDYOURCOMPONENT=Marca su componente con im&aacute;genes para cada Vista!
+CREATECOMPONENT=Creaci&oacute;n de Componentes
+
+MODULES=Modules

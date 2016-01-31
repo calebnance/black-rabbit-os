@@ -1,0 +1,68 @@
+body { padding-top: 0px; padding-bottom: 40px; }
+
+a, a:visited, a:link, a:hover { color outline: 0; }
+
+/*a:hover, a:active, a:focus { background: #000; color: #FFF!important; }*/
+
+::selection { background: #fff2a8; /* Chrome & Safari */ }
+::-moz-selection { background: #fff2a8; /* Firefox */ }
+
+dl dt, dl dd { padding: 10px 0;}
+
+#language-select { margin: 0; padding: 0; }
+#language-choice { margin: 0px 10px 0 0; }
+#language-choice .btn { border-radius: 0!important; border-top: none!important; margin: 0 0 10px 0; }
+
+.nav a { color: #000; }
+.nav.nav-pills li li a:hover { background: #EFEFEF; color: #000; }
+.nav.nav-pills li.active li a { background: #FFF !important; color: #000; }
+.nav.nav-pills li.active li a:hover { background: #000 !important; color: #FFF; }
+.nav.nav-pills li.active a, .nav.nav-pills li li.active a { background: #000 !important; color: #FFF; }
+
+.container-narrow { margin: 0 auto; max-width: 800px; }
+.container-narrow > hr { margin: 30px 0; }
+
+.login { border-radius: 0!important; border-top: none!important; float: right; margin: 0 0 10px 0; }
+
+.jumbotron { margin: 60px 0; text-align: center; }
+.jumbotron h1 { font-size: 52px; line-height: 1; }
+.jumbotron .btn { font-size: 21px; padding: 14px 24px; }
+
+#myTab li span { font-weight: bold; }
+
+.well { text-align: center; }
+.well .btn { font-size: 18px; padding: 14px 24px; }
+.status { display: inline; margin: 0 0 0 10px; width: 26px; }
+
+#tables .error { border: 1px solid #b94a48; }
+
+#step1, #step2, #step3, #download-full-package { display: none; }
+/* progres bar float */
+#scroller { z-index: 10000; }
+
+#showhelpfortables { display: none; }
+
+/* image upload */
+#imageReturn { margin: 10px 0 0 0; }
+.imageProgress { border: 1px solid #ddd; border-radius: 3px; margin: 0 0 10px 0; padding: 1px; position:relative; width:400px; }
+.imageBar { background-color: #B4F5B4; border-radius: 3px; height: 20px; width: 0%; }
+.imagePercent { display: inline-block; left: 48%; position:absolute; top:3px; }
+
+/* custom label */
+.label-j25 { background: #6a379b; }
+.label-j30 { background: #c39106; }
+.label-j31 { background: #a7246c; }
+.label-extend { background: #2fa89e; }
+
+/* debug */
+.debug { background: #FF0; font-weight: bolder; padding: 20px; text-align: center; width: 100%; }
+
+/* responsive */
+/* Large desktop */
+@media (min-width: 1200px) {}
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) {}
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) {}
+/* Landscape phones and down */
+@media (max-width: 480px) {}

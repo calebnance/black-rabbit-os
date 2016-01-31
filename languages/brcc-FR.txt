@@ -1,0 +1,116 @@
+LOGIN=Connexion
+LOGOUT=D&eacute;connexion
+
+HOME=Accueil
+ABOUT=A propos
+SIGNUP=Se connecter
+RELEASEHISTORY=Historique des versions
+CONTACT=Contact
+HELP=Aide
+TUTORIALS=Tutoriels
+FAQS=FAQs
+MANAGER=Manager
+DASHBOARD=Tableau de bord
+COMPONENTS=Composants
+
+VERSION=Version
+VERSION_LC=version
+
+NOTAMEMBER=Pas encore membre?
+CREATEANACCOUNT=Cr&eacute;er un compte
+
+BRCC=Black Rabbit Component Creator
+
+TIRED=Marre de cr&eacute;er une nouvelle structure &aacute; chaque fois que vous cr&eacute;ez un nouveau composant pour Joomla? Laissez nous le faire pour vous! Cet outil <strong>facile &aacute; prendre en main</strong> cr&eacute;&eacute; un composant prêt &aacute; être install&eacute; d'apr&egrave;s les configurations ci-dessous. Selectionnez la <strong>version de Joomla! </strong> que vous souhaitez utiliser et c'est parti ! Cet outil est gratuit et ne n&eacute;cessite pas d'inscription.
+
+GETSTARTED=Commencer
+COMPONENTDEV=Example de composants
+HELLOWORLDDESC=Ces deux composants ont &eacute;t&eacute; conçus uniquement avec cet outil et les options disponibles ci-dessous.
+DOWNLOADEX=T&eacute;l&eacute;charger l'exemple
+
+FUNSTATS=Dr&ocirc;le de statistiques
+FUNSTATSHISTORY=Les avanc&eacute;es du cr&eacute;ateur de composant et ses utilit&eacute;s
+
+TOTALLINESCREATED=Total de lignes de code cr&eacute;&eacute;es
+TOTALCOMPSCREATED=Total de composants cr&eacute;&eacute;s
+TOTALFILESCREATED=Nombre total de fichiers cr&eacute;&eacute;s
+TOTALTIMESCREATED=Temps total sauv&eacute;
+
+STATSSINCE=Statistiques depuis
+SECONDSALLOC=secondes par lignes de code
+
+COMPCREATECONFIG=Configuration du g&eacute;n&eacute;rateur de composant
+COMPCREATEFORM=Component Creator Form
+PROGRESS=Progression
+INSTALLDETAILS=D&eacute;tails de l'installation
+AUTHOR=Auteur
+VIEWS=Vues
+TABLES=Tables
+IMAGES=Images
+
+COMPNAME=Nom du composant
+COMPFILE=Nom du fichier du composant
+DESC=Description
+COPYRIGHT=Copyright
+LICENSE=Licence
+
+AUTHORINFO=Informations sur l'auteur
+AUTHOREMAIL=E-mail de l'auteur
+AUTHORURL=Site web de l'auteur
+
+ADDCATVIEW=Ajouter une vue cat&eacute;gorie
+MAINVIEW=Vue principale
+SINGLEVIEWVERB=Description de la vue principale
+ADDVIEW=Ajouter la vue
+
+USEDATABASE=Utiliser la base de donn&eacute;es
+
+YES=Oui
+NO=Non
+NEW=Nouveau
+OLD=Ancien
+
+NEEDHELP=Besoin d'aide ?
+SURE=Bien s&ucirc;r!
+GOTITTHANKS=J'ai compris, merci.
+
+ALITTLEMORE=Un peu d'aide alors...
+ALITTLEMOREONE=<strong>Pas besoin d'ajouter un ID!</strong> Il sera automatiquement ajout&eacute; pour chaque table cr&eacute;&eacute;e.
+ALITTLEMORETWO=<strong>Notez que</strong> le premier champ de claque table sera le champ utilis&eacute; dans la cr&eacute;ation du lien &aacute; joins qu'un champ d'alias ne soit pr&eacute;sent.
+
+ALITTLEMORETHREE=Pour la s&eacute;lection de plusieurs options, pour des listes <strong>select ou radio</strong> veillez &aacute; utiliser le champ de valeur/d&eacute;faut. S&eacute;parez les valeurs par une virgule (,) et placez la valeur par d&eacute;faut dans des [crochets]. Par exemple : pommes, oranges, [poires], ananas. 
+ALITTLEMOREFOUR=Pour un champ de nombres, renseignez le nombre de d&eacute;part et le nombre de fin. Par exemple : 1##100 dans le champ valeur signifie un nombre entre 1 et 100.
+ALITTLEMOREFIVE=Confus &aacute; propos de l'onglet des tables ? Rendez-vous &aacute; la section "Que repr&eacute;sente l'onglet table et comment l'utiliser?" sur la page de 
+PAGE=
+ALITTLEMORESIX=Un tutoriel vid&eacute;o sur comment utiliser les tables de cet outil va bient&ocirc;t sortir!
+
+USERCREATEDMODIFIED=Utilisateur Cr&eacute;&eacute; / Modifi&eacute;
+DATECREATEDMODIFIED=Date de cr&eacute;ation / modification
+
+IMAGEHEIGHT=Hauteur de l'image
+IMAGEWIDTH=Largeur de l'image
+IMAGETHUMBHEIGHTWIDTH=Images Ins&eacute;rer H / W
+
+FIELDNAME=Nom et Type du champ
+DEFAULTVALUES=Valeurs/D&eacute;faut
+CALENDAR=Calendrier
+CATEGORY=Categorie
+CHECKBOX=Checkbox
+CONTENTEDITOR=Editeur de contenu
+FILEIMAGEUPLOAD=Envoi de fichier/d'image
+HIDDEN=Cach&eacute;
+NUMBERS=Nombres
+INTEGER=Nombre entier (int)
+LIST=Liste
+RADIO=Radio
+TEXTBOX=Text Box
+TEXTAREA=Text Area
+
+SHOWONMANAGER=Montrer sur la vue du manager
+REQUIRED=Requis
+ADDFIELD=Ajouter un champ
+
+BRANDYOURCOMPONENT=Ajoutez des images &aacute; votre composant pour chaque vue !
+CREATECOMPONENT=Cr&eacute;er le composant
+
+MODULES=Modules

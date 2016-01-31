@@ -1,0 +1,78 @@
+<?php
+	// Include database and config
+	include('../master.php');
+
+	// First time? Set the admin up.
+	$database = new Database( HOST, DBNAME, DBUSER, DBPASS);
+	$adminCheck = $database->select('br_admins', '*', '1=1', 'object');
+
+	if($adminCheck):
+		header('location:login.php');
+		exit();
+	endif;
+
+	// Default messages
+	$msg = '';
+	$msgclass = 'error';
+
+	$post = $_POST;
+
+	if($post):
+
+		if($post['password'] != $post['cpassword']):
+			$msg = 'Passwords do not match!';
+		elseif($post['username'] && $post['password'] && $post['cpassword']):
+			$posted_date = date("Y-m-d H:i:s");
+			$query = "INSERT INTO br_admins (username, password, last_login) VALUES ('".$post['username']."', '".md5($post['password'])."','".$posted_date."')";
+			$connect = database::open($host, $db_user, $db_pass, $db_name);
+			if (!mysql_query($query, $connect)):
+				die('Error: ' . mysql_error());
+			endif;
+			header('location:login.php?msg=3');
+			exit();
+		else:
+			$msg = 'Fill in all fields!';
+			$msgclass = 'warning';
+		endif;
+	endif;
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Admin Sign In</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="author" content="Caleb Nance - www.calebnance.com">
+		<!-- Le styles -->
+		<link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
+		<style type="text/css">
+			body { padding-top: 40px; padding-bottom: 40px; background-color: #f5f5f5;}
+			.form-signin { max-width: 300px; padding: 19px 29px 29px; margin: 0 auto 20px; background-color: #fff; border: 1px solid #e5e5e5; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05); -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05); box-shadow: 0 1px 2px rgba(0,0,0,.05); }
+			.form-signin .form-signin-heading, .form-signin .checkbox { margin-bottom: 10px; }
+			.form-signin input[type="text"],.form-signin input[type="password"] { font-size: 16px; height: auto; margin-bottom: 15px; padding: 7px 9px; }
+		</style>
+		<link href="../bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+		<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="container">
+			<form class="form-signin" method="post" action="welcome.php">
+				<h2 class="form-signin-heading">Admin Set Up</h2>
+				<?php if($msg): ?>
+				<div class="alert alert-<?php echo $msgclass; ?>"><button type="button" class="close" data-dismiss="alert">&times;</button><?php echo $msg; ?></div>
+				<?php endif; ?>
+				<input type="text" name="username" class="input-block-level" placeholder="Username">
+				<input type="password" name="password" class="input-block-level" placeholder="Password">
+				<input type="password" name="cpassword" class="input-block-level" placeholder="Confirm Password">
+				<button class="btn btn-large btn-success" type="submit">Create Admin</button>
+			</form>
+		</div> <!-- /container -->
+		<!-- Le javascript
+		================================================== -->
+		<script src="../js/jquery-1.8.3.min.js"></script>
+		<script src="../bootstrap/js/bootstrap.min.js"></script>
+	</body>
+</html>
