@@ -3,6 +3,15 @@ Black Rabbit Open Source
 <h3>Black Rabbit (Open Source) Joomla Component Creator</h3>
 <p>Easily create a fully installable Joomla 2.5/3.0 component from scratch just by filling in the form!</p>
 
+<h3>Final Stats</h3>
+<p>After the 3 years run, this component creator helped the <a href="https://www.joomla.org" target="_blank">Joomla</a> community develop custom components/modules.</p>
+<p>Here are some stats before I took it off-line and placed it here for the community to use.</p>
+<p><strong>Total Lines of Code Created:</strong> 51,843,240</p>
+<p><strong>Total Components Created:</strong> 25,194</p>
+<p><strong>Total Number of Files Created:</strong> 3,589,922</p>
+<p><strong>Total Time Saved In All:</strong> 216,013:30:0 **</p>
+<p><small>** 15 seconds allocated per line of code</small></p>
+
 <h3>Terms of Use</h3>
 <p>This code set was written <a href="https://twitter.com/calebnance/status/335807921076178944">3 years ago</a>. I haven't updated it in more than a year, and the hosted site for this was hacked a couple months back. I didn't have time to fix everything, so I have decided to give the code to the Joomla community and let you all do with it as you'd like.</p>
 <p>Literally anything goes, take this code apart, add to it, fork it, clone it, rebrand it, make money from it.. <strong>I don't care what you do with this code</strong>. It's for whoever wants it.</p>
