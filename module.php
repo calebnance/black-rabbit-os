@@ -1,6 +1,6 @@
 <?php
 	include('master.php');
-	
+
 	// Session check
 	session_start();
 	// store session data
@@ -10,13 +10,13 @@
 	else:
 		FileHelper::checksession();
 	endif;
-	
+
 	// DB Connect
 	$database = new Database( HOST, DBNAME, DBUSER, DBPASS);
-	
+
 	// Set user ID
 	$uid = $_SESSION['uid'];
-	
+
 	// If the module is being downloaded
 	if(isset($_POST['task']) && $_POST['task'] == 'mdownload'):
 		$downloadModule = $database->select('br_modules', '*', 'uid="'.$uid.'" AND id="'.$_POST['mid'].'"', 'object');
@@ -37,23 +37,23 @@
 		endif;
 		exit();
 	endif;
-	
+
 	// Call header
 	$pageTitle = 'My Modules for Black Rabbit Joomla Component Creator | Free | Joomla 2.5 & Joomla 3.0';
 	$pageActive = 'modules';
 	$pageActiveBreadcrumb = '<li class="active">Create Module</li>';
-	
+
 	// Modules and such
 	$userModules = $database->select('br_modules', '*', 'uid="'.$uid.'" AND midparent="0"', 'object'); // grab parents first
 	$userModulesCount = count($userModules);
 	$textModules = $userModulesCount > 1 || $userModulesCount == 0 ? 'modules' : 'module';
-	
+
 	include('template/header.php');
-	
+
 	// MSG handling
 	$msg = '';
 	$error_type = 'error';
-	
+
 	// Default vals
 	$uMJVersion 	= '2.5.0';
 	$uMJVersion25	= $uMJVersion30 = '';
@@ -63,7 +63,7 @@
 	$uMAuthor 		= $_SESSION['fname'] . ' ' . $_SESSION['lname'];
 	$uMCopyright	= 'Copyright (C) ' . date('Y') . '. All Rights Reserved';
 	$uMLicense		= 'GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html';
-	
+
 	// If the module is being updated.
 	if(isset($_POST['mid'])):
 		$editModule 	= $database->select('br_modules', '*', 'uid="'.$uid.'" AND id="'.$_POST['mid'].'"', 'object'); // get module to update!
@@ -81,7 +81,7 @@
 		$uMCopyright	= $editModule->copyright;
 		$uMLicense		= $editModule->license;
 	endif;
-	
+
 	// Make sure Joomla version is right
 	switch($uMJVersion){
 		case '2.5.0':
@@ -107,7 +107,7 @@
 								<?php echo $msg; ?>
 							</div>
 							<?php endif; ?>
-							
+
 							<h1><i class="icon-paper-clip"></i> Create Module</h1>
 						</div><!-- /.span12 -->
 						<?php
@@ -134,7 +134,7 @@
 											<div class="status inline"><i class="icon-asterisk"></i></div>
 										</div><!-- /.controls -->
 									</div><!-- /.control-group -->
-									
+
 									<div class="control-group">
 										<label class="control-label"><?php echo $brtext->__('MODFILE'); ?> <span class="pophelp" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="This will be the package name and how it will be installed. All spaces will be replaced, should not have spaces." title="Tip"><i class="icon icon-info-sign"></i></span></label>
 										<div class="controls">
@@ -145,7 +145,7 @@
 											<div class="status inline"><i class="icon-asterisk"></i></div>
 										</div><!-- /.controls -->
 									</div><!-- /.control-group -->
-									
+
 									<div class="control-group">
 										<label class="control-label"><?php echo $brtext->__('MODAUTHOR'); ?></label>
 										<div class="controls">
@@ -153,7 +153,7 @@
 											<div class="status inline"><i class="icon-asterisk"></i></div>
 										</div><!-- /.controls -->
 									</div><!-- /.control-group -->
-									
+
 									<div class="control-group">
 										<label class="control-label"><?php echo $brtext->__('MODAUTHOREMAIL'); ?></label>
 										<div class="controls">
@@ -161,7 +161,7 @@
 											<div class="status inline"><i class="icon-asterisk"></i></div>
 										</div><!-- /.controls -->
 									</div><!-- /.control-group -->
-									
+
 									<div class="control-group">
 										<label class="control-label"><?php echo $brtext->__('MODAUTHORURL'); ?></label>
 										<div class="controls">
@@ -172,7 +172,7 @@
 											<div class="status inline"><i class="icon-asterisk"></i></div>
 										</div><!-- /.controls -->
 									</div><!-- /.control-group -->
-									
+
 									<div class="control-group">
 										<label class="control-label"><?php echo $brtext->__('VERSION'); ?></label>
 										<div class="controls">
@@ -189,7 +189,7 @@
 											<div class="status inline"><i class="icon-asterisk"></i></div>
 										</div><!-- /.controls -->
 									</div><!-- /.control-group -->
-									
+
 									<div class="control-group">
 										<label class="control-label"><?php echo $brtext->__('MODCOPYRIGHT'); ?></label>
 										<div class="controls">
@@ -197,7 +197,7 @@
 											<div class="status inline"></div>
 										</div><!-- /.controls -->
 									</div><!-- /.control-group -->
-									
+
 									<div class="control-group">
 										<label class="control-label"><?php echo $brtext->__('MODLICENSE'); ?></label>
 										<div class="controls">
@@ -207,13 +207,13 @@
 									</div><!-- /.control-group -->
 
 								</div><!-- /.span6 -->
-								
+
 								<div class="span12">
 									<div class="well well-small center">
 										<button type="submit" class="btn btn-large btn-primary">Create Module</button>
 									</div>
 								</div><!-- /.span12 -->
-								
+
 							</form>
 						</div><!-- /#modules-list -->
 						<?php

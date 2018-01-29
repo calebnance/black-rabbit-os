@@ -816,21 +816,21 @@
 								<h4><?php echo $brtext->__('DOWNLOADEX'); ?> com_helloworlds (v.<?php echo $br_version; ?>)</h4>
 								<form action="create.php" method="post" class="form-horizontal pull-left" style="margin: 0 10px 10px 0;">
 									<button type="submit" class="btn btn-primary label-j25"><i class="icon icon-download icon-white"></i> Joomla 2.5</button>
-									<input type="hidden" name="version" id="version" value="<?php echo $br_version; ?>" />
-									<input type="hidden" name="jversion" id="jversion1" value="2.5" />
-									<input type="hidden" name="task" id="task" value="download" />
+									<input type="hidden" name="version" value="<?php echo $br_version; ?>" />
+									<input type="hidden" name="jversion" value="2.5" />
+									<input type="hidden" name="task" value="download" />
 								</form>
 								<form action="create.php" method="post" class="form-horizontal pull-left" style="margin: 0 10px 10px 0;">
 									<button type="submit" class="btn btn-primary label-j30"><i class="icon icon-download icon-white"></i> Joomla 3.0</button>
-									<input type="hidden" name="version" id="version" value="<?php echo $br_version; ?>" />
-									<input type="hidden" name="jversion" id="jversion2" value="3.0" />
-									<input type="hidden" name="task" id="task" value="download" />
+									<input type="hidden" name="version" value="<?php echo $br_version; ?>" />
+									<input type="hidden" name="jversion" value="3.0" />
+									<input type="hidden" name="task" value="download" />
 								</form>
 								<form action="create.php" method="post" class="form-horizontal pull-left" style="margin: 0 10px 10px 0;">
 									<button type="submit" class="btn btn-primary label-j32"><i class="icon icon-download icon-white"></i> Joomla 3.2</button>
-									<input type="hidden" name="version" id="version" value="<?php echo $br_version; ?>" />
-									<input type="hidden" name="jversion" id="jversion3" value="3.2" />
-									<input type="hidden" name="task" id="task" value="download" />
+									<input type="hidden" name="version" value="<?php echo $br_version; ?>" />
+									<input type="hidden" name="jversion" value="3.2" />
+									<input type="hidden" name="task" value="download" />
 								</form>
 								<div class="clearfix"></div>
 							</div><!-- /.box-video-list -->
@@ -841,21 +841,21 @@
 								<h4><?php echo $brtext->__('DOWNLOADEX'); ?> com_allfields (v.<?php echo $br_version; ?>)</h4>
 								<form action="create.php" method="post" class="form-horizontal pull-left" style="margin: 0 10px 10px 0;">
 									<button type="submit" class="btn btn-primary label-j25"><i class="icon icon-download icon-white"></i> Joomla 2.5</button>
-									<input type="hidden" name="version" id="version" value="<?php echo $br_version; ?>" />
-									<input type="hidden" name="jversion" id="jversion1" value="2.5" />
-									<input type="hidden" name="task" id="task" value="download_allfields" />
+									<input type="hidden" name="version" value="<?php echo $br_version; ?>" />
+									<input type="hidden" name="jversion" value="2.5" />
+									<input type="hidden" name="task" value="download_allfields" />
 								</form>
 								<form action="create.php" method="post" class="form-horizontal pull-left" style="margin: 0 10px 10px 0;">
 									<button type="submit" class="btn btn-primary label-j30"><i class="icon icon-download icon-white"></i> Joomla 3.0</button>
-									<input type="hidden" name="version" id="version" value="<?php echo $br_version; ?>" />
-									<input type="hidden" name="jversion" id="jversion2" value="3.0" />
-									<input type="hidden" name="task" id="task" value="download_allfields" />
+									<input type="hidden" name="version" value="<?php echo $br_version; ?>" />
+									<input type="hidden" name="jversion" value="3.0" />
+									<input type="hidden" name="task" value="download_allfields" />
 								</form>
 								<form action="create.php" method="post" class="form-horizontal pull-left" style="margin: 0 10px 10px 0;">
 									<button type="submit" class="btn btn-primary label-j32"><i class="icon icon-download icon-white"></i> Joomla 3.2</button>
-									<input type="hidden" name="version" id="version" value="<?php echo $br_version; ?>" />
-									<input type="hidden" name="jversion" id="jversion3" value="3.2" />
-									<input type="hidden" name="task" id="task" value="download_allfields" />
+									<input type="hidden" name="version" value="<?php echo $br_version; ?>" />
+									<input type="hidden" name="jversion" value="3.2" />
+									<input type="hidden" name="task" value="download_allfields" />
 								</form>
 								<div class="clearfix"></div>
 							</div><!-- /.box-video-list -->

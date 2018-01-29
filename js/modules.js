@@ -16,7 +16,7 @@ function validateURL(website) {
 
 function validateEmail(email) {
 	var regexEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-	return regexEmail.test(email); 
+	return regexEmail.test(email);
 }
 
 $(document).ready(function(){
@@ -26,20 +26,20 @@ $(document).ready(function(){
 		$('#jversionselect button').addClass('btn');
 		$value = $(this).val().split('.').join('');
 		if($value == '250'){
-			$value = '25';	
+			$value = '25';
 		}
 		$value = 'label-j' + $value;
 		$(this).addClass('btn-warning active ' + $value);
 		$('#jversion').val($(this).val());
 	});
-	
+
 	$('.modules-manager button').click(function(){
 		var formID	= '#module-manager-form';
 		var action	= $(this).attr('action');
 		var mid		= $(this).attr('mid');
 		var url		= 'module.php';
 		var input	= $('<input>').attr('type', 'hidden').attr('name', 'mid').val(mid);
-		
+
 		if(action == 'edit') {
 			var pid	= $(this).attr('pid');
 			var input2 = $('<input>').attr('type', 'hidden').attr('name', 'pid').val(pid);
@@ -56,7 +56,7 @@ $(document).ready(function(){
 			$(formID).submit();
 		}
 	});
-	
+
 	function countdown(){
 		var count = 15;
 		countdown = setInterval(function(){
@@ -78,27 +78,27 @@ $(document).ready(function(){
 		}, 1000);
 	}
 	countdown();
-	
+
 	$('#filename').on('keyup', function(){
 		$(this).val($(this).val().replace(/[^A-Za-z\.]+/g, ''));
 	});
-	
+
 	$('#version').on('keyup', function(){
 		$(this).val($(this).val().replace(/[^0-9.\.]+/g, ''));
 	});
-	
+
 	function inputError(element){
 		element.addClass('error').removeClass('success');
 	}
-	
+
 	function inputSuccess(element){
 		element.removeClass('error').addClass('success');
 	}
-	
+
 	$('form#module-mainform').submit(function() {
 		var empty_count = 0;
 		var total = $(".required").size();
-		
+
 		$('.required').each(function(index){
 			var this_id = $.trim($(this).attr('id'));
 			var this_input = $.trim($(this).val());
@@ -132,12 +132,12 @@ $(document).ready(function(){
 				}
 			}
 		});
-		
+
 		if(empty_count > 0){
-			return false;	
+			return false;
 		}
 	});
-	
+
 	// only once they have tried to submit the page
 	// and there were errors of course...
 	$('input, textarea').on('keyup keydown change', function(){
@@ -172,7 +172,7 @@ $(document).ready(function(){
 					}
 				}
 			});
-			
+
 		}
 	});
 
