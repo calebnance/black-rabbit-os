@@ -6,11 +6,11 @@
 
 	include('master.php');
 
-	$database = new Database( HOST, DBNAME, DBUSER, DBPASS);
+	$database = new Database(HOST, DBNAME, DBUSER, DBPASS);
 
 	// Session check
 	session_start();
-	
+
 	// store session data
 	if(!isset($_SESSION['loggedin'])):
 		header('Location: index.php?msg=7');

@@ -12,7 +12,7 @@
 	endif;
 
 	// DB Connect
-	$database = new Database( HOST, DBNAME, DBUSER, DBPASS);
+	$database = new Database(HOST, DBNAME, DBUSER, DBPASS);
 
 	// Set user ID
 	$uid = $_SESSION['uid'];

@@ -30,7 +30,7 @@
 	require_once('master.php');
 
 	// Connect to database
-	$database = new Database( HOST, DBNAME, DBUSER, DBPASS);
+	$database = new Database(HOST, DBNAME, DBUSER, DBPASS);
 
 	/**
 	 *	Lets set the language session!

@@ -3,7 +3,7 @@
 	include('../master.php');
 
 	// First time? Set the admin up.
-	$database = new Database( HOST, DBNAME, DBUSER, DBPASS);
+	$database = new Database(HOST, DBNAME, DBUSER, DBPASS);
 	$adminCheck = $database->select('br_admins', '*', '1=1', 'object');
 	if(!$adminCheck):
 		header('location:welcome.php');

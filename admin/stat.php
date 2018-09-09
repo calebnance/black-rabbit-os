@@ -10,7 +10,7 @@
 	endif;
 	
 	// Database connect
-	$database = new Database( HOST, DBNAME, DBUSER, DBPASS);
+	$database = new Database(HOST, DBNAME, DBUSER, DBPASS);
 	
 	// Get user
 	//$adminCheck = mysql_fetch_row(mysql_query("SELECT * FROM br_admins"));

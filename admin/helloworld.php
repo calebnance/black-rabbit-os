@@ -10,7 +10,7 @@
 	endif;
 	
 	// Database connect
-	$database = new Database( HOST, DBNAME, DBUSER, DBPASS);
+	$database = new Database(HOST, DBNAME, DBUSER, DBPASS);
 	
 	// Set menu
 	$activeCpanel = $activeStats = $activeHelloworld = $activeUsers = '';

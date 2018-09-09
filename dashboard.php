@@ -19,7 +19,7 @@
 	$pageActive = 'dashboard';
 	$pageActiveBreadcrumb = '<li class="active">My Dashboard</li>';
 	
-	$database = new Database( HOST, DBNAME, DBUSER, DBPASS);
+	$database = new Database(HOST, DBNAME, DBUSER, DBPASS);
 	
 	// Components and Modules and such from DB
 	$uid				= $_SESSION['uid'];

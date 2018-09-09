@@ -312,7 +312,7 @@ class FileHelper
 			// Make sure we have an id to work with
 			if(isset($_SESSION['uid'])):
 				// Connect to database
-				$database = new Database( HOST, DBNAME, DBUSER, DBPASS);
+				$database = new Database(HOST, DBNAME, DBUSER, DBPASS);
 				// Get user information for add or update
 				$user_info = $database->select('br_users', '*', 'id="'.$_SESSION['uid'].'"', 'object');
 				// if empty

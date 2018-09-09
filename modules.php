@@ -17,7 +17,7 @@
 	$pageActiveBreadcrumb = '<li class="active">My Modules</li>';
 	
 	// DB Connect
-	$database = new Database( HOST, DBNAME, DBUSER, DBPASS);
+	$database = new Database(HOST, DBNAME, DBUSER, DBPASS);
 	
 	// Modules and such
 	$uid = $_SESSION['uid'];

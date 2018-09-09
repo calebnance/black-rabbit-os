@@ -49,7 +49,7 @@ if(isset($_GET)):
 			$update['date_paid']					= $date_paid;
 
 			// Connect to database
-			$database = new Database( HOST, DBNAME, DBUSER, DBPASS);
+			$database = new Database(HOST, DBNAME, DBUSER, DBPASS);
 			$database->update('br_users', $update, 'id='.$_SESSION['uid']);
 
 			// set paid in session as well
