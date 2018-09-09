@@ -24,10 +24,21 @@
 
 		protected function _sendQuery($query, $getId = false)
 		{
-
+			// connect to mysql
 			$this->_connection = mysqli_connect($this->_server, $this->_user, $this->_password);
+			if(!$this->_connection) {
+				echo "Whoops, something went wrong, check your database connection credentials...";
+				exit();
+			}
 
-			mysqli_select_db($this->_connection, $this->_database);
+			// does database name exist?
+			$databaseExists = mysqli_select_db($this->_connection, $this->_database);
+
+			// if database doesn't exist
+			if (!$databaseExists) {
+    			printf("Could not connect to database named :: <strong>%s</strong>\n", $this->_database);
+    			exit();
+			}
 
 			mysqli_query($this->_connection, 'SET NAMES \'utf8\'');
 			mysqli_query($this->_connection, 'SET CHARACTER SET \'utf8\'');
