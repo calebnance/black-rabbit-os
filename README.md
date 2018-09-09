@@ -37,8 +37,8 @@ Enjoy, and share the love.
 ### Installation
 
 1. Open file `/includes/configuration.php`
-	* Set $host, **$db_user**, **$db_pass**, **$db_name** for connection.
-  * Edit all other variables in this file (**$base_url**, etc.)
+	- Set $host, **$db_user**, **$db_pass**, **$db_name** for connection.
+	- Edit all other variables in this file (**$base_url**, etc.)
 2. Set up database... import sql into database (file: `/install/database.sql`)
 3. Now that the database is installed and hooked up, go to url: `/admin/index.php`
 4. This will allow you to set up the admin user.
