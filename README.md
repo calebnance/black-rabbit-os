@@ -13,8 +13,8 @@ Here are some stats before I took it off-line and placed it here for the communi
 - **Total Lines of Code Created:** 51,843,240
 - **Total Components Created:** 25,194
 - **Total Number of Files Created:** 3,589,922
-- **Total Time Saved In All:** 216,013:30:0<sup>\* </sup>
-- **_<sup>_ </sup> 15 seconds allocated per line of code\***
+- **Total Time Saved In All:** 216,013:30:0<sup>\*</sup>
+- <sup>\*</sup>15 seconds allocated per line of code
 
 ### Terms of Use
 
