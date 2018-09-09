@@ -1,3 +1,4 @@
 # Files
 *.DS_Store
 error_log
+output/**/*
