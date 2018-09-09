@@ -10,11 +10,11 @@ After the 3 years run, this component creator helped the [Joomla](https://www.jo
 
 Here are some stats before I took it off-line and placed it here for the community to use:
 
-- **Total Lines of Code Created:** 51,843,240
-- **Total Components Created:** 25,194
-- **Total Number of Files Created:** 3,589,922
-- **Total Time Saved In All:** 216,013:30:0<sup>\*</sup>
-		- <sup>\*</sup>15 seconds allocated per line of code
+* **Total Lines of Code Created:** 51,843,240
+* **Total Components Created:** 25,194
+* **Total Number of Files Created:** 3,589,922
+* **Total Time Saved In All:** 216,013:30:0
+	* 15 seconds allocated per line of code
 
 ### Terms of Use
 
@@ -36,14 +36,14 @@ Enjoy, and share the love.
 
 ### Installation
 
-1.  Open file `/includes/configuration.php`
-    - Set $host, **$db_user**, **$db_pass**, **$db_name** for connection.
-    - Edit all other variables in this file (**$base_url**, etc.)
-2.  Set up database... import sql into database (file: `/install/database.sql`)
-3.  Now that the database is installed and hooked up, go to url: `/admin/index.php`
-4.  This will allow you to set up the admin user.
-5.  Then you will want to create an account. Via Sign-Up
-6.  Make sure to change the **$email_to**, **$email_from** in the file: `/includes/configuration.php`
-7.  To get past the "Pay", set the user field `paypal_payment_status` to `1` or `true`.
-8.  Logout from the user frontend and log back in, and you should be good to go!
-9.  Component and Module mangers now should be running fine on your local environment!
+1. Open file `/includes/configuration.php`
+	* Set $host, **$db_user**, **$db_pass**, **$db_name** for connection.
+  * Edit all other variables in this file (**$base_url**, etc.)
+2. Set up database... import sql into database (file: `/install/database.sql`)
+3. Now that the database is installed and hooked up, go to url: `/admin/index.php`
+4. This will allow you to set up the admin user.
+5. Then you will want to create an account. Via Sign-Up
+6. Make sure to change the **$email_to**, **$email_from** in the file: `/includes/configuration.php`
+7. To get past the "Pay", set the user field `paypal_payment_status` to `1` or `true`.
+8. Logout from the user frontend and log back in, and you should be good to go!
+9. Component and Module mangers now should be running fine on your local environment!
