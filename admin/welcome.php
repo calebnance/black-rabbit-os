@@ -3,7 +3,7 @@
 	include('../master.php');
 
 	// First time? Set the admin up.
-	$database = new Database( HOST, DBNAME, DBUSER, DBPASS);
+	$database = new Database(HOST, DBNAME, DBUSER, DBPASS);
 	$adminCheck = $database->select('br_admins', '*', '1=1', 'object');
 
 	if($adminCheck):
@@ -23,12 +23,20 @@
 			$msg = 'Passwords do not match!';
 		elseif($post['username'] && $post['password'] && $post['cpassword']):
 			$posted_date = date("Y-m-d H:i:s");
-			$query = "INSERT INTO br_admins (username, password, last_login) VALUES ('".$post['username']."', '".md5($post['password'])."','".$posted_date."')";
-			$connect = database::open($host, $db_user, $db_pass, $db_name);
-			if (!mysql_query($query, $connect)):
-				die('Error: ' . mysql_error());
-			endif;
-			header('location:login.php?msg=3');
+			$admin_record = [
+				'username' => $post['username'],
+				'password' => md5($post['password']),
+				'last_login' => $posted_date
+			];
+			$record_response = $database->insert('br_admins', $admin_record);
+
+			if($record_response) {
+				// success
+				header('location:login.php?msg=3');
+			} else {
+				// fail
+				header('location:login.php?msg=2');
+			}
 			exit();
 		else:
 			$msg = 'Fill in all fields!';
@@ -47,7 +55,7 @@
 		<!-- Le styles -->
 		<link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
 		<style type="text/css">
-			body { padding-top: 40px; padding-bottom: 40px; background-color: #f5f5f5;}
+			body { padding-bottom: 40px; padding-top: 40px!important; background-color: #f5f5f5;}
 			.form-signin { max-width: 300px; padding: 19px 29px 29px; margin: 0 auto 20px; background-color: #fff; border: 1px solid #e5e5e5; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05); -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05); box-shadow: 0 1px 2px rgba(0,0,0,.05); }
 			.form-signin .form-signin-heading, .form-signin .checkbox { margin-bottom: 10px; }
 			.form-signin input[type="text"],.form-signin input[type="password"] { font-size: 16px; height: auto; margin-bottom: 15px; padding: 7px 9px; }

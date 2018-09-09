@@ -1,7 +1,7 @@
 <?php
 	// Include database and config
 	include('../master.php');
-	
+
 	// First time? Set the admin up.
 	$database = new Database( HOST, DBNAME, DBUSER, DBPASS);
 	$adminCheck = $database->select('br_admins', '*', '1=1', 'object');
@@ -9,13 +9,13 @@
 		header('location:welcome.php');
 		exit();
 	endif;
-	
+
 	// Default messages
 	$msg = '';
 	$msgclass = 'error';
-	
+
 	$post = $_POST;
-	
+
 	if($post):
 		if($post['username'] && $post['password']):
 			$result = $database->select('br_admins', '*', 'username="'.$post['username'].'" AND password="'.md5($post['password']).'"', 'object');
@@ -39,14 +39,20 @@
 			$msgclass = 'warning';
 		endif;
 	endif;
-	
+
 	// Check for messages
 	if($_REQUEST['msg']):
-		$msg_num = $_REQUEST['msg'];
-		if($msg_num == 3):
-			$msg = 'You can now login!';
-			$msgclass = 'success';
-		endif;
+		switch($_REQUEST['msg']) {
+			case '3':
+				$msg = 'You can now login!';
+				$msgclass = 'success';
+				break;
+			case '2':
+			default:
+				$msg = 'Something went wrong...';
+				$msgclass = 'error';
+				break;
+		}
 	endif;
 
 ?>

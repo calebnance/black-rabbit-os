@@ -26,13 +26,13 @@
 		$paypal_btn_id = '';
 		$paypal_pdt_token	= '';
 	else:
-		$host	= 'localhost';
-		$db_user = 'root';
-		$db_pass = 'root';
-		$db_name = 'blackrabbit_2016';
+		$host = 'localhost';
+		$db_user = '';
+		$db_pass = '';
+		$db_name = '';
 		$email_to = '';
 		$email_from = '';
-		$base_url	= 'http://black-rabbit-os.dev/';
+		$base_url	= 'http://black-rabbit-os/';
 
 		// paypal
 		$paypal_url	= 'https://www.sandbox.paypal.com/cgi-bin/webscr';
