@@ -3,7 +3,7 @@
  * Black Rabbit Component Creator
  * by Caleb Nance
  */
- 
+
 	$pageTitle = 'Login for Black Rabbit Joomla Component Creator | Free | Joomla 2.5 & Joomla 3.0';
 	$pageActive = 'login';
 	$pageActiveBreadcrumb = '<li class="active">Login</li>';
@@ -28,11 +28,11 @@
 		$pass		= $post['password'];
 
 		// database
-		$database = new Database( HOST, DBNAME, DBUSER, DBPASS);
+		$database = new Database(HOST, DBNAME, DBUSER, DBPASS);
 		$user_info = $database->select('br_users', '*', 'email="'.$email.'"');
 		if($user_info):
-			$user_pass	= FileHelper::br_decrypt($user_info[0]['password']);
-			if($user_pass === $pass):
+			$user_pass	= $user_info[0]['password'];
+			if($user_pass === md5($pass)):
 				$logged_in = 1;
 				FileHelper::startsession($user_info);
 				header('location: dashboard.php');

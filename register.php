@@ -12,7 +12,7 @@ $post = $_POST;
 
 if(!empty($post)):
 	// Connect to database and open it
-	$database = new Database( HOST, DBNAME, DBUSER, DBPASS);
+	$database = new Database(HOST, DBNAME, DBUSER, DBPASS);
 
 	// validate all information
 	$good = true;
@@ -40,10 +40,10 @@ if(!empty($post)):
 	if($post['password'] != $post['password2']):
 		$good = false;
 	endif;
-	
+
 	// if good, send e-mail and add to database
 	if($good):
-	
+
 		// check if e-mail is already in use
 		$noemail = 0;
 		$noemail = $database->select('br_users', 'COUNT(DISTINCT email) as count', 'email="'.strtolower($post['email']).'"', 'object');
@@ -55,15 +55,15 @@ if(!empty($post)):
 			$user['email']					= strtolower($post['email']);
 			$user['email_code']				= md5(uniqid(rand(), true));
 			$user['email_validated']		= 0;
-			$user['password']				= FileHelper::br_encrypt($post['password']);
+			$user['password']				= md5($post['password']);
 			$user['country']				= $post['country'];
 			$user['paypal_payment_status']	= 0;
 			$user['date_created']			= date('Y-m-d H:i:s');
-			
+
 			$database->insert('br_users', $user);
-			
+
 			$link_validate = $base_url.'validate.php?'.$user['email_code'];
-			
+
 			// send validation e-mail
 			$msg = '
 			<html>
@@ -100,7 +100,7 @@ if(!empty($post)):
 			header('location: sign-up.php?msg=2');
 			exit();
 		endif;
-		
+
 	else:
 		header('location: sign-up.php?msg=1');
 		exit();

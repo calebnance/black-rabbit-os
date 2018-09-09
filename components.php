@@ -10,6 +10,7 @@
 
 	// Session check
 	session_start();
+	
 	// store session data
 	if(!isset($_SESSION['loggedin'])):
 		header('Location: index.php?msg=7');
@@ -31,7 +32,7 @@
 	$msg = '';
 	$error_type = 'error';
 	if($_REQUEST['msg'] == 1):
-		$msg = 'Something went wrong... no idea what happened really.. please let me know if this keeps happening..';
+		$msg = 'Something went wrong... no idea what happened really, please let me know if this keeps happening.';
 	elseif($_REQUEST['msg'] == 2):
 		$msg = 'You do not have access to this component, or it could be found? If this keeps happening, please let me know!';
 	elseif($_REQUEST['msg'] == 3):
@@ -41,7 +42,7 @@
 		$error_type = 'success';
 		$msg = 'CONGRATS! You are now a member and all components will be saved as long as you are logged in.';
 	elseif($_REQUEST['msg'] == 5):
-		$msg = 'Looks like something went wrong, transaction didn\'t go through, please try again..';
+		$msg = 'Looks like something went wrong, transaction didn\'t go through, please try again...';
 	endif;
 
 	include('template/header.php');
