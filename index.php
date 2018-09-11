@@ -141,26 +141,26 @@
 
 	$msg = '';
 	$error_type = 'error';
-	if($_REQUEST['msg'] == 1):
+	if(isset($_REQUEST['msg']) == 1):
 		$msg = 'Please fill in all required fields, and make sure javascript is enabled on your browser!';
-	elseif($_REQUEST['msg'] == 2):
+	elseif(isset($_REQUEST['msg']) == 2):
 		$error_type = 'success';
 		$msg = 'Success! Check your e-mail for the validation code.';
-	elseif($_REQUEST['msg'] == 3):
+	elseif(isset($_REQUEST['msg']) == 3):
 		$msg = 'Can not validate e-mail code.';
-	elseif($_REQUEST['msg'] == 4):
+	elseif(isset($_REQUEST['msg']) == 4):
 		$error_type = 'warning';
 		$msg = 'E-mail has already been validated. You can now sign-in!';
-	elseif($_REQUEST['msg'] == 5):
+	elseif(isset($_REQUEST['msg']) == 5):
 		$error_type = 'success';
 		$msg = 'You can now sign-in!';
-	elseif($_REQUEST['msg'] == 6):
+	elseif(isset($_REQUEST['msg']) == 6):
 		$error_type = 'success';
 		$msg = 'You are now logged out.';
-	elseif($_REQUEST['msg'] == 7):
+	elseif(isset($_REQUEST['msg']) == 7):
 		$error_type = 'warning';
 		$msg = 'Please <a href="login.php">login</a> to view that page.';
-	elseif($_REQUEST['msg'] == 8):
+	elseif(isset($_REQUEST['msg']) == 8):
 		$error_type = 'warning';
 		$msg = 'Session ended due to inactivity.';
 	endif;
