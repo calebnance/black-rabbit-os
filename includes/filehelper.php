@@ -302,6 +302,7 @@ class FileHelper
 		session_destroy();
 
 		header('Location: index.php?msg=6');
+        exit();
 	}
 
 	public static function languagesession($language, $return_url){
@@ -326,6 +327,7 @@ class FileHelper
 		endif;
 		// Return to page they were at with new language
 		header('Location: ' . $return_url);
+        exit();
 	}
 
 	public static function curl_request($url, $vars){

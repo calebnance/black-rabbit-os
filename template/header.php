@@ -72,10 +72,10 @@
 	endif;
 
 
-	// Handle language
+	// handle language
 	$usa = $germany = $spain = $france = '';
 	if(isset($_SESSION['language'])):
-		// Handle language start
+		// handle language start
 		$brtext = new Translator($_SESSION['language']);
 		switch($_SESSION['language']){
 			case 'DE':
@@ -93,7 +93,7 @@
 				break;
 		}
 	else:
-		// Handle language start
+		// handle language start
 		$brtext = new Translator('EN');
 		$usa = 'active';
 	endif;
@@ -184,9 +184,11 @@
 							<li <?php echo $about; ?>><a href="about-joomla-component-creator.php"><?php echo $brtext->__('ABOUT'); ?></a></li>
 							<?php
 							if($loggedin) {
+								/*
 							?>
 							<li <?php echo $logout; ?>><a href="logout.php"><?php echo $brtext->__('LOGOUT'); ?></a></li>
 							<?php
+								*/
 							} else {
 							?>
 							<li <?php echo $login; ?>><a href="login.php"><?php echo $brtext->__('LOGIN'); ?></a></li>
@@ -237,7 +239,10 @@
 						<button type="submit" value="DE" name="submit" class="btn <?php echo $germany; ?>"><img src="images/languages/de.jpg" /></button>
 						<button type="submit" value="FR" name="submit" class="btn <?php echo $france; ?>"><img src="images/languages/fr.jpg" /></button>
 						<input type="hidden" name="task" value="setlanguage" />
-						<input type="hidden" name="return" value="<?php echo array_pop(explode('/',$_SERVER['SCRIPT_NAME'])); ?>" />
+						<?php
+						$returnUrl = urlencode(array_pop(explode('/', $_SERVER['SCRIPT_NAME'])));
+						?>
+						<input type="hidden" name="return" value="<?php echo $returnUrl; ?>" />
 						<div class="clearfix"></div>
 					</div>
 				</form>

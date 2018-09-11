@@ -3,7 +3,7 @@
  * Black Rabbit Component Creator
  * by Caleb Nance
  */
- 
+
 	session_start();
 
 	// Display errors on localhost
