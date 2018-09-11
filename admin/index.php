@@ -1,24 +1,24 @@
 <?php
 	// Include database and config
 	include('../master.php');
-	
+
 	session_start();
 	// store session data
 	if(!isset($_SESSION['logged'])):
 		header('location:login.php');
 		exit();
 	endif;
-	
+
 	// Database connect
 	$database = new Database(HOST, DBNAME, DBUSER, DBPASS);
-	
+
 	// Get user
 	//$adminCheck = mysql_fetch_row(mysql_query("SELECT * FROM br_admins"));
-	
+
 	// Set menu
 	$activeCpanel = $activeStats = $activeHelloworld = $activeUsers = '';
 	$activeCpanel = 'class="active"';
-	
+
 	// Grab helloworlds stats
 	$helloworlds = $database->select('br_helloworlds', '*', '1=1', 'object');
 	$helloworldsAll = array();
@@ -27,46 +27,46 @@
 		$helloworldsAll[] = $row;
 		$downloadcountAll = $downloadcountAll + $row->downloadcount;
 	endforeach;
-	
+
     // just for joomla 2.5
     $helloworlds25Result = $database->select('br_helloworlds', '*', 'jversion ="2.5"', 'object');
 	$helloworlds25 = array();
 	$downloadcount25 = 0;
-	
+
 	foreach($helloworlds25Result as $row):
 		$helloworlds25[] = $row;
 		$downloadcount25 = $downloadcount25 + $row->downloadcount;
 	endforeach;
-	
+
     // just for joomla 3.0
     $helloworlds30Result = $database->select('br_helloworlds', '*', 'jversion ="3.0"', 'object');
 	$helloworlds30 = array();
 	$downloadcount30 = 0;
-	
+
 	foreach($helloworlds30Result as $row):
 		$helloworlds30[] = $row;
     	$downloadcount30 = $downloadcount30 + $row->downloadcount;
 	endforeach;
-    
+
 	// Grab creation stats
 	$packagesResult = $database->select('br_packages', '*', '1=1', 'object');
 	$packages = array();
 	$packageslinescount = 0;
 	$packagesfilescount = 0;
-	
+
 	foreach($packagesResult as $row):
 		$packages[] = $row;
     	$packageslinescount = $packageslinescount + $row->lines_created;
     	$packagesfilescount = $packagesfilescount + $row->files_created;
 	endforeach;
-	
+
 	// Grab all users
 	$usersResult	= $database->select('br_users', '*', '1=1', 'object');
 	$users			= array();
 	$users_paid		= 0;
 	$users_money	= 0;
 	$users_validated= 0;
-	
+
 	foreach($usersResult as $row):
 		if($row->paypal_payment_status):
 			$users_paid		= $users_paid + 1;
@@ -76,13 +76,13 @@
 			$users_validated = $users_validated + 1;
 		endif;
 	endforeach;
-	
+
 	// account for mine
 	$users_paid = $users_paid - 1;
-	
+
     $packageslinescount = number_format($packageslinescount);
 	$packagesfilescount = number_format($packagesfilescount);
-	
+
 	// Include header and menu
 	include('template/header.php');
 	include('template/menu.php');
@@ -115,7 +115,7 @@
 				<?php
 				/*
 				<div class="span6 well">
-				
+
 				</div><!-- /span6 -->
 				*/
 				?>

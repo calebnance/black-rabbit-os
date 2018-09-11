@@ -32,16 +32,14 @@
 			else:
 				$msg = 'Wrong username or password!';
 			endif;
-			// Close connection
-			mysql_close($connect);
 		else:
 			$msg = 'Fill in all fields!';
 			$msgclass = 'warning';
 		endif;
 	endif;
 
-	// Check for messages
-	if($_REQUEST['msg']):
+	// check for messages
+	if(isset($_REQUEST['msg'])):
 		switch($_REQUEST['msg']) {
 			case '3':
 				$msg = 'You can now login!';
