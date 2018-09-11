@@ -1,7 +1,7 @@
 <?php
 	$br_version = '1.1.5';
 
-	$home = $about = $history = $contact = $tutorial = $signup = $login = $faqs = $terms = $contributors = $testimonials = $manager = $dashboard = $development = $components = $modules = '';
+	$home = $about = $history = $contact = $tutorial = $signup = $login = $faqs = $terms = $contributors = $testimonials = $help = $manager = $dashboard = $development = $components = $modules = '';
 
 	switch($pageActive){
 		case 'home':
@@ -18,27 +18,33 @@
 			break;
 		case 'tutorial':
 			$tutorial = 'class="active"';
+			$help = ' active';
 			break;
 		case 'login':
 			$login = 'class="active"';
 			break;
 		case 'faqs':
 			$faqs = 'class="active"';
+			$help = ' active';
 			break;
 		case 'terms':
 			$terms = 'class="active"';
+			$help = ' active';
 			break;
 		case 'contributors':
 			$contributors = 'class="active"';
+			$help = ' active';
 			break;
 		case 'testimonials':
 			$testimonials = 'class="active"';
+			$help = ' active';
 			break;
 		case 'signup':
 			$signup = 'class="active"';
 			break;
 		case 'development':
 			$development = 'class="active"';
+			$help = ' active';
 			break;
 		case 'dashboard':
 			$dashboard = 'class="active"';
@@ -170,7 +176,7 @@
 							<li <?php echo $signup; ?>><a href="sign-up.php"><?php echo $brtext->__('SIGNUP'); ?></a></li>
 							<li <?php echo $history; ?>><a href="release-history.php"><?php echo $brtext->__('RELEASEHISTORY'); ?></a></li>
 
-							<li class="dropdown">
+							<li class="dropdown<?php echo $help; ?>">
 								<a class="dropdown-toggle" data-toggle="dropdown" href="#"><?php echo $brtext->__('HELP'); ?> <b class="caret"></b></a>
 								<ul class="dropdown-menu">
 									<li <?php echo $tutorial; ?>><a href="tutorials.php"><?php echo $brtext->__('TUTORIALS'); ?></a></li>

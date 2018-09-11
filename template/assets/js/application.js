@@ -6,14 +6,14 @@ jQuery.noConflict()(function($){
       "use strict";
       // Create the dropdown base
       $("<select />").appendTo("#nav-main");
-      
+
       // Create default option "Go to..."
       $("<option />", {
          "selected": "selected",
          "value"   : "",
          "text"    : "Please choose page"
       }).appendTo("#nav-main select");
-      
+
       // Populate dropdown with menu items
       $("#nav-main a").each(function() {
        var el = $(this);
@@ -22,7 +22,7 @@ jQuery.noConflict()(function($){
            "text"    : el.text()
        }).appendTo("#nav-main select");
       });
-      
+
      // To make dropdown actually work
      // To make more unobtrusive: http://css-tricks.com/4064-unobtrusive-page-changer/
       $("#nav-main select").change(function() {
@@ -32,7 +32,7 @@ jQuery.noConflict()(function($){
 });
 
 /***************************************************
-      As the page loads, cal these scripts
+      As the page loads, call these scripts
 ***************************************************/
 
 jQuery(document).ready(function ($) {
@@ -42,17 +42,17 @@ jQuery(document).ready(function ($) {
       parent.siblings().removeClass('active').find('.accordion-body').stop(true,true).hide(300);
       if(!parent.hasClass('active')) {
         parent.addClass('active').find('.accordion-body').stop(true,true).fadeIn(400);
-      } else { 
+      } else {
         parent.removeClass('active').find('.accordion-body').stop(true,true).hide(200);
       }
     });
 
   // responsive videos with fitvids
   $('.fitvids').fitVids();
-  
+
 }); /* end of as page load scripts */
 
-  
+
 /***************************************************
       Autocomplete Search
 ***************************************************/
@@ -70,6 +70,5 @@ jQuery.ajax({
     jQuery('#autocomplete-dynamic').autocomplete({
         lookup: countriesArray
     });
-    
-});
 
+});
