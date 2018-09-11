@@ -25,7 +25,7 @@
 	// Call header
 	$pageTitle = 'Black Rabbit Joomla Component Creator | Free | Joomla 2.5 & Joomla 3.0';
 	$pageActive = 'home';
-
+	$pageActiveBreadcrumb = '<li class="active">index</li>';
 	include('template/header.php');
 
 	$database = new Database(HOST, DBNAME, DBUSER, DBPASS);
@@ -141,29 +141,44 @@
 
 	$msg = '';
 	$error_type = 'error';
-	if(isset($_REQUEST['msg']) == 1):
-		$msg = 'Please fill in all required fields, and make sure javascript is enabled on your browser!';
-	elseif(isset($_REQUEST['msg']) == 2):
-		$error_type = 'success';
-		$msg = 'Success! Check your e-mail for the validation code.';
-	elseif(isset($_REQUEST['msg']) == 3):
-		$msg = 'Can not validate e-mail code.';
-	elseif(isset($_REQUEST['msg']) == 4):
-		$error_type = 'warning';
-		$msg = 'E-mail has already been validated. You can now sign-in!';
-	elseif(isset($_REQUEST['msg']) == 5):
-		$error_type = 'success';
-		$msg = 'You can now sign-in!';
-	elseif(isset($_REQUEST['msg']) == 6):
-		$error_type = 'success';
-		$msg = 'You are now logged out.';
-	elseif(isset($_REQUEST['msg']) == 7):
-		$error_type = 'warning';
-		$msg = 'Please <a href="login.php">login</a> to view that page.';
-	elseif(isset($_REQUEST['msg']) == 8):
-		$error_type = 'warning';
-		$msg = 'Session ended due to inactivity.';
-	endif;
+
+	if(isset($_REQUEST['msg'])) {
+		switch($_REQUEST['msg']) {
+			case "1":
+				$msg = 'Please fill in all required fields, and make sure javascript is enabled on your browser!';
+				break;
+			case "2":
+				$error_type = 'success';
+				$msg = 'Success! Check your e-mail for the validation code.';
+				break;
+			case "3":
+				$msg = 'Can not validate e-mail code.';
+				break;
+			case "4":
+				$error_type = 'warning';
+				$msg = 'E-mail has already been validated. You can now sign-in!';
+				break;
+			case "5":
+				$error_type = 'success';
+				$msg = 'You can now sign-in!';
+				break;
+			case "6":
+				$error_type = 'success';
+				$msg = 'You are now logged out.';
+				break;
+			case "7":
+				$error_type = 'warning';
+				$msg = 'Please <a href="login.php">login</a> to view that page.';
+				break;
+			case "8":
+				$error_type = 'warning';
+				$msg = 'Session ended due to inactivity.';
+				break;
+			default:
+				$msg = 'watttt';
+				break;
+		}
+	}
 
 ?>
 			<!-- HERO -->
