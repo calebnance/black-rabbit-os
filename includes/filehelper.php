@@ -256,7 +256,7 @@ class FileHelper
 
 	public static function startsession($user_info)
 	{
-		session_start();
+		// session_start();
 		$_SESSION['loggedin']	= 1;
 		$_SESSION['uid']		= $user_info[0]['id'];
 		$_SESSION['fname']		= $user_info[0]['fname'];
@@ -287,7 +287,7 @@ class FileHelper
 
 	public static function checksession()
 	{
-		session_start();
+		// session_start();
 		if($_SESSION['loggedin'] == 1):
 			FileHelper::timeoutsession();
 		endif;
@@ -295,7 +295,7 @@ class FileHelper
 
 	public static function timeoutsession()
 	{
-		session_start();
+		// session_start();
 		if ($_SESSION['timeout'] + 120 * 60 < time()): // 2 hours of inactive time
 			session_destroy();
 
@@ -307,7 +307,7 @@ class FileHelper
 
 	public static function endsession()
 	{
-		session_start();
+		// session_start();
 		session_destroy();
 
 		header('Location: index.php?msg=6');

@@ -3,7 +3,7 @@
  * Black Rabbit Component Creator
  * by Caleb Nance
  */
- 
+
 	include('master.php');
 	$pageTitle = 'About Black Rabbit Joomla Component Creator | Free | Joomla 2.5 & Joomla 3.0';
 	$pageActive = 'about';

@@ -4,15 +4,6 @@
  * by Caleb Nance
  */
 
-	// Display errors on localhost
-	$whitelist = array('locathost');
-	if(!in_array($_SERVER['SERVER_NAME'], $whitelist)){
-		// this is localhost!
-		ini_set('display_errors', 1);
-		error_reporting(E_ALL);
-		// error_reporting(E_ALL ^ E_NOTICE);
-	}
-
 	include('master.php');
 
 	// session check

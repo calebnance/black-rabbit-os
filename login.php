@@ -8,11 +8,11 @@
 	$pageActive = 'login';
 	$pageActiveBreadcrumb = '<li class="active">Login</li>';
 
-	// session check
-	session_start();
-
 	// include what we need
 	include('master.php');
+
+	// MSG handling
+	$msg = '';
 
 	// Lets do some checking
 	if(empty($_POST['email']) || empty($_POST['password'])):

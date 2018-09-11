@@ -39,7 +39,7 @@
 	endif;
 
 	// check for messages
-	if(isset($_REQUEST['msg'])):
+	if(isset($_REQUEST['msg'])){
 		switch($_REQUEST['msg']) {
 			case '3':
 				$msg = 'You can now login!';
@@ -51,8 +51,7 @@
 				$msgclass = 'error';
 				break;
 		}
-	endif;
-
+	}
 ?>
 <!DOCTYPE html>
 <html lang="en">
