@@ -7,16 +7,16 @@
 	// Display errors on localhost
 	$whitelist = array('locathost');
 	if(!in_array($_SERVER['SERVER_NAME'], $whitelist)){
-		//this is localhost!
+		// this is localhost!
 		ini_set('display_errors', 1);
-		//error_reporting(E_ALL);
-		error_reporting(E_ALL ^ E_NOTICE);
+		error_reporting(E_ALL);
+		// error_reporting(E_ALL ^ E_NOTICE);
 	}
 
 	include('master.php');
 
-	// Session check
-	session_start();
+	// session check
+	// session_start();
 	// store session data
 	if(isset($_SESSION['loggedin'])):
 		FileHelper::checksession();
