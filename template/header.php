@@ -148,7 +148,7 @@
 							<?php
 							if($loggedin) {
 							?>
-							<li <?php echo $logout; ?>><a href="logout.php"><?php echo $brtext->__('LOGOUT'); ?></a></li>
+							<li><a href="logout.php"><?php echo $brtext->__('LOGOUT'); ?></a></li>
 							<?php
 							} else {
 							?>
@@ -184,11 +184,9 @@
 							<li <?php echo $about; ?>><a href="about-joomla-component-creator.php"><?php echo $brtext->__('ABOUT'); ?></a></li>
 							<?php
 							if($loggedin) {
-								/*
 							?>
-							<li <?php echo $logout; ?>><a href="logout.php"><?php echo $brtext->__('LOGOUT'); ?></a></li>
+							<li><a href="logout.php"><?php echo $brtext->__('LOGOUT'); ?></a></li>
 							<?php
-								*/
 							} else {
 							?>
 							<li <?php echo $login; ?>><a href="login.php"><?php echo $brtext->__('LOGIN'); ?></a></li>
