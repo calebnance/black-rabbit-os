@@ -145,7 +145,17 @@
 						<ul class="hide">
 							<li <?php echo $home; ?>><a href="index.php"><?php echo $brtext->__('HOME'); ?></a></li>
 							<li <?php echo $about; ?>><a href="about-joomla-component-creator.php"><?php echo $brtext->__('ABOUT'); ?></a></li>
+							<?php
+							if($loggedin) {
+							?>
+							<li <?php echo $logout; ?>><a href="logout.php"><?php echo $brtext->__('LOGOUT'); ?></a></li>
+							<?php
+							} else {
+							?>
 							<li <?php echo $login; ?>><a href="login.php"><?php echo $brtext->__('LOGIN'); ?></a></li>
+							<?php
+							}
+							?>
 							<li <?php echo $signup; ?>><a href="sign-up.php"><?php echo $brtext->__('SIGNUP'); ?></a></li>
 							<li <?php echo $history; ?>><a href="release-history.php"><?php echo $brtext->__('RELEASEHISTORY'); ?></a></li>
 							<li <?php echo $tutorial; ?>><a href="tutorials.php"><?php echo $brtext->__('TUTORIALS'); ?></a></li>
@@ -172,7 +182,17 @@
 						<ul id="menu" class="nav">
 							<li <?php echo $home; ?>><a href="index.php"><?php echo $brtext->__('HOME'); ?></a></li>
 							<li <?php echo $about; ?>><a href="about-joomla-component-creator.php"><?php echo $brtext->__('ABOUT'); ?></a></li>
+							<?php
+							if($loggedin) {
+							?>
+							<li <?php echo $logout; ?>><a href="logout.php"><?php echo $brtext->__('LOGOUT'); ?></a></li>
+							<?php
+							} else {
+							?>
 							<li <?php echo $login; ?>><a href="login.php"><?php echo $brtext->__('LOGIN'); ?></a></li>
+							<?php
+							}
+							?>
 							<li <?php echo $signup; ?>><a href="sign-up.php"><?php echo $brtext->__('SIGNUP'); ?></a></li>
 							<li <?php echo $history; ?>><a href="release-history.php"><?php echo $brtext->__('RELEASEHISTORY'); ?></a></li>
 
