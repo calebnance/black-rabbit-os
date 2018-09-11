@@ -9,7 +9,7 @@
 	$database = new Database(HOST, DBNAME, DBUSER, DBPASS);
 
 	// Session check
-	session_start();
+	// session_start();
 
 	// store session data
 	if(!isset($_SESSION['loggedin'])):
@@ -31,19 +31,28 @@
 
 	$msg = '';
 	$error_type = 'error';
-	if($_REQUEST['msg'] == 1):
-		$msg = 'Something went wrong... no idea what happened really, please let me know if this keeps happening.';
-	elseif($_REQUEST['msg'] == 2):
-		$msg = 'You do not have access to this component, or it could be found? If this keeps happening, please let me know!';
-	elseif($_REQUEST['msg'] == 3):
-		$error_type = 'success';
-		$msg = 'Your component has been deleted!';
-	elseif($_REQUEST['msg'] == 4):
-		$error_type = 'success';
-		$msg = 'CONGRATS! You are now a member and all components will be saved as long as you are logged in.';
-	elseif($_REQUEST['msg'] == 5):
-		$msg = 'Looks like something went wrong, transaction didn\'t go through, please try again...';
-	endif;
+	if(isset($_REQUEST['msg'])) {
+		switch($_REQUEST['msg']) {
+			case "1":
+			default:
+				$msg = 'Something went wrong... no idea what happened really, please let me know if this keeps happening.';
+				break;
+			case "2":
+				$msg = 'You do not have access to this component, or it could be found? If this keeps happening, please let me know!';
+				break;
+			case "3":
+				$error_type = 'success';
+				$msg = 'Your component has been deleted!';
+				break;
+			case "4":
+				$error_type = 'success';
+				$msg = 'CONGRATS! You are now a member and all components will be saved as long as you are logged in.';
+				break;
+			case "5":
+				$msg = 'Looks like something went wrong, transaction didn\'t go through, please try again...';
+				break;
+		}
+	}
 
 	include('template/header.php');
 ?>

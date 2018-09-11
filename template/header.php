@@ -64,7 +64,7 @@
 	}
 
 	// Session check
-	session_start();
+	// session_start();
 	$loggedin = 0;
 	// store session data
 	if(isset($_SESSION['loggedin'])):

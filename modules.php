@@ -1,8 +1,8 @@
 <?php
 	include('master.php');
-	
+
 	// Session check
-	session_start();
+	// session_start();
 	// store session data
 	if(!isset($_SESSION['loggedin'])):
 		header('Location: index.php?msg=7');
@@ -10,31 +10,39 @@
 	else:
 		FileHelper::checksession();
 	endif;
-	
+
 	// Call header
 	$pageTitle = 'My Modules for Black Rabbit Joomla Component Creator | Free | Joomla 2.5 & Joomla 3.0';
 	$pageActive = 'modules';
 	$pageActiveBreadcrumb = '<li class="active">My Modules</li>';
-	
+
 	// DB Connect
 	$database = new Database(HOST, DBNAME, DBUSER, DBPASS);
-	
+
 	// Modules and such
 	$uid = $_SESSION['uid'];
 	$userModules = $database->select('br_modules', '*', 'uid="'.$uid.'" AND midparent="0"', 'object'); // grab parents first
 	$userModulesCount = count($userModules);
 	$textModules = $userModulesCount > 1 || $userModulesCount == 0 ? 'modules' : 'module';
-	
+
 	include('template/header.php');
-	
+
 	// MSG handling
 	$msg = '';
 	$error_type = 'error';
-	if($_REQUEST['msg'] == 1):
-		$msg = 'Please complete membership before you can continue with the module creator!';
-	elseif($_REQUEST['msg'] == 2):
-		$msg = 'File can not be found, or you do not have access to this file!';
-	endif;
+	if(isset($_REQUEST['msg'])){
+		switch($_REQUEST['msg']) {
+			case '1':
+				$msg = 'Please complete membership before you can continue with the module creator!';
+				break;
+			case '2':
+				$msg = 'File can not be found, or you do not have access to this file!';
+				break;
+			default:
+				$msg = 'Something went wrong...';
+				break;
+		}
+	}
 ?>
 			<div id="section-container">
 				<div class="container">
@@ -47,7 +55,7 @@
 								<?php echo $msg; ?>
 							</div>
 							<?php endif; ?>
-							
+
 							<h1><i class="icon-paper-clip"></i> My Modules</h1>
 							<?php if($_SESSION['paid'] == 1): ?>
 								<p class="lead">You have <?php echo $userModulesCount . ' ' . $textModules; ?> in your work area!</p>
@@ -78,7 +86,7 @@
 										</tr>
 									</thead>
 									<tbody>
-									<?php 
+									<?php
 									$m = 1;
 									foreach($userModules as $userModule):
 										// grab all components under parent

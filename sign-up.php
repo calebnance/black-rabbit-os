@@ -1,17 +1,26 @@
 <?php
 	include('master.php');
+
 	$pageTitle = 'Sign-up for Black Rabbit Joomla Component Creator | Free | Joomla 2.5 & Joomla 3.0';
 	$pageActive = 'signup';
 	$pageActiveBreadcrumb = '<li class="active">Sign-up</li>';
+
 	include('template/header.php');
 
 	$msg = '';
-	if($_REQUEST['msg'] == 1):
-		$msg = 'Please make sure you fill in all required fields!';
-	elseif($_REQUEST['msg'] == 2):
-		$msg = 'This e-mail address has already been used. Please check for your validation e-mail and click the link provided.';
-	endif;
-
+	if(isset($_REQUEST['msg'])) {
+		switch($_REQUEST['msg']) {
+			case "1":
+				$msg = 'Please make sure you fill in all required fields!';
+				break;
+			case "2":
+				$msg = 'This e-mail address has already been used. Please check for your validation e-mail and click the link provided.';
+				break;
+			default:
+				$msg = 'watttt';
+				break;
+		}
+	}
 ?>
 			<div id="section-container">
 				<div class="container">
@@ -363,7 +372,9 @@
 					<div class="row">
 						<div class="span12">
 							<div class="well">
-								<?php if(!$_SESSION['loggedin'] || !$_SESSION['paid']){ ?>
+								<?php
+								if(!isset($_SESSION['loggedin']) || !$_SESSION['loggedin'] || !$_SESSION['paid']){
+								?>
 								<span class="hidden-phone">
 									<div class="page-ad pull-right">
 										<img src="http://placehold.it/250">

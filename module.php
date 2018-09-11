@@ -2,7 +2,7 @@
 	include('master.php');
 
 	// Session check
-	session_start();
+	// session_start();
 	// store session data
 	if(!isset($_SESSION['loggedin'])):
 		header('Location: index.php?msg=7');
@@ -53,6 +53,16 @@
 	// MSG handling
 	$msg = '';
 	$error_type = 'error';
+	if(isset($_REQUEST['msg'])){
+		switch($_REQUEST['msg']) {
+			case '1':
+				$msg = 'Please fill in all fields...';
+				break;
+			default:
+				$msg = 'Something went wrong...';
+				break;
+		}
+	}
 
 	// Default vals
 	$uMJVersion 	= '2.5.0';
