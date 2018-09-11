@@ -1,15 +1,13 @@
 <?php
 	include('master.php');
 
-	// Session check
-	// session_start();
 	// store session data
-	if(!isset($_SESSION['loggedin'])):
+	if(!isset($_SESSION['loggedin'])) {
 		header('Location: index.php?msg=7');
 		exit();
-	else:
+	} else {
 		FileHelper::checksession();
-	endif;
+	}
 
 	// DB Connect
 	$database = new Database(HOST, DBNAME, DBUSER, DBPASS);
