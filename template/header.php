@@ -63,14 +63,10 @@
 			break;
 	}
 
-	// Session check
-	// session_start();
 	$loggedin = 0;
-	// store session data
-	if(isset($_SESSION['loggedin'])):
+	if(Access::loggedIn()) {
 		$loggedin = 1;
-	endif;
-
+	}
 
 	// handle language
 	$usa = $germany = $spain = $france = '';

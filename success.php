@@ -1,21 +1,13 @@
 <?php
-/*********
- * Black Rabbit Component Creator
- * by Caleb Nance
- */
-
 include('master.php');
 
-// Session check
-session_start();
-// store session data
-if(isset($_SESSION['loggedin'])):
+if(Access::loggedIn()) {
 	FileHelper::checksession();
-endif;
+}
 
-// Check to see if there is even data to GET
+// check to see if there is even data to GET
 if(isset($_GET)):
-	// Make sure its coming from paypal
+	// make sure its coming from paypal
 	if(array_key_exists('tx', $_GET)):
 		$output = FileHelper::curl_request(PAYPAL_URL, "tx=".$_GET['tx']."&cmd=_notify-synch&at=".PAYPAL_PDT);
 

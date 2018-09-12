@@ -1637,7 +1637,7 @@
 		endif;
 
 		// Save user record of component and move to their repo
-		if($_SESSION['loggedin'] && Access::paid() && $filescreatedlist):
+		if(Access::loggedIn() && Access::paid() && $filescreatedlist):
 			// get all fields to save and relation
 			$user_component_record = array(
 				'uid' 				=> $_SESSION['uid'],

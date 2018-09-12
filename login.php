@@ -58,10 +58,14 @@ include('template/header.php');
 		<div class="row">
 			<div class="span6">
 				<div class="well">
-					<?php if(isset($_SESSION['loggedin'])): ?>
+					<?php
+					if(Access::loggedIn()) {
+					?>
 						<h3><?php echo $_SESSION['fname'] . ' ' . $_SESSION['lname']; ?></h3>
 						<a href="logout.php" class="btn btn-info login"><i class="icon icon-off icon-white"></i> <?php echo $brtext->__('LOGOUT'); ?></a>
-					<?php else: ?>
+					<?php
+					} else {
+					?>
 						<h3>Already A Member</h3>
 						<form class="form-horizontal"  action="login.php" method="post">
 							<div class="control-group">
@@ -74,7 +78,9 @@ include('template/header.php');
 								<button type="submit" class="btn btn-info"><?php echo $brtext->__('LOGIN'); ?></button>
 							</div>
 						</form>
-					<?php endif; ?>
+					<?php
+					}
+					?>
 					<br /><br />
 				</div><!-- /.well -->
 			</div><!-- /.span6 -->

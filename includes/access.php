@@ -1,6 +1,11 @@
 <?php
 class Access
 {
+	public static function loggedIn()
+	{
+        return isset($_SESSION['loggedin']);
+	}
+
 	public static function notLoggedIn()
 	{
         return !isset($_SESSION['loggedin']);

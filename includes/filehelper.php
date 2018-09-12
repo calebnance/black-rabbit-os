@@ -265,6 +265,7 @@ class FileHelper
 		$database	= new Database(HOST, DBNAME, DBUSER, DBPASS);
 		$date = date('Y-m-d H:i:s');
 		$user = array();
+
 		// stamp if this is the first time logging in
 		if($user_info[0]['date_logged_in'] == '0000-00-00 00:00:00'):
 			$user['date_logged_in'] = $date;
@@ -282,27 +283,25 @@ class FileHelper
 
 	public static function checksession()
 	{
-		// session_start();
-		if($_SESSION['loggedin'] == 1):
+		if(Access::loggedIn()){
 			FileHelper::timeoutsession();
-		endif;
+		}
 	}
 
 	public static function timeoutsession()
 	{
-		// session_start();
-		if ($_SESSION['timeout'] + 120 * 60 < time()): // 2 hours of inactive time
+		if($_SESSION['timeout'] + 120 * 60 < time()) {
+            // 2 hours of inactive time
 			session_destroy();
 
 			header('Location: index.php?msg=8');
-		else:
-			$_SESSION['timeout']	= time();
-		endif;
+		} else {
+			$_SESSION['timeout'] = time();
+		}
 	}
 
 	public static function endsession()
 	{
-		// session_start();
 		session_destroy();
 
 		header('Location: index.php?msg=6');
@@ -312,24 +311,23 @@ class FileHelper
 	public static function languagesession($language, $return_url){
 		$_SESSION['language'] = $language;
 
-		// Check if they are logged in
-		if(isset($_SESSION['loggedin'])):
-			// Make sure we have an id to work with
-			if(isset($_SESSION['uid'])):
-				// Connect to database
+		// check if they are logged in
+		if(Access::loggedIn()) {
+			// make sure we have an id to work with
+			if(isset($_SESSION['uid'])) {
+				// connect to database
 				$database = new Database(HOST, DBNAME, DBUSER, DBPASS);
-				// Get user information for add or update
+				// get user information for add or update
 				$user_info = $database->select('br_users', '*', 'id="'.$_SESSION['uid'].'"', 'object');
 				// if empty
-				if(empty($user_info[0]->language) || $user_info[0]->language != $language):
-					$data = array(
-						'language' => $language
-					);
+				if(empty($user_info[0]->language) || $user_info[0]->language != $language) {
+					$data = array('language' => $language);
 					$database->update('br_users', $data, 'id="'.$_SESSION['uid'].'"');
-				endif;
-			endif;
-		endif;
-		// Return to page they were at with new language
+				}
+			}
+		}
+
+		// return to page they were at with new language
 		header('Location: ' . $return_url);
         exit();
 	}
