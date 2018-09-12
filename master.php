@@ -27,6 +27,9 @@
  	// Database file
  	require_once(INCLUDESDIR . 'database.php');
 
+    // Access
+ 	require_once(INCLUDESDIR . 'access.php');
+
  	// Helpers
  	require_once(INCLUDESDIR . 'helpers.php');
 

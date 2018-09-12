@@ -1,10 +1,6 @@
 <?php
-/**
- *
- *
- */
 class ModuleHelper
-{		
+{
 	public static function phpheader($filename, $varObject)
 	{
 	 	// Header PHP File
@@ -23,18 +19,18 @@ class ModuleHelper
 		}
 		$phpheader .= '-------------------------------------------------------------------------*/'.$varObject->return;
 		$phpheader .= ''.$varObject->return;
-		
+
 		return $phpheader;
 	}
-	
+
 	public static function nodirectaccess($varObject)
 	{
 		$nodirectaccess  = '// No direct access to this file'.$varObject->return;
 		$nodirectaccess .= 'defined(\'_JEXEC\') or die(\'Restricted access\');'.$varObject->return;
-		
+
 		return $nodirectaccess;
 	}
-	
+
 	public static function modulefile($varObject){
 		$modulefile		= array();
 		$modulefile[]	= '<?php'.$varObject->return;
@@ -45,7 +41,7 @@ class ModuleHelper
 		if($varObject->jversion == '3.0'){
 			$modulefile[]	= 'require_once __DIR__ . \'/helper.php\';'.$varObject->return;
 		} else {
-			$modulefile[]	= 'require_once( dirname(__FILE__).DS.\'helper.php\' );'.$varObject->return;	
+			$modulefile[]	= 'require_once( dirname(__FILE__).DS.\'helper.php\' );'.$varObject->return;
 		}
 		$modulefile[]	= $varObject->return;
 		$modulefile[]	= 'require(JModuleHelper::getLayoutPath(\'mod_'.$varObject->filename.'\'));'.$varObject->return;
@@ -53,7 +49,7 @@ class ModuleHelper
 
 		return $modulefile;
 	}
-	
+
 	public static function modulexml($varObject){
 		$xml	= array();
 		$xml[]	= '<?xml version="1.0" encoding="utf-8"?>'.$varObject->return;
@@ -72,12 +68,12 @@ class ModuleHelper
 		$xml[]	= $varObject->tab1.'<config>'.$varObject->return;
 		$xml[]	= $varObject->tab1.'</config>'.$varObject->return;
 		$xml[]	= '</extension>';
-		
+
 		return $xml;
  	}
- 	
+
  	public static function helperfile($varObject){
-	 	
+
 	 	$helper		= array();
 	 	$helper[]	= '<?php'.$varObject->return;
 		$helper[]	= ModuleHelper::phpheader('helper.php', $varObject);
@@ -90,18 +86,17 @@ class ModuleHelper
 	 	$helper[]	= $varObject->return;
 	 	$helper[]	= '}'.$varObject->return;
 	 	$helper[]	= '?>';
-	 	
+
 	 	return $helper;
  	}
- 	
+
  	public static function defaultfile($varObject){
 	 	$default	= array();
 	 	$default[]	= '<?php'.$varObject->return;
 		$default[]	= ModuleHelper::phpheader('default.php', $varObject);
 		$default[]	= ModuleHelper::nodirectaccess($varObject);
 		$default[]	= '?>';
-		
+
 		return $default;
  	}
 }
-?>

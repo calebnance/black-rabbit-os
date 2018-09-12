@@ -1,9 +1,5 @@
 <?php
-/**
- *
- *
- */
-class SiteFiles 
+class SiteFiles
 {
 	public static function controllerFile($varObject, $filename)
 	{
@@ -22,10 +18,10 @@ class SiteFiles
 		$controllerFileLines[] = $varObject->return;
 		$controllerFileLines[] = '}'.$varObject->return;
 		$controllerFileLines[] = '?>';
-			
+
 		return $controllerFileLines;
 	}
-	
+
 	public static function componentFile($varObject)
 	{
 		$filename = $varObject->comp_m_view.'.php';
@@ -60,10 +56,10 @@ class SiteFiles
 		$componentFileLines[] = '// Redirect if set by the controller'.$varObject->return;
 		$componentFileLines[] = '$controller->redirect();'.$varObject->return;
 		$componentFileLines[] = '?>';
-			
+
 		return $componentFileLines;
 	}
-	
+
 	public static function helperFile($varObject)
 	{
 		$filename = $varObject->comp_m_view.'.php';
@@ -79,10 +75,10 @@ class SiteFiles
 		$helperFileLines[] = $varObject->return;
 		$helperFileLines[] = '}'.$varObject->return;
 		$helperFileLines[] = '?>';
-		
+
 		return $helperFileLines;
 	}
-	
+
 	public static function routerFile($varObject, $filename)
 	{
 		$routerFileLines[] = '<?php'.$varObject->return;
@@ -114,7 +110,7 @@ class SiteFiles
 		$routerFileLines[] = $varObject->tab1.'//Handle View and Identifier'.$varObject->return;
 		$routerFileLines[] = $varObject->tab1.'switch($segments[0])'.$varObject->return;
 		$routerFileLines[] = $varObject->tab1.'{'.$varObject->return;
-		
+
 		// Parse through views
 		foreach($varObject->allViews as $view):
 		$routerFileLines[] = $varObject->tab2.'case \''.$view['plural']['safe'].'\':'.$varObject->return;
@@ -129,23 +125,23 @@ class SiteFiles
 		$routerFileLines[] = $varObject->tab3.'$vars[\'view\'] = \''.$view['singular']['safe'].'\';'.$varObject->return;
 		$routerFileLines[] = $varObject->tab3.'break;'.$varObject->return;
 		endforeach;
-		
+
 		$routerFileLines[] = $varObject->tab1.'}'.$varObject->return;
 		$routerFileLines[] = $varObject->return;
 		$routerFileLines[] = $varObject->tab1.'return $vars;'.$varObject->return;
 		$routerFileLines[] = '}'.$varObject->return;
 		$routerFileLines[] = '?>';
-		
-		return $routerFileLines;		
+
+		return $routerFileLines;
 	}
-	
+
 	/**
 	 *	PLURAL VIEW - SITE
 	 */
-	
+
 	// plural model
 	public static function modelsModelPlural($view, $varObject)
-	{		
+	{
 		$filename = $view['plural']['safe'].'.php';
 		$modelsModel[] = '<?php'.$varObject->return;
 		$modelsModel[] = Helpers::phpheader($filename, $varObject);
@@ -176,13 +172,13 @@ class SiteFiles
 		$modelsModel[] = $varObject->tab1.'}'.$varObject->return;
 		$modelsModel[] = '}'.$varObject->return;
 		$modelsModel[] = '?>';
-		
+
 		return $modelsModel;
 	}
-	
+
 	// plural view - view.html.php
 	public static function viewsViewPluralViewHtml($view, $varObject, $filename)
-	{		
+	{
 		$viewHTML[] = '<?php'.$varObject->return;
 		$viewHTML[] = Helpers::phpheader($filename, $varObject);
 		$viewHTML[] = Helpers::nodirectaccess($varObject);
@@ -208,16 +204,16 @@ class SiteFiles
 		$viewHTML[] = $varObject->tab1.'}'.$varObject->return;
 		$viewHTML[] = '}'.$varObject->return;
 		$viewHTML[] = '?>';
-		
+
 		return $viewHTML;
 	}
-	
+
 	// plural view tmpl - default.php
 	public static function viewsViewPluralTmplDefaulPHP($formfields, $view, $varObject, $filename, $view_count)
-	{	
+	{
 		$categoryLookUp	= 0;
 		$categoryField	= '';
-		
+
 		// Make sure there is formfields
 		if($formfields->type):
 			if(array_search("category", $formfields->type) && $varObject->includeCat):
@@ -226,7 +222,7 @@ class SiteFiles
 				$categoryLookUp = 1;
 			endif;
 		endif;
-		
+
 		$defaultPHP[] = '<?php'.$varObject->return;
 		$defaultPHP[] = Helpers::phpheader($filename, $varObject);
 		$defaultPHP[] = Helpers::nodirectaccess($varObject);
@@ -244,17 +240,17 @@ class SiteFiles
 			$defaultPHP[] = $varObject->tab2.'$item->'.$categoryField.' = $db->setQuery(\'SELECT #__categories.title FROM #__categories WHERE #__categories.id = "\'.$item->'.$categoryField.'.\'"\')->loadResult();'.$varObject->return;
 		endif;
 		$defaultPHP[] = $varObject->tab2.'if(empty($item->alias)){'.$varObject->return;
-		
+
 		$link = $formfields->name_safe[0];
-		
+
 		$defaultPHP[] = $varObject->tab3.'$item->alias = $item->'.$link.';'.$varObject->return;
 		$defaultPHP[] = $varObject->tab2.'};'.$varObject->return;
 		$defaultPHP[] = $varObject->tab2.'$item->alias = JFilterOutput::stringURLSafe($item->alias);'.$varObject->return;
 		$defaultPHP[] = $varObject->tab2.'$item->linkURL = JRoute::_(\'index.php?option=com_'.$varObject->comp_m_view.'&view='.$view['singular']['safe'].'&id=\'.$item->id.\':\'.$item->alias);'.$varObject->return;
 		$defaultPHP[] = $varObject->tab2.'?>'.$varObject->return;
-		
+
 		// Make sure there is formfields
-		if($formfields->name):		
+		if($formfields->name):
 			// Parse through fields and just display them
 			foreach($formfields->name as $key=>$field):
 				$field			= strtolower($field);
@@ -272,7 +268,7 @@ class SiteFiles
 							endif;
 						endforeach;
 					}
-					
+
 					if($foundImage == false):
 						//check for first field and put at link on it.
 						if($field_lower == $link):
@@ -291,32 +287,32 @@ class SiteFiles
 				endif;
 			endforeach;
 		endif;
-		
+
 		$defaultPHP[] = $varObject->tab2.'<p><strong>Link URL</strong>: <a href="<?php echo $item->linkURL; ?>">Go to page</a> - <?php echo $item->linkURL; ?></p>'.$varObject->return;
 		$defaultPHP[] = $varObject->tab2.'<br /><br />'.$varObject->return;
 		$defaultPHP[] = $varObject->tab1.'<?php }; ?>'.$varObject->return;
 		$defaultPHP[] = '</div>'.$varObject->return;
-		
+
 		return $defaultPHP;
 	}
-	
+
 	// plural view tmpl - default.xml
 	public static function viewsViewPluralTmplDefaulXML($view, $varObject)
-	{		
+	{
 		$defaultXML[] = '<?xml version="1.0" encoding="utf-8" ?>'.$varObject->return;
 		$defaultXML[] = '<metadata>'.$varObject->return;
 		$defaultXML[] = $varObject->tab1.'<layout title="'.$varObject->com_language.'_'.$view['plural']['language'].'_VIEW_DEFAULT_TITLE">'.$varObject->return;
 		$defaultXML[] = $varObject->tab2.'<message>'.$varObject->com_language.'_'.$view['plural']['language'].'_VIEW_DEFAULT_DESC</message>'.$varObject->return;
 		$defaultXML[] = $varObject->tab1.'</layout>'.$varObject->return;
 		$defaultXML[] = '</metadata>';
-		
+
 		return $defaultXML;
 	}
-	
+
 	/**
 	 *	SINGULAR VIEW - SITE
 	 */
-	 
+
 	// singular model
 	public static function modelsModelSingular($view, $varObject)
 	{
@@ -399,15 +395,15 @@ class SiteFiles
 		$modelsModel[] = $varObject->tab1.'}'.$varObject->return;
 		$modelsModel[] = '}'.$varObject->return;
 		$modelsModel[] = '?>';
-		
+
 		return $modelsModel;
 	}
-	
+
 	public static function viewsViewSingularViewHtml($formfields, $view, $varObject, $filename)
 	{
 		$categoryLookUp	= 0;
 		$categoryField	= '';
-		
+
 		// Make sure there is formfields
 		if($formfields->type):
 			if(array_search("category", $formfields->type) && $varObject->includeCat):
@@ -416,7 +412,7 @@ class SiteFiles
 				$categoryLookUp	= 1;
 			endif;
 		endif;
-		
+
 		$viewHTML[] = '<?php'.$varObject->return;
 		$viewHTML[] = Helpers::phpheader($filename, $varObject);
 		$viewHTML[] = Helpers::nodirectaccess($varObject);
@@ -450,10 +446,10 @@ class SiteFiles
 		$viewHTML[] = $varObject->tab1.'}'.$varObject->return;
 		$viewHTML[] = '}'.$varObject->return;
 		$viewHTML[] = '?>';
-		
+
 		return $viewHTML;
 	}
-	
+
 	public static function viewsViewSingularTmplDefaulPHP($formfields, $varObject, $filename, $view_count)
 	{
 		$defaultPHP[] = '<?php'.$varObject->return;
@@ -481,7 +477,7 @@ class SiteFiles
 							endif;
 						endforeach;
 					}
-					
+
 					if($imageFound == false):
 						$defaultPHP[] = $varObject->tab1.'<p><strong>'.$field.'</strong>: <?php echo $this->item->'.$field_lower.'; ?></p>'.$varObject->return;
 					endif;
@@ -492,12 +488,12 @@ class SiteFiles
 		endif;
 
 		$defaultPHP[] = '</div>';
-		
+
 		return $defaultPHP;
 	}
-	
+
 	public static function viewsViewSingularTmplDefaulXML($formfields, $view, $varObject, $view_count)
-	{	
+	{
 		$field = $formfields->name[0];
 		$field = strtolower($field);
 		$field = ucwords($field);
@@ -505,7 +501,7 @@ class SiteFiles
 		$field_f = $formfields->name_safe[0];
 		$field_lower = strtolower($field_f);
 		$field_upper = strtoupper($field_lower);
-		
+
 		$defaultXML[] = '<?xml version="1.0" encoding="utf-8" ?>'.$varObject->return;
 		$defaultXML[] = '<metadata>'.$varObject->return;
 		$defaultXML[] = $varObject->tab1.'<layout title="'.$varObject->com_language.'_'.$view['singular']['language'].'_VIEW_DEFAULT_TITLE">'.$varObject->return;
@@ -526,14 +522,14 @@ class SiteFiles
         $defaultXML[] = $varObject->tab2.'</fieldset>'.$varObject->return;
         $defaultXML[] = $varObject->tab1.'</fields>'.$varObject->return;
 		$defaultXML[] = '</metadata>';
-		
-		return $defaultXML;		
+
+		return $defaultXML;
 	}
-	
+
 	/**
 	 *	CATEGORY VIEW - SITE
 	 */
-	 
+
 	// category model
 	public static function modelsModelCat($view, $varObject)
 	{
@@ -571,12 +567,12 @@ class SiteFiles
 		$modelsModel[] = $varObject->tab1 . '}'.$varObject->return;
 		$modelsModel[] = '}'.$varObject->return;
 		$modelsModel[] = '?>';
-		
+
 		return $modelsModel;
 	}
-	
+
 	public static function viewsViewCatViewHtml($view, $varObject, $filename)
-	{		
+	{
 		$viewHTML[] = '<?php'.$varObject->return;
 		$viewHTML[] = Helpers::phpheader($filename, $varObject);
 		$viewHTML[] = Helpers::nodirectaccess($varObject);
@@ -606,12 +602,12 @@ class SiteFiles
 		$viewHTML[] = $varObject->tab1.'}'.$varObject->return;
 		$viewHTML[] = '}'.$varObject->return;
 		$viewHTML[] = '?>';
-		
+
 		return $viewHTML;
 	}
-	
+
 	public static function viewsViewCatTmplDefaulPHP($formfields, $varObject, $filename, $view_count)
-	{	
+	{
 		$defaultPHP[] = '<?php'.$varObject->return;
 		$defaultPHP[] = Helpers::phpheader($filename, $varObject);
 		$defaultPHP[] = Helpers::nodirectaccess($varObject);
@@ -640,7 +636,7 @@ class SiteFiles
 						endforeach;
 					}
 				endif;
-				
+
 				if($imageFound == false):
 					$defaultPHP[] = $varObject->tab1.'<p><strong>'.$field.'</strong>: <?php echo $item->'.$field_lower.'; ?></p>'.$varObject->return;
 				endif;
@@ -648,12 +644,12 @@ class SiteFiles
 		endif;
 		$defaultPHP[] = '<?php } ?>'.$varObject->return;
 		$defaultPHP[] = '</div>';
-		
+
 		return $defaultPHP;
 	}
-	
+
 	public static function viewsViewCatTmplDefaulXML($view, $varObject, $view_count_string)
-	{	
+	{
 		$defaultXML[] = '<?xml version="1.0" encoding="utf-8" ?>'.$varObject->return;
 		$defaultXML[] = '<metadata>'.$varObject->return;
 		$defaultXML[] = $varObject->tab1.'<layout title="'.$varObject->com_language.'_'.$view['plural']['view_lang'].'CATEGORY_VIEW_DEFAULT_TITLE">'.$varObject->return;
@@ -674,8 +670,7 @@ class SiteFiles
         $defaultXML[] = $varObject->tab2.'</fieldset>'.$varObject->return;
         $defaultXML[] = $varObject->tab1.'</fields>'.$varObject->return;
 		$defaultXML[] = '</metadata>';
-		
-		return $defaultXML;		
+
+		return $defaultXML;
 	}
 }
-?>

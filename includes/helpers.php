@@ -1,8 +1,4 @@
 <?php
-/**
- *
- *
- */
 class Helpers
 {
  	public static function phpheader($filename, $varObject)
@@ -17,18 +13,18 @@ class Helpers
 		$phpheader .= '# website   '.$varObject->a_url.$varObject->return;
 		$phpheader .= '-------------------------------------------------------------------------*/'.$varObject->return;
 		$phpheader .= ''.$varObject->return;
-		
+
 		return $phpheader;
  	}
- 	
+
  	public static function nodirectaccess($varObject)
  	{
  		$nodirectaccess = "// No direct access to this file".$varObject->return;
  		$nodirectaccess .= "defined('_JEXEC') or die('Restricted access');".$varObject->return;
- 		
+
  		return $nodirectaccess;
  	}
- 	
+
  	public static function numtonumtext($number){
  		$text = array(
  			'zero',
@@ -82,20 +78,20 @@ class Helpers
  			'fortynine',
  			'fifty',
  		);
- 		
- 		if(array_key_exists($number, $text)):
+
+ 		if(array_key_exists($number, $text)) {
  			$return = $text[$number];
- 		else:
+ 		} else {
  			$characters = 'abcdefghijklmnopqrstuvwxyz';
  			$randomString = '';
  			for ($i = 0; $i < 5; $i++) {
  				$randomString .= $characters[rand(0, strlen($characters) - 1)];
  			}
+
  			// random
  			$return = $randomString;
- 		endif;
-	 	
+ 		}
+
 	 	return $return;
  	}
 }
-?>

@@ -1,8 +1,4 @@
 <?php
-/**
- *
- *
- */
 class Files
 {
 	// index.html
@@ -10,10 +6,10 @@ class Files
 	{
 		return '<html><body bgcolor="#FFFFFF"></body></html>';
 	}
-	
+
 	// install.xml (component name)
 	public static function installFile($varObject)
-	{	
+	{
 		$install[] = '<?xml version="1.0" encoding="utf-8"?>'.$varObject->return;
 		$install[] = '<extension type="component" version="'.$varObject->j_version.'" method="upgrade">'.$varObject->return;
 		$install[] = $varObject->tab1.'<name>'.$varObject->com_language.'</name>'.$varObject->return;
@@ -31,7 +27,7 @@ class Files
 		$install[] = $varObject->tab2.'<p>Created by <a href="http://'.$varObject->a_url.'" target="_blank">'.$varObject->author.' | '.$varObject->a_url.'</a>'.$varObject->return;
 		$install[] = $varObject->tab1.']]></description>'.$varObject->return;
 		$install[] = $varObject->return;
-		
+
 		// start - added v.0.6.0
 		if($varObject->useDatabase):
 			// Install Section - Joomla 1.5/2.5/3.0
@@ -50,12 +46,12 @@ class Files
 			$install[] = $varObject->tab1.'</uninstall>'.$varObject->return;
 			$install[] = $varObject->return;
 		endif;
-		
+
 		// Script Section - Joomla 2.5 / 3.0
 		$install[] = $varObject->tab1.'<!-- Runs on install/uninstall/update; New in Joomla 2.5 -->'.$varObject->return;
 		$install[] = $varObject->tab1.'<scriptfile>script.php</scriptfile>'.$varObject->return;
 		$install[] = $varObject->return;
-		
+
 		// start - added v.0.6.0
 		if($varObject->useDatabase):
 			// Update Section - Joomla 2.5 / 3.0
@@ -68,7 +64,7 @@ class Files
 			$install[] = $varObject->return;
 		endif;
 		// end - added v.0.6.0
-		
+
 		// Site Files Section
 		$install[] = $varObject->tab1.'<files folder="site">'.$varObject->return;
 		$install[] = $varObject->tab2.'<filename>controller.php</filename>'.$varObject->return;
@@ -81,10 +77,10 @@ class Files
 		$install[] = $varObject->tab2.'<folder>models</folder>'.$varObject->return;
 		$install[] = $varObject->tab2.'<folder>views</folder>'.$varObject->return;
 		$install[] = $varObject->tab1.'</files>'.$varObject->return;
-		
+
 		// Administrator Files Section
 		$install[] = $varObject->tab1.'<administration>'.$varObject->return;
-		
+
 		// start - added v.0.6.0
 		$main_view_image = '';
 		if($varObject->imagesUploaded[$varObject->comp_m_view]):
@@ -92,9 +88,9 @@ class Files
 			$main_view_image = ' img="components/'.$varObject->com_main.'/assets/images/icons/'.$varObject->imagesUploaded[$varObject->comp_m_view]->menu.'"';
 		endif;
 		// end - added v.0.6.0
-		
+
 		$install[]	= $varObject->tab2.'<menu'.$main_view_image.'>'.$varObject->com_language_menu.'</menu>'.$varObject->return;
-		
+
 		// handle submenu if other views are set!
 		$imageIndex	= 1;
 		if(count($varObject->allViews)):
@@ -125,14 +121,14 @@ class Files
 		$install[] = $varObject->tab3.'<folder>controllers</folder>'.$varObject->return;
 		$install[] = $varObject->tab3.'<folder>helpers</folder>'.$varObject->return;
 		$install[] = $varObject->tab3.'<folder>models</folder>'.$varObject->return;
-		
+
 		// start - added v.0.6.0
 		if($varObject->useDatabase):
 			$install[] = $varObject->tab3.'<folder>sql</folder>'.$varObject->return;
 			$install[] = $varObject->tab3.'<folder>tables</folder>'.$varObject->return;
 		endif;
 		// end - added v.0.6.0
-		
+
 		$install[] = $varObject->tab3.'<folder>views</folder>'.$varObject->return;
 		$install[] = $varObject->tab2.'</files>'.$varObject->return;
 		$install[] = $varObject->return;
@@ -142,13 +138,13 @@ class Files
 		$install[] = $varObject->tab2.'</languages>'.$varObject->return;
 		$install[] = $varObject->return;
 		$install[] = $varObject->tab1.'</administration>'.$varObject->return;
-		
+
 		// Finish it up
 		$install[] = '</extension>';
-		
+
 		return $install;
 	}
-	
+
 	// script.php
 	public static function scriptFile($varObject, $filename)
 	{
@@ -216,9 +212,8 @@ class Files
 		$script[] = $varObject->tab1.'}'.$varObject->return;
 		$script[] = '}'.$varObject->return;
 		$script[] = '?>';
-		
+
 		return $script;
 	}
 
 }
-?>

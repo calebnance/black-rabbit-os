@@ -131,4 +131,3 @@ class Debug
 		echo '<span class="tan">Array</span>' . $return;
 	}
 }
-?>

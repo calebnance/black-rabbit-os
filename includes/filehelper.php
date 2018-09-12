@@ -1,8 +1,4 @@
 <?php
-/**
- *
- *
- */
 class FileHelper
 {
  	public static function filecheck($file)
@@ -371,6 +367,4 @@ class FileHelper
 			mail($to_notify, $subject_notify, $msg_notify, $headers);
 		}
 	}
-
 }
-?>
