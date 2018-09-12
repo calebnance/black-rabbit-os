@@ -1,58 +1,57 @@
 <?php
-/**
- *	Start it off with everything
- *
- */
- 	define('MAINDIR', dirname(__FILE__));
- 	define('INCLUDESDIR', MAINDIR . '/includes/');
-    session_start();
-    // Display errors on localhost
-	$whitelist = array('locathost');
-	if(!in_array($_SERVER['SERVER_NAME'], $whitelist)){
-		// this is localhost!
-		// ini_set('display_errors', 1);
-		error_reporting(E_ALL);
-		// error_reporting(E_ALL ^ E_NOTICE);
-	}
+define('MAINDIR', dirname(__FILE__));
+define('INCLUDESDIR', MAINDIR . '/includes/');
 
- 	// Config file
- 	require_once(INCLUDESDIR . 'configuration.php');
+session_start();
 
- 	// Constants file
- 	require_once(INCLUDESDIR . 'constants.php');
+// display errors on localhost
+$whitelist = array('locathost');
 
- 	// Translator
- 	require_once(INCLUDESDIR . 'translator.php');
+if(!in_array($_SERVER['SERVER_NAME'], $whitelist)) {
+    // this is localhost!
+    // ini_set('display_errors', 1);
+    error_reporting(E_ALL);
+    // error_reporting(E_ALL ^ E_NOTICE);
+}
 
- 	// Database file
- 	require_once(INCLUDESDIR . 'database.php');
+// Config file
+require_once(INCLUDESDIR . 'configuration.php');
 
-    // Access
- 	require_once(INCLUDESDIR . 'access.php');
+// Constants file
+require_once(INCLUDESDIR . 'constants.php');
 
- 	// Helpers
- 	require_once(INCLUDESDIR . 'helpers.php');
+// Translator
+require_once(INCLUDESDIR . 'translator.php');
 
- 	// File helper
- 	require_once(INCLUDESDIR . 'filehelper.php');
+// Database file
+require_once(INCLUDESDIR . 'database.php');
 
- 	// Files
- 	require_once(INCLUDESDIR . 'files.php');
+// Access
+require_once(INCLUDESDIR . 'access.php');
 
- 	// Site files
- 	require_once(INCLUDESDIR . 'sitefiles.php');
+// Helpers
+require_once(INCLUDESDIR . 'helpers.php');
 
- 	// Admin files
- 	require_once(INCLUDESDIR . 'adminfiles.php');
+// File helper
+require_once(INCLUDESDIR . 'filehelper.php');
 
- 	// Field types
- 	require_once(INCLUDESDIR . 'fieldtypes.php');
+// Files
+require_once(INCLUDESDIR . 'files.php');
 
- 	// Module helper
- 	require_once(INCLUDESDIR . 'modulehelper.php');
+// Site files
+require_once(INCLUDESDIR . 'sitefiles.php');
 
- 	// Debug mode
- 	if(CREATE_PACKAGE == false){
-		require_once(INCLUDESDIR . 'debug.php');
- 	}
+// Admin files
+require_once(INCLUDESDIR . 'adminfiles.php');
+
+// Field types
+require_once(INCLUDESDIR . 'fieldtypes.php');
+
+// Module helper
+require_once(INCLUDESDIR . 'modulehelper.php');
+
+// Debug mode
+if(CREATE_PACKAGE == false){
+    require_once(INCLUDESDIR . 'debug.php');
+}
 ?>
