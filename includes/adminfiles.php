@@ -1,8 +1,4 @@
 <?php
-/**
- *
- *
- */
 class AdminFiles
 {
 	public static function accessFile($varObject)
@@ -16,7 +12,7 @@ class AdminFiles
 		$access[] = $varObject->tab2.'<action name="core.delete" title="JACTION_DELETE" description="JACTION_DELETE_COMPONENT_DESC" />'.$varObject->return;
 		$access[] = $varObject->tab2.'<action name="core.edit" title="JACTION_EDIT" description="JACTION_EDIT_COMPONENT_DESC" />'.$varObject->return;
 		$access[] = $varObject->tab1.'</section>'.$varObject->return;
-		
+
 		// If categories is a view, make sure to add it to the access file
 		if(in_array('categories',$varObject->views) || in_array('category',$varObject->views) || $varObject->includeCat):
 			$access[] = $varObject->tab1.'<section name="category">'.$varObject->return;
@@ -25,14 +21,14 @@ class AdminFiles
 			$access[] = $varObject->tab2.'<action name="core.edit" title="JACTION_EDIT" description="COM_CATEGORIES_ACCESS_EDIT_DESC" />'.$varObject->return;
 			$access[] = $varObject->tab2.'<action name="core.edit.state" title="JACTION_EDITSTATE" description="COM_CATEGORIES_ACCESS_EDITSTATE_DESC" />'.$varObject->return;
 			$access[] = $varObject->tab2.'<action name="core.edit.own" title="JACTION_EDITOWN" description="COM_CATEGORIES_ACCESS_EDITOWN_DESC" />'.$varObject->return;
-			$access[] = $varObject->tab1.'</section>'.$varObject->return;	
+			$access[] = $varObject->tab1.'</section>'.$varObject->return;
 		endif;
-		
+
 		$access[] = '</access>';
-		
+
 		return $access;
 	}
-	
+
 	public static function configFile($varObject)
 	{
 		$config[] = '<?xml version="1.0" encoding="utf-8"?>'.$varObject->return;
@@ -52,7 +48,7 @@ class AdminFiles
 		$config[] = $varObject->tab3.'section="component"'.$varObject->return;
 		$config[] = $varObject->tab2.'/>'.$varObject->return;
 		$config[] = $varObject->tab1.'</fieldset>'.$varObject->return;
-		
+
 		if($varObject->imageUpload):
 			$config[] = $varObject->tab1.'<fieldset'.$varObject->return;
 			$config[] = $varObject->tab2.'name="image_params"'.$varObject->return;
@@ -88,12 +84,12 @@ class AdminFiles
 			$config[] = $varObject->tab2.'/>'.$varObject->return;
 			$config[] = $varObject->tab1.'</fieldset>'.$varObject->return;
 		endif;
-		
+
 		$config[] = '</config>';
-		
+
 		return $config;
 	}
-	
+
 	public static function componentFile($varObject)
 	{
 		$filename = $varObject->comp_m_view.'.php';
@@ -101,7 +97,7 @@ class AdminFiles
 		$componentlines[] = Helpers::phpheader($filename, $varObject);
 		$componentlines[] = Helpers::nodirectaccess($varObject);
 		$componentlines[] = $varObject->return;
-		
+
 		// Check if Joomla 3.0
 		if($varObject->j_version == '3.0' || $varObject->j_version == '3.2'):
 			$componentlines[] = '// Added for Joomla 3.0'.$varObject->return;
@@ -110,13 +106,13 @@ class AdminFiles
 			$componentlines[] = '};'.$varObject->return;
 			$componentlines[] = $varObject->return;
 		endif;
-		
+
 		$componentlines[] = '// Access check.'.$varObject->return;
 		$componentlines[] = 'if (!JFactory::getUser()->authorise(\'core.manage\', \''.$varObject->com_main.'\')){'.$varObject->return;
 		$componentlines[] = $varObject->tab1.'return JError::raiseWarning(404, JText::_(\'JERROR_ALERTNOAUTHOR\'));'.$varObject->return;
 		$componentlines[] = '};'.$varObject->return;
 		$componentlines[] = $varObject->return;
-		
+
 		// Only Joomla 3.0 supported
 		if($varObject->j_version == '3.0' || $varObject->j_version == '3.2'):
 			$componentlines[] = '// Load cms libraries'.$varObject->return;
@@ -125,7 +121,7 @@ class AdminFiles
 			$componentlines[] = 'JLoader::registerPrefix(\'J\', JPATH_PLATFORM . \'/joomla\',false);'.$varObject->return;
 			$componentlines[] = $varObject->return;
 		endif;
-		
+
 		$componentlines[] = '// require helper files'.$varObject->return;
 		$componentlines[] = 'JLoader::register(\''.$varObject->comp_m_view_cap.'Helper\', dirname(__FILE__) . DS . \'helpers\' . DS . \''.$filename.'\');'.$varObject->return;
 		$componentlines[] = $varObject->return;
@@ -141,22 +137,22 @@ class AdminFiles
 		$componentlines[] = '$controller = '.$varObject->j_controller.'::getInstance(\''.$varObject->comp_m_view_cap.'\');'.$varObject->return;
 		$componentlines[] = $varObject->return;
 		$componentlines[] = '// Perform the Request task'.$varObject->return;
-		
+
 		if($varObject->j_version == '3.0' || $varObject->j_version == '3.2'):
 			$componentlines[] = '$controller->execute(JFactory::getApplication()->input->get(\'task\'));'.$varObject->return;
 		else:
 			$componentlines[] = '$controller->execute(JRequest::getCmd(\'task\'));'.$varObject->return;
 		endif;
-		
+
 		$componentlines[] = $varObject->return;
 		$componentlines[] = '// Redirect if set by the controller'.$varObject->return;
 		$componentlines[] = '$controller->redirect();'.$varObject->return;
 		$componentlines[] = $varObject->return;
 		$componentlines[] = '?>';
-		
+
 		return $componentlines;
 	}
-	
+
 	public static function controllerFile($varObject, $filename)
 	{
 		$controllerlines[] = '<?php'.$varObject->return;
@@ -192,10 +188,10 @@ class AdminFiles
 		$controllerlines[] = $varObject->tab1.'}'.$varObject->return;
 		$controllerlines[] = '}'.$varObject->return;
 		$controllerlines[] = '?>';
-		
+
 		return $controllerlines;
 	}
-	
+
 	public static function helperFile($varObject)
 	{
 		$filename = $varObject->comp_m_view.'.php';
@@ -214,7 +210,7 @@ class AdminFiles
 		$helperlines[] = $varObject->tab1.'public static function addSubmenu($submenu) '.$varObject->return;
 		$helperlines[] = $varObject->tab1.'{'.$varObject->return;
 		$categories = 0;
-		
+
 		// Handle views
 		foreach($varObject->allViews as $view):
 			// Check for categories view
@@ -225,13 +221,13 @@ class AdminFiles
 				$helperlines[] = $varObject->tab2.$varObject->j_helper_sub_menu_type.'::addEntry(JText::_(\''.$view['plural']['cap'].'\'), \'index.php?option='.$varObject->com_main.'&view='.$view['plural']['safe'].'\', $submenu == \''.$view['plural']['safe'].'\');'.$varObject->return;
 			endif;
 		endforeach;
-		
+
 		// Check for categories include
 		if($varObject->includeCat):
 			$helperlines[] = $varObject->tab2.$varObject->j_helper_sub_menu_type.'::addEntry(JText::_(\'Categories\'), \'index.php?option=com_categories&view=categories&extension='.$varObject->com_main.'\', $submenu == \'categories\');'.$varObject->return;
 			$categories = 1;
 		endif;
-		
+
 		// If categories are being used, set the title
 		if($categories):
 			$helperlines[] = $varObject->return;
@@ -241,7 +237,7 @@ class AdminFiles
 			$helperlines[] = $varObject->tab3.'$document->setTitle(JText::_(\'Categories - '.$varObject->comp_m_view_cap.'\'));'.$varObject->return;
 			$helperlines[] = $varObject->tab2.'};'.$varObject->return;
 		endif;
-		
+
 		$helperlines[] = $varObject->tab1.'}'.$varObject->return;
 		$helperlines[] = $varObject->return;
 		$helperlines[] = $varObject->tab1.'/**'.$varObject->return;
@@ -268,8 +264,8 @@ class AdminFiles
 		$helperlines[] = $varObject->return;
 		$helperlines[] = $varObject->tab2.'return $result;'.$varObject->return;
 		$helperlines[] = $varObject->tab1.'}'.$varObject->return;
-		
-		
+
+
 		if($varObject->imageUpload):
 			$helperlines[] = $varObject->return;
 			$helperlines[] = $varObject->tab1.'/**'.$varObject->return;
@@ -461,28 +457,28 @@ class AdminFiles
 			$helperlines[] = $varObject->tab2.'}'.$varObject->return;
 			$helperlines[] = $varObject->tab1.'}'.$varObject->return;
 		endif;
-		
+
 		$helperlines[] = '}'.$varObject->return;
 		$helperlines[] = '?>';
-		
+
 		return $helperlines;
 	}
-	
+
 	public static function languageFile($varObject)
 	{
 		$languagelines[] = $varObject->com_language .'_N_ITEMS_DELETED="%s item(s) deleted."'.$varObject->return;
 		$languagelines[] = $varObject->com_language .'_N_ITEMS_DELETED_1="%s item deleted."'.$varObject->return;
 		$languagelines[] = $varObject->com_language .'_CONFIGURATION="'.$varObject->comp_m_view_cap.' Configuration"'.$varObject->return; // added v.0.6.0
 		$languagelines[] = $varObject->com_language .'_N_ITEMS_CHECKED_IN="%s item(s) checked in."'; // added v.1.1.0
-		
+
 		return $languagelines;
 	}
-	
+
 	public static function languagesysFile($varObject, $extraSysLanguageLines)
 	{
 		$languagesyslines[] = $varObject->com_language . '="' . $varObject->comp_m_view_cap . '"'.$varObject->return;
 		$languagesyslines[] = $varObject->com_language_menu . '="' . $varObject->comp_m_view_cap . ' Manager"';
-		
+
 		if($varObject->allViews):
 			$languagesyslines[] = $varObject->return . $varObject->return;
 			foreach($varObject->allViews as $view):
@@ -496,7 +492,7 @@ class AdminFiles
 			endif;
 			array_pop($languagesyslines);
 		endif;
-		
+
 		if(!empty($extraSysLanguageLines)):
 			$languagesyslines[] = $varObject->return . $varObject->return;
 			foreach($extraSysLanguageLines as $extraSysLanguageLine):
@@ -506,10 +502,10 @@ class AdminFiles
 			// Remove last array() entry, which is the return
 			array_pop($languagesyslines);
 		endif;
-		
+
 		return $languagesyslines;
 	}
-	
+
 	public static function cssFile($varObject)
 	{
 		$csslines[] = '';
@@ -528,10 +524,10 @@ class AdminFiles
 			// Remove last array() entry, which is the return
 			array_pop($csslines);
 		endif;
-		
+
 		return $csslines;
 	}
-	
+
 	public static function viewsViewHtml25($view, $varObject, $filename)
 	{
 		$viewhtmllines[] = '<?php'.$varObject->return;
@@ -552,7 +548,7 @@ class AdminFiles
 		$viewhtmllines[] = $varObject->tab1.' */'.$varObject->return;
 		$viewhtmllines[] = $varObject->tab1.'function display($tpl = null) '.$varObject->return;
 		$viewhtmllines[] = $varObject->tab1.'{'.$varObject->return;
-		
+
 		// start - added v.0.6.0
 		if($varObject->useDatabase):
 			$viewhtmllines[] = $varObject->tab2.'// Get data from the model'.$varObject->return;
@@ -571,14 +567,14 @@ class AdminFiles
 			$viewhtmllines[] = $varObject->return;
 		endif;
 		// end - added v.0.6.0
-		
+
 		// Don't need a toolbar if this is just a view by itself
 		if(!is_numeric($view['singular']['safe'])):
 			$viewhtmllines[] = $varObject->tab2.'// Set the toolbar'.$varObject->return;
 			$viewhtmllines[] = $varObject->tab2.'$this->addToolBar();'.$varObject->return;
 			$viewhtmllines[] = $varObject->return;
 		endif;
-		
+
 		$viewhtmllines[] = $varObject->tab2.'// Display the template'.$varObject->return;
 		$viewhtmllines[] = $varObject->tab2.'parent::display($tpl);'.$varObject->return;
 		$viewhtmllines[] = $varObject->return;
@@ -586,7 +582,7 @@ class AdminFiles
 		$viewhtmllines[] = $varObject->tab2.'$this->setDocument();'.$varObject->return;
 		$viewhtmllines[] = $varObject->tab1.'}'.$varObject->return;
 		$viewhtmllines[] = $varObject->return;
-		
+
 		// Don't need a toolbar if this is just a view by itself
 		if(!is_numeric($view['singular']['safe'])):
 			$viewhtmllines[] = $varObject->tab1.'/**'.$varObject->return;
@@ -594,15 +590,15 @@ class AdminFiles
 			$viewhtmllines[] = $varObject->tab1.' */'.$varObject->return;
 			$viewhtmllines[] = $varObject->tab1.'protected function addToolBar() '.$varObject->return;
 			$viewhtmllines[] = $varObject->tab1.'{'.$varObject->return;
-			
+
 			// start - added v.0.6.0
 			if($varObject->useDatabase):
 				$viewhtmllines[] = $varObject->tab2.'$canDo = '.$varObject->comp_m_view_cap.'Helper::getActions();'.$varObject->return;
 			endif;
 			// end - added v.0.6.0
-			
+
 			$viewhtmllines[] = $varObject->tab2.'JToolBarHelper::title(JText::_(\''.$varObject->comp_m_view_cap.' Manager\'), \''.$varObject->comp_m_view.'\');'.$varObject->return;
-			
+
 			// start - added v.0.6.0
 			if($varObject->useDatabase):
 				$viewhtmllines[] = $varObject->tab2.'if($canDo->get(\'core.create\')){'.$varObject->return;
@@ -620,11 +616,11 @@ class AdminFiles
 				$viewhtmllines[] = $varObject->tab2.'};'.$varObject->return;
 			endif;
 			// end - added v.0.6.0
-			
+
 			$viewhtmllines[] = $varObject->tab1.'}'.$varObject->return;
 			$viewhtmllines[] = $varObject->return;
 		endif;
-		
+
 		$viewhtmllines[] = $varObject->tab1.'/**'.$varObject->return;
 		$viewhtmllines[] = $varObject->tab1.' * Method to set up the document properties'.$varObject->return;
 		$viewhtmllines[] = $varObject->tab1.' *'.$varObject->return;
@@ -638,10 +634,10 @@ class AdminFiles
 		$viewhtmllines[] = $varObject->tab1.'}'.$varObject->return;
 		$viewhtmllines[] = '}'.$varObject->return;
 		$viewhtmllines[] = '?>';
-		
+
 		return $viewhtmllines;
 	}
-	
+
 	public static function viewsViewHtml30($view, $varObject, $filename)
 	{
 		$viewhtmllines[] = '<?php'.$varObject->return;
@@ -665,7 +661,7 @@ class AdminFiles
 		$viewhtmllines[] = $varObject->tab2.'// Include helper submenu'.$varObject->return;
 		$viewhtmllines[] = $varObject->tab2.$varObject->comp_m_view_cap.'Helper::addSubmenu(\''.$view['plural']['safe'].'\');'.$varObject->return;
 		$viewhtmllines[] = $varObject->return;
-		
+
 		// start - added v.0.6.0
 		if($varObject->useDatabase):
 			$viewhtmllines[] = $varObject->tab2.'// Get data from the model'.$varObject->return;
@@ -684,7 +680,7 @@ class AdminFiles
 			$viewhtmllines[] = $varObject->return;
 		endif;
 		// end - added v.0.6.0
-		
+
 		// Don't need a toolbar if this is just a view by itself
 		if(!is_numeric($view['singular']['safe'])):
 			$viewhtmllines[] = $varObject->tab2.'// Set the toolbar'.$varObject->return;
@@ -693,7 +689,7 @@ class AdminFiles
 			$viewhtmllines[] = $varObject->tab2.'$this->sidebar = JHtmlSidebar::render();'.$varObject->return;
 			$viewhtmllines[] = $varObject->return;
 		endif;
-		
+
 		$viewhtmllines[] = $varObject->tab2.'// Display the template'.$varObject->return;
 		$viewhtmllines[] = $varObject->tab2.'parent::display($tpl);'.$varObject->return;
 		$viewhtmllines[] = $varObject->return;
@@ -701,7 +697,7 @@ class AdminFiles
 		$viewhtmllines[] = $varObject->tab2.'$this->setDocument();'.$varObject->return;
 		$viewhtmllines[] = $varObject->tab1.'}'.$varObject->return;
 		$viewhtmllines[] = $varObject->return;
-		
+
 		// Don't need a toolbar if this is just a view by itself
 		if(!is_numeric($view['singular']['safe'])):
 			$viewhtmllines[] = $varObject->tab1.'/**'.$varObject->return;
@@ -709,15 +705,15 @@ class AdminFiles
 			$viewhtmllines[] = $varObject->tab1.' */'.$varObject->return;
 			$viewhtmllines[] = $varObject->tab1.'protected function addToolBar() '.$varObject->return;
 			$viewhtmllines[] = $varObject->tab1.'{'.$varObject->return;
-			
+
 			// start - added v.0.6.0
 			if($varObject->useDatabase):
 				$viewhtmllines[] = $varObject->tab2.'$canDo = '.$varObject->comp_m_view_cap.'Helper::getActions();'.$varObject->return;
 			endif;
 			// end - added v.0.6.0
-			
+
 			$viewhtmllines[] = $varObject->tab2.'JToolBarHelper::title(JText::_(\''.$varObject->comp_m_view_cap.' Manager\'), \''.$varObject->comp_m_view.'\');'.$varObject->return;
-			
+
 			// start - added v.0.6.0
 			if($varObject->useDatabase):
 				$viewhtmllines[] = $varObject->tab2.'if($canDo->get(\'core.create\')){'.$varObject->return;
@@ -735,11 +731,11 @@ class AdminFiles
 				$viewhtmllines[] = $varObject->tab2.'};'.$varObject->return;
 			endif;
 			// end - added v.0.6.0
-			
+
 			$viewhtmllines[] = $varObject->tab1.'}'.$varObject->return;
 			$viewhtmllines[] = $varObject->return;
 		endif;
-		
+
 		$viewhtmllines[] = $varObject->tab1.'/**'.$varObject->return;
 		$viewhtmllines[] = $varObject->tab1.' * Method to set up the document properties'.$varObject->return;
 		$viewhtmllines[] = $varObject->tab1.' *'.$varObject->return;
@@ -753,10 +749,10 @@ class AdminFiles
 		$viewhtmllines[] = $varObject->tab1.'}'.$varObject->return;
 		$viewhtmllines[] = '}'.$varObject->return;
 		$viewhtmllines[] = '?>';
-		
+
 		return $viewhtmllines;
 	}
-	
+
 	public static function viewsViewDefault25($view, $varObject, $filename)
 	{
 		$viewhtmldefaultlines[] = '<?php'.$varObject->return;
@@ -766,7 +762,7 @@ class AdminFiles
 		$viewhtmldefaultlines[] = '// load tooltip behavior'.$varObject->return;
 		$viewhtmldefaultlines[] = 'JHtml::_(\'behavior.tooltip\');'.$varObject->return;
 		$viewhtmldefaultlines[] = '?>'.$varObject->return;
-		
+
 		// start - added v.0.6.0
 		if($varObject->useDatabase):
 			$viewhtmldefaultlines[] = '<form action="<?php echo JRoute::_(\'index.php?option='.$varObject->com_main.'&view='.$view['plural']['safe'].'\'); ?>" method="post" name="adminForm" id="adminForm">'.$varObject->return;
@@ -783,10 +779,10 @@ class AdminFiles
 			$viewhtmldefaultlines[] = '</form>';
 		endif;
 		// end - added v.0.6.0
-		
+
 		return $viewhtmldefaultlines;
 	}
-	
+
 	public static function viewsViewDefault30($view, $varObject, $filename)
 	{
 		$viewhtmldefaultlines[] = '<?php'.$varObject->return;
@@ -808,7 +804,7 @@ class AdminFiles
 		$viewhtmldefaultlines[] = '<?php } else { ?>'.$varObject->return;
 		$viewhtmldefaultlines[] = $varObject->tab1.'<div id="j-main-container">'.$varObject->return;
 		$viewhtmldefaultlines[] = '<?php }; ?>'.$varObject->return;
-		
+
 		// start - added v.0.6.0
 		if($varObject->useDatabase):
 			$viewhtmldefaultlines[] = $varObject->tab2.'<table class="table table-striped">'.$varObject->return;
@@ -818,7 +814,7 @@ class AdminFiles
 			$viewhtmldefaultlines[] = $varObject->tab2.'</table>'.$varObject->return;
 		endif;
 		// end - added v.0.6.0
-		
+
 		$viewhtmldefaultlines[] = $varObject->tab2.'<div>'.$varObject->return;
 		$viewhtmldefaultlines[] = $varObject->tab3.'<input type="hidden" name="task" value="" />'.$varObject->return;
 		$viewhtmldefaultlines[] = $varObject->tab3.'<input type="hidden" name="boxchecked" value="0" />'.$varObject->return;
@@ -829,7 +825,7 @@ class AdminFiles
 
 		return $viewhtmldefaultlines;
 	}
-	
+
 	public static function viewsViewDefaultHead($varObject, $formfields, $filename)
 	{
 		$viewhtmldefaultheadlines[] = '<?php'.$varObject->return;
@@ -844,7 +840,7 @@ class AdminFiles
 		$viewhtmldefaultheadlines[] = $varObject->tab1.'<th width="20">'.$varObject->return;
 		$viewhtmldefaultheadlines[] = $varObject->tab2.'<input type="checkbox" name="toggle" value="" onclick="checkAll(<?php echo count($this->items); ?>);" />'.$varObject->return;
 		$viewhtmldefaultheadlines[] = $varObject->tab1.'</th>'.$varObject->return;
-		
+
 		// Make sure there is formfields
 		if($formfields->name):
 			$shown = 0;
@@ -868,18 +864,18 @@ class AdminFiles
 				$viewhtmldefaultheadlines[] = $varObject->tab1.'</th>'.$varObject->return;
 			endif;
 		endif;
-		
+
 		$viewhtmldefaultheadlines[] = '</tr>';
-		
+
 		return $viewhtmldefaultheadlines;
 	}
-	
+
 	public static function viewsViewDefaultBody($view, $varObject, $formfields, $filename)
 	{
-		
+
 		$categoryLookUp	= 0;
 		$categoryField	= '';
-		
+
 		// Make sure there is formfields
 		if($formfields->type):
 			if(array_search("category", $formfields->type) && $varObject->includeCat):
@@ -888,7 +884,7 @@ class AdminFiles
 				$categoryLookUp = 1;
 			endif;
 		endif;
-		
+
 		$firstfield = 1;
 		$viewhtmldefaultbodylines[] = '<?php'.$varObject->return;
 		$viewhtmldefaultbodylines[] = Helpers::phpheader($filename, $varObject);
@@ -897,22 +893,22 @@ class AdminFiles
 		$viewhtmldefaultbodylines[] = '$edit = "index.php?option='.$varObject->com_main.'&view='.$view['plural']['safe'].'&task='.$view['singular']['safe'].'.edit";'.$varObject->return;
 		$viewhtmldefaultbodylines[] = '$user = JFactory::getUser();'.$varObject->return;
 		$viewhtmldefaultbodylines[] = '$userId = $user->get(\'id\');'.$varObject->return;
-		
+
 		if($categoryLookUp):
 			$viewhtmldefaultbodylines[] = $varObject->return;
 			$viewhtmldefaultbodylines[] = '// Connect to database'.$varObject->return;
 			$viewhtmldefaultbodylines[] = '$db = JFactory::getDBO();'.$varObject->return;
 		endif;
-		
+
 		$viewhtmldefaultbodylines[] = '?>'.$varObject->return;
 		$viewhtmldefaultbodylines[] = '<?php foreach($this->items as $i => $item){'.$varObject->return;
 		$viewhtmldefaultbodylines[] = $varObject->tab1.'$canCheckin	= $user->authorise(\'core.manage\', \'com_checkin\') || $item->checked_out == $userId || $item->checked_out == 0;'.$varObject->return;
 		$viewhtmldefaultbodylines[] = $varObject->tab1.'$userChkOut	= JFactory::getUser($item->checked_out);'.$varObject->return;
-		
+
 		if($categoryLookUp):
 			$viewhtmldefaultbodylines[] = $varObject->tab1.'$categoryTitle = $db->setQuery(\'SELECT #__categories.title FROM #__categories WHERE #__categories.id = "\'.$item->'.$categoryField.'.\'"\')->loadResult();'.$varObject->return;
 		endif;
-		
+
 		$viewhtmldefaultbodylines[] = $varObject->tab1.'?>'.$varObject->return;
 		$viewhtmldefaultbodylines[] = $varObject->tab1.'<tr class="row<?php echo $i % 2; ?>">'.$varObject->return;
 		$viewhtmldefaultbodylines[] = $varObject->tab2.'<td>'.$varObject->return;
@@ -921,7 +917,7 @@ class AdminFiles
 		$viewhtmldefaultbodylines[] = $varObject->tab2.'<td>'.$varObject->return;
 		$viewhtmldefaultbodylines[] = $varObject->tab3.'<?php echo JHtml::_(\'grid.id\', $i, $item->id); ?>'.$varObject->return;
 		$viewhtmldefaultbodylines[] = $varObject->tab2.'</td>'.$varObject->return;
-		
+
 		// Make sure there are formfields
 		if($formfields->name_safe):
 			$shown = 0;
@@ -959,18 +955,18 @@ class AdminFiles
 				$viewhtmldefaultbodylines[] = $varObject->tab2.'</td>'.$varObject->return;
 			endif;
 		endif;
-		
+
 		$viewhtmldefaultbodylines[] = $varObject->tab1.'</tr>'.$varObject->return;
 		$viewhtmldefaultbodylines[] = '<?php } ?>';
-		
+
 		return $viewhtmldefaultbodylines;
 	}
-	
+
 	public static function viewsViewDefaultFoot($varObject, $formfields, $filename)
 	{
 		//Set column number
 		$colspan = 0;
-		
+
 		// Make sure there is formfields
 		if($formfields->name):
 			// Parse through fields
@@ -978,20 +974,20 @@ class AdminFiles
 				// Check if field is required
 				if($formfields->show):
 					if (array_key_exists($key, $formfields->show)):
-						$colspan++;		
+						$colspan++;
 					endif;
 				endif;
 			endforeach;
 		endif;
-		
+
 		// default at least the first field to be the edit field
 		if($colspan == 0):
 			$colspan++;
 		endif;
-		
+
 		// Add 2 to colspan for id field and checkbox (present by default in list manager)
 		$colspan = $colspan + 2;
-		
+
 		$viewhtmldefaultfootlines[] = '<?php'.$varObject->return;
 		$viewhtmldefaultfootlines[] = Helpers::phpheader($filename, $varObject);
 		$viewhtmldefaultfootlines[] = Helpers::nodirectaccess($varObject);
@@ -1000,10 +996,10 @@ class AdminFiles
 		$viewhtmldefaultfootlines[] = '<tr>'.$varObject->return;
 		$viewhtmldefaultfootlines[] = $varObject->tab1.'<td colspan="'.$colspan.'"><?php echo $this->pagination->getListFooter(); ?></td>'.$varObject->return;
 		$viewhtmldefaultfootlines[] = '</tr>';
-				
+
 		return $viewhtmldefaultfootlines;
 	}
-	
+
 	public static function viewsViewSingularViewHtml($view, $varObject, $filename)
 	{
 		$viewsingularviewhtml[] = '<?php'.$varObject->return;
@@ -1105,12 +1101,12 @@ class AdminFiles
 		$viewsingularviewhtml[] = $varObject->tab1.'}'.$varObject->return;
 		$viewsingularviewhtml[] = '}'.$varObject->return;
 		$viewsingularviewhtml[] = '?>';
-				
+
 		return $viewsingularviewhtml;
 	}
-	
+
 	public static function viewsViewSingularViewSubmitButton($view, $varObject, $filename)
-	{	
+	{
 		$viewsingularviewsubmit[] = '/**'.$varObject->return;
 		$viewsingularviewsubmit[] = ' *'.$varObject->tab1.$view['singular']['cap'].' : Submit Button Override'.$varObject->return;
 		$viewsingularviewsubmit[] = ' *'.$varObject->tab1.'Filename : '.$filename.$varObject->return;
@@ -1147,10 +1143,10 @@ class AdminFiles
 		$viewsingularviewsubmit[] = $varObject->tab2.'}'.$varObject->return;
 		$viewsingularviewsubmit[] = $varObject->tab1.'}'.$varObject->return;
 		$viewsingularviewsubmit[] = '}';
-		
+
 		return $viewsingularviewsubmit;
 	}
-	
+
 	public static function viewsViewSingularViewEdit25($view, $varObject, $filename, $view_count)
 	{
 		$viewsingularhtmledit[] = '<?php'.$varObject->return;
@@ -1161,21 +1157,21 @@ class AdminFiles
 		$viewsingularhtmledit[] = 'JHtml::_(\'behavior.tooltip\');'.$varObject->return;
 		$viewsingularhtmledit[] = 'JHtml::_(\'behavior.formvalidation\');'.$varObject->return;
 		$viewsingularhtmledit[] = '$params = $this->form->getFieldsets(\'params\');'.$varObject->return;
-		
+
 		if($varObject->imageUpload):
 			$viewsingularhtmledit[] = '$componentParams = JComponentHelper::getParams(\''.$varObject->com_main.'\');'.$varObject->return;
 		endif;
-		
+
 		$viewsingularhtmledit[] = $varObject->return;
 		$viewsingularhtmledit[] = '?>'.$varObject->return;
-		
+
 		if($varObject->imageUpload):
 			$viewsingularhtmledit[] = '<style type="text/css">'.$varObject->return;
 			$viewsingularhtmledit[] = $varObject->tab1.'.full, .thumb { border: 1px solid #CCC; float: left; margin: 0 10px 0 0; padding: 10px; }'.$varObject->return;
 			$viewsingularhtmledit[] = $varObject->tab1.'.full h2, .thumb h2 { margin: 0; padding: 0; }'.$varObject->return;
 			$viewsingularhtmledit[] = '</style>'.$varObject->return;
 		endif;
-		
+
 		$viewsingularhtmledit[] = '<form action="<?php echo JRoute::_(\'index.php?option='.$varObject->com_main.'&layout=edit&id=\'.(int) $this->item->id); ?>" method="post" name="adminForm" id="adminForm" enctype="multipart/form-data">'.$varObject->return;
 		$viewsingularhtmledit[] = $varObject->tab1.'<div class="width-100 fltlft">'.$varObject->return;
 		$viewsingularhtmledit[] = $varObject->tab2.'<fieldset class="adminform">'.$varObject->return;
@@ -1184,7 +1180,7 @@ class AdminFiles
 		$viewsingularhtmledit[] = $varObject->tab4.'<?php foreach($this->form->getFieldset(\'details\') as $field){ ?>'.$varObject->return;
 		$viewsingularhtmledit[] = $varObject->tab5.'<div>'.$varObject->return;
 		$viewsingularhtmledit[] = $varObject->tab6.'<?php echo $field->label; echo $field->input;?>'.$varObject->return;
-		
+
 		if($varObject->imageUpload):
 			if(is_array($varObject->imageFields[$view_count])){
 				foreach($varObject->imageFields[$view_count] as $image_name):
@@ -1195,9 +1191,9 @@ class AdminFiles
 				endforeach;
 			}
 		endif;
-		
+
 		$viewsingularhtmledit[] = $varObject->tab5.'</div>'.$varObject->return;
-		
+
 		if($varObject->imageUpload):
 			$viewsingularhtmledit[] = $varObject->tab5.'<?php if($field->fieldname == \''.$image_name['fieldnamesafe'].'\' && $field->value){ ?>'.$varObject->return;
 			$viewsingularhtmledit[] = $varObject->tab5.'<label>Image Preview</label>'.$varObject->return;
@@ -1211,9 +1207,9 @@ class AdminFiles
 			$viewsingularhtmledit[] = $varObject->tab5.'</div>'.$varObject->return;
 			$viewsingularhtmledit[] = $varObject->tab5.'<?php } ?>'.$varObject->return;
 		endif;
-		
+
 		$viewsingularhtmledit[] = $varObject->tab5.'<div class="' . $varObject->j_clear_class . '"></div>'.$varObject->return;
-		
+
 		$viewsingularhtmledit[] = $varObject->tab4.'<?php }; ?>'.$varObject->return;
 		$viewsingularhtmledit[] = $varObject->tab3.'</div>'.$varObject->return;
 		$viewsingularhtmledit[] = $varObject->tab2.'</fieldset>'.$varObject->return;
@@ -1223,10 +1219,10 @@ class AdminFiles
 		$viewsingularhtmledit[] = $varObject->tab2.'<?php echo JHtml::_(\'form.token\'); ?>'.$varObject->return;
 		$viewsingularhtmledit[] = $varObject->tab1.'</div>'.$varObject->return;
 		$viewsingularhtmledit[] = '</form>';
-		
+
 		return $viewsingularhtmledit;
 	}
-	
+
 	public static function viewsViewSingularViewEdit30($view, $varObject, $filename, $view_count)
 	{
 		$viewsingularhtmledit[] = '<?php'.$varObject->return;
@@ -1239,21 +1235,21 @@ class AdminFiles
 		$viewsingularhtmledit[] = 'JHtml::_(\'formbehavior.chosen\', \'select\');'.$varObject->return;
 		$viewsingularhtmledit[] = 'JHtml::_(\'behavior.keepalive\');'.$varObject->return;
 		$viewsingularhtmledit[] = '$params = $this->form->getFieldsets(\'params\');'.$varObject->return;
-		
+
 		if($varObject->imageUpload):
 			$viewsingularhtmledit[] = '$componentParams = JComponentHelper::getParams(\''.$varObject->com_main.'\');'.$varObject->return;
 		endif;
-		
+
 		$viewsingularhtmledit[] = $varObject->return;
 		$viewsingularhtmledit[] = '?>'.$varObject->return;
-		
+
 		if($varObject->imageUpload):
 			$viewsingularhtmledit[] = '<style type="text/css">'.$varObject->return;
 			$viewsingularhtmledit[] = $varObject->tab1.'.full, .thumb { border: 1px solid #CCC; float: left; margin: 0 10px 0 0; padding: 10px; }'.$varObject->return;
 			$viewsingularhtmledit[] = $varObject->tab1.'.full h2, .thumb h2 { margin: 0; padding: 0; }'.$varObject->return;
 			$viewsingularhtmledit[] = '</style>'.$varObject->return;
 		endif;
-		
+
 		$viewsingularhtmledit[] = '<ul class="nav nav-tabs hidden" >'.$varObject->return;
 		$viewsingularhtmledit[] = $varObject->tab1.'<li class="active"><a data-toggle="tab" href="#home">tab</a></li>'.$varObject->return;
 		$viewsingularhtmledit[] = '</ul>'.$varObject->return;
@@ -1266,7 +1262,7 @@ class AdminFiles
 		$viewsingularhtmledit[] = $varObject->tab5.'<?php foreach($this->form->getFieldset(\'details\') as $field){ ?>'.$varObject->return;
 		$viewsingularhtmledit[] = $varObject->tab6.'<div>'.$varObject->return;
 		$viewsingularhtmledit[] = $varObject->tab7.'<?php echo $field->label; echo $field->input;?>'.$varObject->return;
-		
+
 		if($varObject->imageUpload):
 			if(is_array($varObject->imageFields[$view_count])){
 				foreach($varObject->imageFields[$view_count] as $image_name):
@@ -1277,9 +1273,9 @@ class AdminFiles
 				endforeach;
 			}
 		endif;
-		
+
 		$viewsingularhtmledit[] = $varObject->tab6.'</div>'.$varObject->return;
-		
+
 		if($varObject->imageUpload):
 			if(is_array($varObject->imageFields[$view_count])){
 				foreach($varObject->imageFields[$view_count] as $image_name):
@@ -1297,9 +1293,9 @@ class AdminFiles
 				endforeach;
 			}
 		endif;
-		
+
 		$viewsingularhtmledit[] = $varObject->tab6.'<div class="' . $varObject->j_clear_class . '"></div>'.$varObject->return;
-		
+
 		$viewsingularhtmledit[] = $varObject->tab5.'<?php }; ?>'.$varObject->return;
 		$viewsingularhtmledit[] = $varObject->tab4.'</div>'.$varObject->return;
 		$viewsingularhtmledit[] = $varObject->tab3.'</fieldset>'.$varObject->return;
@@ -1310,10 +1306,10 @@ class AdminFiles
 		$viewsingularhtmledit[] = $varObject->tab2.'<?php echo JHtml::_(\'form.token\'); ?>'.$varObject->return;
 		$viewsingularhtmledit[] = $varObject->tab1.'</div>'.$varObject->return;
 		$viewsingularhtmledit[] = '</form>';
-		
+
 		return $viewsingularhtmledit;
 	}
-	
+
 	public static function adminControllerPlural($view, $varObject)
 	{
 		$filename = $view['plural']['safe'] . '.php';
@@ -1341,10 +1337,10 @@ class AdminFiles
 		$adminControllerPlural[] = $varObject->tab1.'}'.$varObject->return;
 		$adminControllerPlural[] = '}'.$varObject->return;
 		$adminControllerPlural[] = '?>';
-		
+
 		return $adminControllerPlural;
 	}
-	
+
 	public static function adminControllerSingular($view, $varObject, $view_count)
 	{
 		$filename = $view['singular']['safe'] . '.php';
@@ -1379,12 +1375,12 @@ class AdminFiles
 		$adminControllerSingular[] = $varObject->tab1.' */'.$varObject->return;
 		$adminControllerSingular[] = $varObject->tab1.'protected function postSaveHook(' . $varObject->j_model . ' &$model, $validData = array())'.$varObject->return;
 		$adminControllerSingular[] = $varObject->tab1.'{'.$varObject->return;
-		
-		
+
+
 		$adminControllerSingular[] = $varObject->tab2.'// Get a handle to the Joomla! application object'.$varObject->return;
 		$adminControllerSingular[] = $varObject->tab2.'$application = JFactory::getApplication();'.$varObject->return;
 		$adminControllerSingular[] = $varObject->return;
-		
+
 		if($varObject->datemodified):
 			$adminControllerSingular[] = $varObject->tab2.'$date = date(\'Y-m-d H:i:s\');'.$varObject->return;
 			$adminControllerSingular[] = $varObject->tab2.'if($validData[\'date_created\'] == \'0000-00-00 00:00:00\'){'.$varObject->return;
@@ -1393,7 +1389,7 @@ class AdminFiles
 			$adminControllerSingular[] = $varObject->tab2.'$data[\'date_modified\'] = $date;'.$varObject->return;
 			$adminControllerSingular[] = $varObject->return;
 		endif;
-		
+
 		if($varObject->usermodified):
 			$adminControllerSingular[] = $varObject->tab2.'$user = JFactory::getUser();'.$varObject->return;
 			$adminControllerSingular[] = $varObject->tab2.'if($validData[\'user_created\'] == 0){'.$varObject->return;
@@ -1402,7 +1398,7 @@ class AdminFiles
 			$adminControllerSingular[] = $varObject->tab2.'$data[\'user_modified\'] = $user->id;'.$varObject->return;
 			$adminControllerSingular[] = $varObject->return;
 		endif;
-		
+
 		if($varObject->imageUpload):
 			if(is_array($varObject->imageFields[$view_count])){
 				foreach($varObject->imageFields[$view_count] as $image_name):
@@ -1454,18 +1450,18 @@ class AdminFiles
 				endforeach;
 			}
 		endif;
-		
+
 		$adminControllerSingular[] = $varObject->tab2.'$model->save($data);'.$varObject->return;
 		$adminControllerSingular[] = $varObject->return;
-		
+
 		$adminControllerSingular[] = $varObject->tab1.'}'.$varObject->return;
 		$adminControllerSingular[] = $varObject->return;
 		$adminControllerSingular[] = '}'.$varObject->return;
 		$adminControllerSingular[] = '?>';
-		
+
 		return $adminControllerSingular;
 	}
-	
+
 	public static function adminModelPlural($view, $varObject)
 	{
 		$filename = $view['plural']['safe'] . '.php';
@@ -1480,7 +1476,7 @@ class AdminFiles
 		$adminModelPlural[] = ' */'.$varObject->return;
 		$adminModelPlural[] = 'class '.$varObject->comp_m_view_cap.'Model'.$view['plural']['safe'].' extends JModelList'.$varObject->return;
 		$adminModelPlural[] = '{'.$varObject->return;
-		
+
 		// start - added v.0.6.0
 		if($varObject->useDatabase):
 			$adminModelPlural[] = $varObject->tab1.'/**'.$varObject->return;
@@ -1504,13 +1500,13 @@ class AdminFiles
 			$adminModelPlural[] = $varObject->tab1.'}'.$varObject->return;
 		endif;
 		// end - added v.0.6.0
-		
+
 		$adminModelPlural[] = '}'.$varObject->return;
 		$adminModelPlural[] = '?>';
-		
+
 		return $adminModelPlural;
 	}
-	
+
 	public static function adminModelSingular($view, $varObject)
 	{
 		$filename = $view['singular']['safe'] . '.php';
@@ -1604,10 +1600,10 @@ class AdminFiles
 		$adminModelSingular[] = $varObject->tab1.'}'.$varObject->return;
 		$adminModelSingular[] = '}'.$varObject->return;
 		$adminModelSingular[] = '?>';
-		
+
 		return $adminModelSingular;
 	}
-	
+
 	public static function adminModelFormsForm($formfields, $varObject)
 	{
 		$adminModelFormsForm[] = '<?xml version="1.0" encoding="utf-8"?>'.$varObject->return;
@@ -1620,47 +1616,47 @@ class AdminFiles
 		$adminModelFormsForm[] = $varObject->tab3.'name="id"'.$varObject->return;
 		$adminModelFormsForm[] = $varObject->tab3.'type="hidden"'.$varObject->return;
 		$adminModelFormsForm[] = $varObject->tab2.'/>'.$varObject->return;
-		
+
 		if($varObject->datemodified):
 			$adminModelFormsForm[] = $varObject->tab2.'<field'.$varObject->return;
 			$adminModelFormsForm[] = $varObject->tab3.'name="date_created"'.$varObject->return;
 			$adminModelFormsForm[] = $varObject->tab3.'type="hidden"'.$varObject->return;
 			$adminModelFormsForm[] = $varObject->tab2.'/>'.$varObject->return;
 		endif;
-		
+
 		if($varObject->usermodified):
 			$adminModelFormsForm[] = $varObject->tab2.'<field'.$varObject->return;
 			$adminModelFormsForm[] = $varObject->tab3.'name="user_created"'.$varObject->return;
 			$adminModelFormsForm[] = $varObject->tab3.'type="hidden"'.$varObject->return;
-			$adminModelFormsForm[] = $varObject->tab2.'/>'.$varObject->return;		
+			$adminModelFormsForm[] = $varObject->tab2.'/>'.$varObject->return;
 		endif;
-		
+
 		// Make sure there is formfields
 		if($formfields->name):
 			// Parse through fields
 			foreach($formfields->name as $key=>$field):
 				// Set variables to empty
 				$default = $required = $validate = $class = $size = $filter = $width = $format = $first = $last = $step = $rows = $cols = $extension = '';
-				
+
 				// Capitalize the field word(s)
 				$field = strtolower($field);
 				$field = ucwords($field);
-				
+
 				// pull safe value
 				$field_lower = $formfields->name_safe[$key];
-	
+
 				// Check if field has a default
 				if(array_key_exists($key, $formfields->default)):
 					$default = $formfields->default[$key];
 				endif;
-				
+
 				// Check if field is to be on the manager
 				if($formfields->show):
 					if(array_key_exists($key, $formfields->show)):
 						//echo 'show in manager';
 					endif;
 				endif;
-				
+
 				// Check if field is required
 				if($formfields->required):
 					if (array_key_exists($key, $formfields->required)):
@@ -1669,10 +1665,10 @@ class AdminFiles
 						$validate = 'validate-';
 					endif;
 				endif;
-				
+
 				// Set end var
 				$end = 1;
-				
+
 				// Type of field
 				$type = $formfields->type[$key];
 				switch ($type) {
@@ -1741,7 +1737,7 @@ class AdminFiles
 						$cols = $varObject->tab3.'cols="5"'.$varObject->return;
 						break;
 				}
-				
+
 				$adminModelFormsForm[] = $varObject->tab2.'<field'.$varObject->return;
 				$adminModelFormsForm[] = $class;
 				$adminModelFormsForm[] = $varObject->tab3.'default="'.$default.'"'.$varObject->return;
@@ -1763,7 +1759,7 @@ class AdminFiles
 				if($validate):
 					$adminModelFormsForm[] = $varObject->tab3.'validate="'.$field_lower.'"'.$varObject->return;;
 				endif;
-				
+
 				// end of field
 				if($end == 1):
 					$adminModelFormsForm[] = $varObject->tab2.'/>'.$varObject->return;
@@ -1776,21 +1772,21 @@ class AdminFiles
 					endforeach;
 					$adminModelFormsForm[] = $varObject->tab2.'</field>'.$varObject->return;
 				endif;
-				
+
 			endforeach;
 		endif;
-		
-		
+
+
 		$adminModelFormsForm[] = $varObject->tab1.'</fieldset>'.$varObject->return;
 		$adminModelFormsForm[] = '</form>';
-		
+
 		return $adminModelFormsForm;
 	}
-	
+
 	public static function adminModelFormsFormJS($formfields, $view, $varObject)
 	{
 		$filename = $view['singular']['safe'] . '.js';
-		
+
 		$adminModelFormsFormJS[] = '/**'.$varObject->return;
 		$adminModelFormsFormJS[] = ' *'.$varObject->tab1.$view['singular']['orig'].' : Validate'.$varObject->return;
 		$adminModelFormsFormJS[] = ' *'.$varObject->tab1.'Filename : '.$filename.$varObject->return;
@@ -1803,7 +1799,7 @@ class AdminFiles
 		$adminModelFormsFormJS[] = ' *'.$varObject->return;
 		$adminModelFormsFormJS[] = ' **/'.$varObject->return;
 		$adminModelFormsFormJS[] = 'window.addEvent(\'domready\', function() {'.$varObject->return;
-		
+
 		// Make sure there is formfields
 		if($formfields->name):
 			// Parse through fields
@@ -1821,17 +1817,17 @@ class AdminFiles
 				endif;
 			endforeach;
 		endif;
-		
+
 		$adminModelFormsFormJS[] = '});';
-		
+
 		return $adminModelFormsFormJS;
 	}
-	
+
 	public static function adminModuleFieldsField($formfields, $adminmodelfieldfilename, $view, $varObject, $view_count_string)
-	{	
+	{
 		$field = $formfields->name_safe[0];
 		$filename = $varObject->comp_m_view.$view_count_string . '.php';
-		
+
 		$adminModuleFieldsFieldLine[] = '<?php'.$varObject->return;
 		$adminModuleFieldsFieldLine[] = Helpers::phpheader($filename, $varObject);
 		$adminModuleFieldsFieldLine[] = Helpers::nodirectaccess($varObject);
@@ -1877,12 +1873,12 @@ class AdminFiles
 		$adminModuleFieldsFieldLine[] = $varObject->tab1.'}'.$varObject->return;
 		$adminModuleFieldsFieldLine[] = '}'.$varObject->return;
 		$adminModuleFieldsFieldLine[] = '?>';
-		
+
 		return $adminModuleFieldsFieldLine;
 	}
-	
+
 	public static function adminCatModuleFieldsField($view, $varObject, $view_count_string)
-	{	
+	{
 		/*
 		// No direct access to this file
 defined('_JEXEC') or die('Restricted access');
@@ -1975,10 +1971,10 @@ class JFormFieldproductsone extends JFormFieldList
 		$adminModuleFieldsFieldLine[] = $varObject->tab1.'}'.$varObject->return;
 		$adminModuleFieldsFieldLine[] = '}'.$varObject->return;
 		$adminModuleFieldsFieldLine[] = '?>';
-		
+
 		return $adminModuleFieldsFieldLine;
 	}
-	
+
 	public static function adminModelRulesRule($formfields, $varObject)
 	{
 		// Make sure you don't overwrite a rule
@@ -2019,12 +2015,12 @@ class JFormFieldproductsone extends JFormFieldList
 				endif;
 			endforeach;
 		endif;
-		
+
 		return $adminModelRulesRule;
 	}
-	
+
 	public static function adminSQLInstallFile($formfields, $view, $varObject)
-	{	
+	{
 		$adminSQLInstallLine[] = 'CREATE TABLE IF NOT EXISTS `#__'.$varObject->comp_m_view.'_'.$view['singular']['safe'].'` (';
 		$adminSQLInstallLine[] = $varObject->space2 . '`id` int(11) NOT NULL AUTO_INCREMENT,';
 		// Make sure there is formfields
@@ -2033,7 +2029,7 @@ class JFormFieldproductsone extends JFormFieldList
 				$field			= strtolower($field);
 				$field			= ucwords($field);
 				$field_lower	= $formfields->name_safe[$key];
-				
+
 				// Type of field
 				switch ($formfields->type[$key]) {
 					case 'calendar':
@@ -2056,10 +2052,10 @@ class JFormFieldproductsone extends JFormFieldList
 						$adminSQLInstallLine[] = $varObject->space2 . '`'.$field_lower.'` varchar(256) NOT NULL,';
 						break;
 				}
-				
+
 			endforeach;
 		endif;
-		
+
 		// User & Date Created/Modified
 		if($varObject->usermodified):
 			$adminSQLInstallLine[] = $varObject->space2 . '`user_created` int(11) NOT NULL DEFAULT \'0\',';
@@ -2069,24 +2065,24 @@ class JFormFieldproductsone extends JFormFieldList
 			$adminSQLInstallLine[] = $varObject->space2 . '`date_created` DATETIME NOT NULL,';
 			$adminSQLInstallLine[] = $varObject->space2 . '`date_modified` DATETIME NOT NULL,';
 		endif;
-		
+
 		// Add checked out support
 		$adminSQLInstallLine[] = $varObject->space2 . '`checked_out` int(11) NOT NULL,';
 		$adminSQLInstallLine[] = $varObject->space2 . '`checked_out_time` DATETIME NOT NULL,';
-		
+
 		$adminSQLInstallLine[] = $varObject->space2 . 'PRIMARY KEY  (`id`)';
 		$adminSQLInstallLine[] = ') ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;';
-		
+
 		return $adminSQLInstallLine;
 	}
-	
+
 	public static function adminSQLUninstallFile($formfields, $view, $varObject)
 	{
 		$adminSQLUninstallLine = 'DROP TABLE IF EXISTS `#__'.$varObject->comp_m_view.'_'.$view['singular']['safe'].'`;';
-		
+
 		return $adminSQLUninstallLine;
 	}
-	
+
 	public static function adminTable($view, $varObject)
 	{
 		$filename = $view['singular']['safe'] . '.php';
@@ -2153,8 +2149,8 @@ class JFormFieldproductsone extends JFormFieldList
 		$adminTable[] = ''.$varObject->return;
 		$adminTable[] = '}'.$varObject->return;
 		$adminTable[] = '?>';
-		
+
 		return $adminTable;
-	}	
+	}
 }
 ?>
