@@ -772,18 +772,18 @@ if(isset($_REQUEST['msg'])) {
 				<br /><br />
 				<div class="row recent-posts">
 					<div class="span4 ad">
-						<img src="http://placehold.it/250">
-						<br>
+						<img src="https://via.placeholder.com/250" />
+						<br />
 						Place Ad Here
 					</div><!-- /.span4 -->
 					<div class="span4 ad">
-						<img src="http://placehold.it/250">
-						<br>
+						<img src="https://via.placeholder.com/250" />
+						<br />
 						Place Ad Here
 					</div><!-- /.span4 -->
 					<div class="span4 ad">
-						<img src="http://placehold.it/250">
-						<br>
+						<img src="https://via.placeholder.com/250" />
+						<br />
 						Place Ad Here
 					</div><!-- /.span4 -->
 				</div><!-- /.row -->

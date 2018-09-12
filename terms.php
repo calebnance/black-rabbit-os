@@ -17,8 +17,8 @@ include('template/header.php');
 				?>
 					<span class="hidden-phone">
 						<div class="page-ad well pull-right">
-							<img src="http://placehold.it/250">
-							<br>
+							<img src="https://via.placeholder.com/250" />
+							<br />
 							Place Ad Here
 						</div>
 					</span>

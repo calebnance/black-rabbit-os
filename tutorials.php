@@ -23,22 +23,22 @@ include('template/header.php');
 						<div class="row-fluid">
 							<div class="span4">
 								<div class="well">
-									<img src="http://placehold.it/250">
-									<br>
+									<img src="https://via.placeholder.com/250" />
+									<br />
 									Place Ad Here
 								</div><!-- /.page-ad -->
 							</div><!-- /.span4 -->
 							<div class="span4">
 								<div class="well">
-									<img src="http://placehold.it/250">
-									<br>
+									<img src="https://via.placeholder.com/250" />
+									<br />
 									Place Ad Here
 								</div><!-- /.page-ad -->
 							</div><!-- /.span4 -->
 							<div class="span4">
 								<div class="well">
-									<img src="http://placehold.it/250">
-									<br>
+									<img src="https://via.placeholder.com/250" />
+									<br />
 									Place Ad Here
 								</div><!-- /.page-ad -->
 							</div><!-- /.span4 -->

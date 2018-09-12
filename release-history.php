@@ -229,8 +229,8 @@ foreach($items as $item){
 							?>
 								<span class="hidden-phone">
 									<div class="page-ad well pull-right" style="margin-top: 15px;">
-										<img src="http://placehold.it/250">
-										<br>
+										<img src="https://via.placeholder.com/250" />
+										<br />
 										Place Ad Here
 									</div>
 								</span>

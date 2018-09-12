@@ -377,8 +377,8 @@ if(isset($_REQUEST['msg'])) {
 					?>
 						<span class="hidden-phone">
 							<div class="page-ad pull-right">
-								<img src="http://placehold.it/250">
-								<br>
+								<img src="https://via.placeholder.com/250" />
+								<br />
 								Place Ad Here
 							</div><!-- /.page-ad -->
 						</span>
