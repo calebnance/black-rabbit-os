@@ -42,7 +42,10 @@
 	endif;
 
 	// Set Black Rabbit Version
-	$br_version	= $post['brversion'];
+	$br_version	= '0.0.0';
+	if(isset($post['brversion'])) {
+		$br_version	= $post['brversion'];
+	}
 
 	if(DEBUG):
 		/*
