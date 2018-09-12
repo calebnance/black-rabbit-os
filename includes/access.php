@@ -8,7 +8,7 @@ class Access
 
     public static function notLoggedInOrPaid()
 	{
-        return !isset($_SESSION['loggedin']) || !isset($_SESSION['paid']);
+        return (!isset($_SESSION['loggedin']) || !isset($_SESSION['paid']));
 	}
 }
 ?>

@@ -1,13 +1,10 @@
 <?php
-/*
- * Black Rabbit Component Creator
- * by Caleb Nance
- */
-
 include('master.php');
+
 $pageTitle = 'About Black Rabbit Joomla Component Creator | Free | Joomla 2.5 & Joomla 3.0';
 $pageActive = 'about';
 $pageActiveBreadcrumb = '<li class="active">About Black Rabbit Component Creator</li>';
+
 include('template/header.php');
 ?>
 <div id="section-container">

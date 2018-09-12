@@ -224,15 +224,19 @@ foreach($items as $item){
 								</div><!-- /.tab-content -->
 							</div><!-- /.tabbable -->
 
-							<?php if(!$_SESSION['loggedin'] || !$_SESSION['paid']){ ?>
-							<span class="hidden-phone">
-								<div class="page-ad well pull-right" style="margin-top: 15px;">
-									<img src="http://placehold.it/250">
-									<br>
-									Place Ad Here
-								</div>
-							</span>
-							<?php } ?>
+							<?php
+							if(Access::notLoggedInOrPaid()) {
+							?>
+								<span class="hidden-phone">
+									<div class="page-ad well pull-right" style="margin-top: 15px;">
+										<img src="http://placehold.it/250">
+										<br>
+										Place Ad Here
+									</div>
+								</span>
+							<?php
+							}
+							?>
 
 							<h3><i class="icon-list-ul"></i> Wishlist and Things To Come</h3>
 							<ul>
