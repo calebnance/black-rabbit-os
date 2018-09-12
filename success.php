@@ -48,12 +48,11 @@ if(isset($_GET)):
 			$update['payment_payer_country']		= $keyarray['residence_country'];
 			$update['date_paid']					= $date_paid;
 
-			// Connect to database
 			$database = new Database(HOST, DBNAME, DBUSER, DBPASS);
 			$database->update('br_users', $update, 'id='.$_SESSION['uid']);
 
 			// set paid in session as well
-			$_SESSION['paid'] = 1;
+			$_SESSION['paid'] = '1';
 
 			// redirect to components, should be able to save them now!
 			header('location: components.php?msg=4');

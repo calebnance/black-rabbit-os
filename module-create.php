@@ -1,19 +1,10 @@
 <?php
-/*********
-* Black Rabbit Component Creator
-* by Caleb Nance
-*/
-
 include('master.php');
 
-// session check
-// session_start();
-
-// store session data
-if(!isset($_SESSION['loggedin'])){
+if(Access::notLoggedIn()) {
     header('Location: index.php?msg=7');
     exit();
-} elseif($_SESSION['paid'] !== '1') {
+} elseif(Access::notPaid()) {
     header('Location: modules.php?msg=1');
     exit();
 } else {

@@ -3,7 +3,7 @@
 include('master.php');
 
 // store session data
-if(!isset($_SESSION['loggedin'])) {
+if(Access::notLoggedIn()) {
 	header('Location: index.php?msg=7');
 	exit();
 } else {
@@ -62,14 +62,14 @@ include('template/header.php');
 						<?php endif; ?>
 
 						<h1><i class="icon-cogs"></i> My Components</h1>
-						<?php if($_SESSION['paid'] == 1): ?>
+						<?php if(Access::paid()): ?>
 							<p class="lead">You have <?php echo $userComponentsCount . ' ' . $textComponents; ?> in your work area!</p>
 						<?php endif; ?>
 					</div><!-- /.span12 -->
 				</div><!-- /.row -->
 				<div class="row">
 					<?php
-					if($_SESSION['paid'] == 1):
+					if(Access::paid()):
 					?>
 					<div id="components-list" class="span12">
 						<p>

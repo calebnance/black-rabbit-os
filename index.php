@@ -2,9 +2,6 @@
 
 include('master.php');
 
-// session check
-// session_start();
-// store session data
 if(isset($_SESSION['loggedin'])):
 	FileHelper::checksession();
 endif;
@@ -36,7 +33,7 @@ $uCDatabase		= 1;
 $uCDatabaseYes	= 'btn-warning active';
 
 // lets check for a post and if they are still logged in
-if($_POST && $_SESSION['loggedin'] && $_SESSION['paid']):
+if($_POST && $_SESSION['loggedin'] && Access::paid()):
 	$cid	= $_POST['cid'];
 	$pid	= $_POST['pid'];
 	$uid	= $_SESSION['uid'];
@@ -358,7 +355,7 @@ if(isset($_REQUEST['msg'])) {
 							</div><!-- /.controls -->
 						</div><!-- /#componentviews -->
 						<?php
-						if($_POST && $_SESSION['loggedin'] && $_SESSION['paid'] && $userComponentViews):
+						if($_POST && $_SESSION['loggedin'] && Access::paid() && $userComponentViews):
 							for($i=1; $i < count($userComponentViews); $i++):
 								$userComponentView = $userComponentViews[$i];
 							?>
@@ -598,7 +595,7 @@ if(isset($_REQUEST['msg'])) {
 								</div><!-- /mainview -->
 							</div><!-- /accordion-group -->
 							<?php
-							if($_POST && $_SESSION['loggedin'] && $_SESSION['paid'] && $userComponentViews):
+							if($_POST && $_SESSION['loggedin'] && Access::paid() && $userComponentViews):
 								for($v=1; $v < count($userComponentViews); $v++):
 									$userComponentView	= $userComponentViews[$v];
 									$uCFields			= unserialize($userComponentView->fields);
@@ -715,7 +712,7 @@ if(isset($_REQUEST['msg'])) {
 								</div><!-- /.control-group -->
 
 								<?php
-								if($_POST && $_SESSION['loggedin'] && $_SESSION['paid'] && $userComponentViews):
+								if($_POST && $_SESSION['loggedin'] && Access::paid() && $userComponentViews):
 									for($v=1; $v < count($userComponentViews); $v++):
 									$viewCount = $v + 1;
 								?>

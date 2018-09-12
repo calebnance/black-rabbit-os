@@ -252,7 +252,6 @@ class FileHelper
 
 	public static function startsession($user_info)
 	{
-		// session_start();
 		$_SESSION['loggedin']	= 1;
 		$_SESSION['uid']		= $user_info[0]['id'];
 		$_SESSION['fname']		= $user_info[0]['fname'];
