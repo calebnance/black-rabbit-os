@@ -5,26 +5,24 @@ $pageTitle = 'Login for Black Rabbit Joomla Component Creator | Free | Joomla 2.
 $pageActive = 'login';
 $pageActiveBreadcrumb = '<li class="active">Login</li>';
 
-
-
-// MSG handling
 $msg = '';
 
-// Lets do some checking
+// lets do some checking
 if(empty($_POST['email']) || empty($_POST['password'])):
 	if(isset($_POST['email']) || isset($_POST['password'])):
 		$msg = 'Make sure you fill in your e-mail and password.';
 	endif;
 else:
-	$post		= $_POST;
-	$email		= $post['email'];
-	$pass		= $post['password'];
+	$post = $_POST;
+	$email = $post['email'];
+	$pass = $post['password'];
 
 	// database
 	$database = new Database(HOST, DBNAME, DBUSER, DBPASS);
 	$user_info = $database->select('br_users', '*', 'email="'.$email.'"');
+
 	if($user_info):
-		$user_pass	= $user_info[0]['password'];
+		$user_pass = $user_info[0]['password'];
 		if($user_pass === md5($pass)):
 			FileHelper::startsession($user_info);
 			header('location: dashboard.php');
@@ -35,7 +33,6 @@ else:
 	else:
 		$msg = 'E-mail was not found..';
 	endif;
-
 endif;
 
 include('template/header.php');
@@ -44,13 +41,9 @@ include('template/header.php');
 	<div class="container">
 		<div class="row">
 			<div class="span12">
-				<?php if($msg): ?>
-				<br />
-				<div class="alert alert-error">
-					<button type="button" class="close" data-dismiss="alert">&times;</button>
-					<?php echo $msg; ?>
-				</div>
-				<?php endif; ?>
+				<?php
+				Msg::alert($msg, 'error');
+				?>
 				<h1><?php echo $brtext->__('LOGIN'); ?></h1>
 				<p class="lead">and be able to manage/edit/download all your components created!</p>
 			</div><!-- /.span12 -->

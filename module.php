@@ -8,10 +8,7 @@ if(Access::notLoggedIn()) {
 	FileHelper::checksession();
 }
 
-// DB Connect
 $database = new Database(HOST, DBNAME, DBUSER, DBPASS);
-
-// Set user ID
 $uid = $_SESSION['uid'];
 
 // If the module is being downloaded
@@ -35,21 +32,17 @@ if(isset($_POST['task']) && $_POST['task'] == 'mdownload'):
 	exit();
 endif;
 
-// Call header
 $pageTitle = 'My Modules for Black Rabbit Joomla Component Creator | Free | Joomla 2.5 & Joomla 3.0';
 $pageActive = 'modules';
 $pageActiveBreadcrumb = '<li class="active">Create Module</li>';
 
-// Modules and such
 $userModules = $database->select('br_modules', '*', 'uid="'.$uid.'" AND midparent="0"', 'object'); // grab parents first
 $userModulesCount = count($userModules);
 $textModules = $userModulesCount > 1 || $userModulesCount == 0 ? 'modules' : 'module';
 
 include('template/header.php');
 
-// MSG handling
 $msg = '';
-$error_type = 'error';
 if(isset($_REQUEST['msg'])){
 	switch($_REQUEST['msg']) {
 		case '1':
@@ -107,14 +100,9 @@ switch($uMJVersion){
 	<div class="container">
 		<div class="row">
 			<div class="span12">
-				<?php if($msg): ?>
-				<br />
-				<div class="alert alert-<?php echo $error_type; ?>">
-					<button type="button" class="close" data-dismiss="alert">&times;</button>
-					<?php echo $msg; ?>
-				</div>
-				<?php endif; ?>
-
+				<?php
+				Msg::alert($msg, 'error');
+				?>
 				<h1><i class="icon-paper-clip"></i> Create Module</h1>
 			</div><!-- /.span12 -->
 			<?php

@@ -26,12 +26,9 @@ if(isset($_REQUEST['msg'])) {
 	<div class="container">
 		<div class="row">
 			<div class="span12">
-				<?php if($msg): ?>
-				<div class="alert alert-error">
-					<button type="button" class="close" data-dismiss="alert">&times;</button>
-					<?php echo $msg; ?>
-				</div>
-				<?php endif; ?>
+				<?php
+				Msg::alert($msg, 'error');
+				?>
 				<h1>Sign-up for Membership</h1>
 				<p class="lead">and be able to manage/edit/download all your components created!</p>
 				<div id="scroller-anchor"></div>

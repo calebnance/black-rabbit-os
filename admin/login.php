@@ -1,57 +1,53 @@
 <?php
-	// Include database and config
-	include('../master.php');
+include('../master.php');
 
-	// First time? Set the admin up.
-	$database = new Database(HOST, DBNAME, DBUSER, DBPASS);
-	$adminCheck = $database->select('br_admins', '*', '1=1', 'object');
-	if(!$adminCheck):
-		header('location:welcome.php');
-		exit();
-	endif;
+$database = new Database(HOST, DBNAME, DBUSER, DBPASS);
+$adminCheck = $database->select('br_admins', '*', '1=1', 'object');
 
-	// Default messages
-	$msg = '';
-	$msgclass = 'error';
+if(!$adminCheck):
+	header('location:welcome.php');
+	exit();
+endif;
 
-	$post = $_POST;
+$msg = $msgType = '';
+$post = $_POST;
 
-	if($post):
-		if($post['username'] && $post['password']):
-			$result = $database->select('br_admins', '*', 'username="'.$post['username'].'" AND password="'.md5($post['password']).'"', 'object');
-			if($result):
-				$loggedin_date = date("Y-m-d H:i:s");
-				$user_update = array(
-					'last_login' => $loggedin_date
-				);
-				$database->update('br_admins', $user_update, 'username="'.$post['username'].'"');
-				session_start();
-				$_SESSION['logged'] = 1;
-				header('location:index.php');
-				exit();
-			else:
-				$msg = 'Wrong username or password!';
-			endif;
+if($post):
+	if($post['username'] && $post['password']):
+		$result = $database->select('br_admins', '*', 'username="'.$post['username'].'" AND password="'.md5($post['password']).'"', 'object');
+		if($result):
+			$loggedin_date = date("Y-m-d H:i:s");
+			$user_update = array(
+				'last_login' => $loggedin_date
+			);
+			$database->update('br_admins', $user_update, 'username="'.$post['username'].'"');
+			session_start();
+			$_SESSION['logged'] = 1;
+			header('location:index.php');
+			exit();
 		else:
-			$msg = 'Fill in all fields!';
-			$msgclass = 'warning';
+			$msg = 'Wrong username or password!';
+			$msgType = 'error';
 		endif;
+	else:
+		$msg = 'Fill in all fields!';
+		$msgType = 'warning';
 	endif;
+endif;
 
-	// check for messages
-	if(isset($_REQUEST['msg'])){
-		switch($_REQUEST['msg']) {
-			case '3':
-				$msg = 'You can now login!';
-				$msgclass = 'success';
-				break;
-			case '2':
-			default:
-				$msg = 'Something went wrong...';
-				$msgclass = 'error';
-				break;
-		}
+// check for messages
+if(isset($_REQUEST['msg'])){
+	switch($_REQUEST['msg']) {
+		case '3':
+			$msg = 'You can now login!';
+			break;
+		case '2':
+		default:
+			$msg = 'Something went wrong...';
+			$msgType = 'error';
+			break;
 	}
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -79,9 +75,9 @@
 			<div class="row">
 				<form class="form-signin" method="post" action="login.php">
 					<h2 class="form-signin-heading">Admin Sign In</h2>
-					<?php if($msg): ?>
-					<div class="alert alert-<?php echo $msgclass; ?>"><button type="button" class="close" data-dismiss="alert">&times;</button><?php echo $msg; ?></div>
-					<?php endif; ?>
+					<?php
+					Msg::alert($msg, $msgType);
+					?>
 					<input type="text" name="username" class="input-block-level" placeholder="Username">
 					<input type="password" name="password" class="input-block-level" placeholder="Password">
 					<button class="btn btn-large btn-success" type="submit">Sign in</button>

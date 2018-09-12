@@ -1,7 +1,6 @@
 <?php
 include('master.php');
 
-
 if(Access::notLoggedIn()) {
 	header('Location: index.php?msg=7');
 	exit();
@@ -9,15 +8,11 @@ if(Access::notLoggedIn()) {
 	FileHelper::checksession();
 }
 
-// Call header
 $pageTitle = 'My Modules for Black Rabbit Joomla Component Creator | Free | Joomla 2.5 & Joomla 3.0';
 $pageActive = 'modules';
 $pageActiveBreadcrumb = '<li class="active">My Modules</li>';
 
-// DB Connect
 $database = new Database(HOST, DBNAME, DBUSER, DBPASS);
-
-// Modules and such
 $uid = $_SESSION['uid'];
 $userModules = $database->select('br_modules', '*', 'uid="'.$uid.'" AND midparent="0"', 'object'); // grab parents first
 $userModulesCount = count($userModules);
@@ -25,9 +20,7 @@ $textModules = $userModulesCount > 1 || $userModulesCount == 0 ? 'modules' : 'mo
 
 include('template/header.php');
 
-// MSG handling
 $msg = '';
-$error_type = 'error';
 if(isset($_REQUEST['msg'])){
 	switch($_REQUEST['msg']) {
 		case '1':
@@ -46,14 +39,9 @@ if(isset($_REQUEST['msg'])){
 	<div class="container">
 		<div class="row">
 			<div class="span12">
-				<?php if($msg): ?>
-				<br />
-				<div class="alert alert-<?php echo $error_type; ?>">
-					<button type="button" class="close" data-dismiss="alert">&times;</button>
-					<?php echo $msg; ?>
-				</div>
-				<?php endif; ?>
-
+				<?php
+				Msg::alert($msg, 'error');
+				?>
 				<h1><i class="icon-paper-clip"></i> My Modules</h1>
 				<?php if(Access::paid()): ?>
 					<p class="lead">You have <?php echo $userModulesCount . ' ' . $textModules; ?> in your work area!</p>

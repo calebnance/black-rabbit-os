@@ -11,16 +11,13 @@
 		exit();
 	endif;
 
-	// Default messages
-	$msg = '';
-	$msgclass = 'error';
-
+	$msg = $msgType = '';
 	$post = $_POST;
 
 	if($post):
-
 		if($post['password'] != $post['cpassword']):
 			$msg = 'Passwords do not match!';
+			$msgType = 'error';
 		elseif($post['username'] && $post['password'] && $post['cpassword']):
 			$posted_date = date("Y-m-d H:i:s");
 			$admin_record = [
@@ -40,7 +37,7 @@
 			exit();
 		else:
 			$msg = 'Fill in all fields!';
-			$msgclass = 'warning';
+			$msgType = 'warning';
 		endif;
 	endif;
 
@@ -69,9 +66,9 @@
 		<div class="container">
 			<form class="form-signin" method="post" action="welcome.php">
 				<h2 class="form-signin-heading">Admin Set Up</h2>
-				<?php if($msg): ?>
-				<div class="alert alert-<?php echo $msgclass; ?>"><button type="button" class="close" data-dismiss="alert">&times;</button><?php echo $msg; ?></div>
-				<?php endif; ?>
+				<?php
+				Msg::alert($msg, $msgType);
+				?>
 				<input type="text" name="username" class="input-block-level" placeholder="Username">
 				<input type="password" name="password" class="input-block-level" placeholder="Password">
 				<input type="password" name="cpassword" class="input-block-level" placeholder="Confirm Password">
