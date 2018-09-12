@@ -32,6 +32,9 @@ require_once(INCLUDESDIR . 'access.php');
 // Helpers
 require_once(INCLUDESDIR . 'helpers.php');
 
+// Message
+require_once(INCLUDESDIR . 'message.php');
+
 // File helper
 require_once(INCLUDESDIR . 'filehelper.php');
 

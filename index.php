@@ -122,43 +122,42 @@ $packagesfilescount	= number_format($packagesfilescount);
 $totaltimesaved		= sprintf("%04d%s%02d%s%02d", $hours, $f, $minutes, $f, $seconds);
 $totaltimesaved		= $hours . ':' . $minutes . ':' . $seconds;
 
-$msg = '';
-$error_type = 'error';
+$msg = $msgType = '';
 
 if(isset($_REQUEST['msg'])) {
 	switch($_REQUEST['msg']) {
 		case "1":
 			$msg = 'Please fill in all required fields, and make sure javascript is enabled on your browser!';
+			$msgType = 'error';
 			break;
 		case "2":
-			$error_type = 'success';
 			$msg = 'Success! Check your e-mail for the validation code.';
 			break;
 		case "3":
 			$msg = 'Can not validate e-mail code.';
+			$msgType = 'error';
 			break;
 		case "4":
-			$error_type = 'warning';
 			$msg = 'E-mail has already been validated. You can now sign-in!';
+			$msgType = 'warning';
 			break;
 		case "5":
-			$error_type = 'success';
 			$msg = 'You can now sign-in!';
 			break;
 		case "6":
-			$error_type = 'success';
 			$msg = 'You are now logged out.';
 			break;
 		case "7":
-			$error_type = 'warning';
 			$msg = 'Please <a href="login.php">login</a> to view that page.';
+			$msgType = 'warning';
 			break;
 		case "8":
-			$error_type = 'warning';
 			$msg = 'Session ended due to inactivity.';
+			$msgType = 'warning';
 			break;
 		default:
 			$msg = 'watttt';
+			$msgType = 'error';
 			break;
 	}
 }
@@ -166,13 +165,9 @@ if(isset($_REQUEST['msg'])) {
 ?>
 <div id="hero">
 	<div class="container">
-		<?php if($msg): ?>
-		<br />
-		<div class="alert alert-<?php echo $error_type; ?>">
-			<button type="button" class="close" data-dismiss="alert">&times;</button>
-			<?php echo $msg; ?>
-		</div>
-		<?php endif; ?>
+		<?php
+		Msg::alert($msg, $msgType);
+		?>
 		<div class="hero-title">
 			<div class="logo-wrapper">
 				<a href="index.php"><div class="logo"></div></a>
