@@ -1,28 +1,25 @@
 <?php
-	// Include database and config
 	include('../master.php');
-	
-	session_start();
-	// store session data
+
 	if(!isset($_SESSION['logged'])):
 		header('location:login.php');
 		exit();
 	endif;
-	
+
 	// Database connect
 	$database = new Database(HOST, DBNAME, DBUSER, DBPASS);
-	
+
 	// Set menu
 	$activeCpanel = $activeStats = $activeHelloworld = $activeUsers = '';
 	$activeHelloworld = 'class="active"';
-	
+
 	// Get total packages!
 	$hellowords = $database->select('br_helloworlds', '*', '1=1', 'object');
 	$allHelloworlds = count($hellowords);
 	$totalDownloads = 0;
 	$joomla25Downloads = 0;
 	$joomla30Downloads = 0;
-	
+
 	foreach($hellowords as $row):
 		$totalDownloads = $totalDownloads + $row->downloadcount;
 		if($row->jversion == '2.5'):
@@ -32,7 +29,7 @@
 			$joomla30Downloads = $joomla30Downloads + $row->downloadcount;
 		endif;
 	endforeach;
-	
+
 	$hellowords25 = $database->select('br_helloworlds', '*', 'jversion = "2.5"', 'object');
 	$joomla25 = array();
 	foreach($hellowords25 as $row):
@@ -40,7 +37,7 @@
 		$joomla25['brv'][] = $row->version;
 		$joomla25['last'][] = $row->lastdownloaded;
 	endforeach;
-	
+
 	$hellowords30 = $database->select('br_helloworlds', '*', 'jversion = "3.0"', 'object');
 	$joomla30 = array();
 	foreach($hellowords30 as $row):
@@ -48,9 +45,9 @@
 		$joomla30['brv'][] = $row->version;
 		$joomla30['last'][] = $row->lastdownloaded;
 	endforeach;
-	
-	$linesCount = count($joomla25['25']);
-	
+
+	$linesCount = isset($joomla25['25']) ? count($joomla25['25']) : 0;
+
 	// Include header and menu
 	include('template/header.php');
 	include('template/menu.php');
@@ -92,6 +89,4 @@
 				</div><!-- /.span12 -->
 			</div><!-- /.row-fluid -->
 <?php
-	// Include footer
-	include('template/footer.php');
-?>
+include('template/footer.php');

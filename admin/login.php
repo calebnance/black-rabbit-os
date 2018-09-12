@@ -21,7 +21,6 @@ if($post):
 				'last_login' => $loggedin_date
 			);
 			$database->update('br_admins', $user_update, 'username="'.$post['username'].'"');
-			session_start();
 			$_SESSION['logged'] = 1;
 			header('location:index.php');
 			exit();
@@ -83,7 +82,7 @@ if(isset($_REQUEST['msg'])){
 					<button class="btn btn-large btn-success" type="submit">Sign in</button>
 				</form>
 			</div>
-		</div> <!-- /container -->
+		</div>
 		<!-- Le javascript
 		================================================== -->
 		<script src="../js/jquery-1.8.3.min.js"></script>

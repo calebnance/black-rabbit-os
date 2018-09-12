@@ -1,44 +1,37 @@
 <?php
-	// Include database and config
 	include('../master.php');
-	
-	session_start();
-	// store session data
+
 	if(!isset($_SESSION['logged'])):
 		header('location:login.php');
 		exit();
 	endif;
-	
-	// Database connect
+
 	$database = new Database(HOST, DBNAME, DBUSER, DBPASS);
-	
-	// Get user
-	//$adminCheck = mysql_fetch_row(mysql_query("SELECT * FROM br_admins"));
-	
+
 	// Set menu
 	$activeCpanel = $activeStats = $activeHelloworld = $activeUsers = '';
 	$activeStats = 'class="active"';
-	
+
 	// Grab creation stats
 	$currentpage = 1;
 	$start = 0;
 	//$limit = 10;
 	$limitSet = 10;
-	
-	if($_REQUEST['p']):
+
+	if(isset($_REQUEST['p'])) {
 		$currentpage = $_REQUEST['p'];
-	endif;
-	
-	if($_REQUEST['start']):
+	}
+
+	if(isset($_REQUEST['start'])) {
 		$start = $_REQUEST['start'];
-	endif;
-	
+	}
+
 	/*
 	if($_REQUEST['limit']):
 		$limit = $_REQUEST['limit'];
 	endif;
 	*/
-	
+
 	// Get total packages!
 	$totalCheck = $database->select('br_packages', '*', '1=1', 'object');
 	$totalPackages = count($totalCheck);
@@ -50,14 +43,14 @@
     	$packageslinescount = $packageslinescount + $row->lines_created;
     	$packagesfilescount = $packagesfilescount + $row->files_created;
 	endforeach;
-    
+
 	// Set query for this page
 	$totalP = $database->select('br_packages', '*', '1=1', 'object', '', '', 'date_created', $limitSet, true, $start);
 	$packages = array();
 	foreach($totalP as $row):
 		$packages[] = $row;
 	endforeach;
-    
+
     // Calculate time saved (hours)
     //$totaltimesaved = round(($packageslinescount / 4) / 60);
     $t = $packageslinescount * 15;
@@ -66,11 +59,10 @@
 	$minutes = ($t/60)%60;
 	$seconds = $t%60;
 	$totaltimesaved = $hours . $f . $minutes . $f . $seconds;
-	
+
 	$packageslinescount = number_format($packageslinescount);
 	$packagesfilescount = number_format($packagesfilescount);
-    
-	// Include header and menu
+
 	include('template/header.php');
 	include('template/menu.php');
 ?>
@@ -134,7 +126,7 @@
 						<?php endforeach; ?>
 						</tbody>
 					</table>
-					
+
 					<?php
 					if($totalPackages > 10):
 						$totalpages = 1;
@@ -144,7 +136,7 @@
 						endfor;
 						$laststart = $i - 11;
 						$totalpages = $totalpages - 1;
-						
+
 						if($totalPackages > 10)
 						{
 							$firstActive = ($currentpage == 1) ? " class=\"active\"" : "";
@@ -173,7 +165,7 @@
 							$pagination .= '</div>';
 							echo $pagination;
 						}
-						
+
 						$last_done_page = 0;
 						if($totalPackages > 10)
 						{
@@ -205,10 +197,8 @@
 						}
 					endif;
 					?>
-					
+
 				</div><!-- /.span12 -->
 			</div><!-- /.row-fluid -->
 <?php
-	// Include footer
-	include('template/footer.php');
-?>
+include('template/footer.php');
