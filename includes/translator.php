@@ -58,7 +58,10 @@ class Translator {
 		if(file_exists($langpath)){
 			$strings = array_map(array($this,'splitStrings'),file($langpath));
 			foreach ($strings as $k => $v){
-				$langEN[$v[0]] = $v[1];
+				// if not empty (account for empty lines in .txt file)
+				if(!empty($v[0])) {
+					$langEN[$v[0]] = $v[1];
+				}
 			}
 			return $langEN;
 		}
