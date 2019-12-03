@@ -21,7 +21,7 @@ class Database {
 	{
 		// connect to mysql
 		$this->_connection = mysqli_connect($this->_server, $this->_user, $this->_password);
-		if(!$this->_connection) {
+		if (!$this->_connection) {
 			echo "Whoops, something went wrong, check your database connection credentials...";
 			exit();
 		}
@@ -162,7 +162,7 @@ class Database {
 	 */
 	public function delete($table, $id, $where = null)
 	{
-		if($where === null):
+		if ($where === null):
 			$query = 'DELETE FROM ' . $table . ' WHERE id=\'' . $id . '\'';
 		else:
 			$query = 'DELETE FROM ' . $table . ' WHERE ' . $where;

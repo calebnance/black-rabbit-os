@@ -1,10 +1,10 @@
 <?php
 include('master.php');
 
-if(Access::notLoggedIn()) {
+if (Access::notLoggedIn()) {
     header('Location: index.php?msg=7');
     exit();
-} elseif(Access::notPaid()) {
+} elseif (Access::notPaid()) {
     header('Location: modules.php?msg=1');
     exit();
 } else {
@@ -28,7 +28,7 @@ $requiredFields = [
 // loop through required fields
 foreach($requiredFields as $requiredField) {
     // if empty, no go
-    if(empty($post[$requiredField])){
+    if (empty($post[$requiredField])){
         $validPost = false;
         header('location:module.php?msg=1');
         exit();
@@ -201,7 +201,7 @@ include('template/header.php');
         <div class="row">
             <div class="span12">
                 <?php
-                if($filescreatedlist) {
+                if ($filescreatedlist) {
                 ?>
                     <div class="jumbotron">
                         <h2><?php echo $varObject->name; ?> module has been created...</h2>

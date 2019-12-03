@@ -1,7 +1,7 @@
 <?php
 include('master.php');
 
-if(Access::loggedIn()) {
+if (Access::loggedIn()) {
 	FileHelper::checksession();
 }
 
@@ -32,7 +32,7 @@ $uCDatabase		= 1;
 $uCDatabaseYes	= 'btn-warning active';
 
 // lets check for a post and if they are still logged in
-if($_POST && Access::loggedIn() && Access::paid()):
+if ($_POST && Access::loggedIn() && Access::paid()):
 	$cid	= $_POST['cid'];
 	$pid	= $_POST['pid'];
 	$uid	= $_SESSION['uid'];
@@ -124,7 +124,7 @@ $totaltimesaved		= $hours . ':' . $minutes . ':' . $seconds;
 
 $msg = $msgType = '';
 
-if(isset($_REQUEST['msg'])) {
+if (isset($_REQUEST['msg'])) {
 	switch($_REQUEST['msg']) {
 		case "1":
 			$msg = 'Please fill in all required fields, and make sure javascript is enabled on your browser!';
@@ -349,7 +349,7 @@ if(isset($_REQUEST['msg'])) {
 							</div><!-- /.controls -->
 						</div><!-- /#componentviews -->
 						<?php
-						if($_POST && Access::loggedIn() && Access::paid() && $userComponentViews):
+						if ($_POST && Access::loggedIn() && Access::paid() && $userComponentViews):
 							for($i=1; $i < count($userComponentViews); $i++):
 								$userComponentView = $userComponentViews[$i];
 							?>
@@ -473,17 +473,19 @@ if(isset($_REQUEST['msg'])) {
 													<td></td>
 												</tr>
 												<?php
-												if($uCFields):
+												$fshow =  '';
+
+												if ($uCFields):
 													for($f=0; $f < count($uCFields['name']); $f++):
 														$findex = $f + 1;
-														$fshow = $frequired = '';
-														if(is_array($uCFields['show'])):
-															if(array_key_exists($f, $uCFields['show'])):
+														$frequired = '';
+														if (is_array($uCFields['show'])):
+															if (array_key_exists($f, $uCFields['show'])):
 																$fshow = 'checked';
 															endif;
 														endif;
-														if(is_array($uCFields['required'])):
-															if(array_key_exists($f, $uCFields['required'])):
+														if (is_array($uCFields['required'])):
+															if (array_key_exists($f, $uCFields['required'])):
 																$frequired = 'checked';
 															endif;
 														endif;
@@ -496,18 +498,18 @@ if(isset($_REQUEST['msg'])) {
 																</div>
 																<select name="main-view-table-fieldtype[]" id="main-view-table-fieldtype" class="input input-block-level">
 																	<optgroup label="Standard Fields">
-																		<option value="calendar" <?php if($uCFields['type'][$f] == 'calendar'){ echo 'selected'; }; ?>><?php echo $brtext->__('CALENDAR'); ?></option>
-																		<option value="category" <?php if($uCFields['type'][$f] == 'category'){ echo 'selected'; }; ?>><?php echo $brtext->__('CATEGORY'); ?></option>
-																		<option value="checkbox" <?php if($uCFields['type'][$f] == 'checkbox'){ echo 'selected'; }; ?>><?php echo $brtext->__('CHECKBOX'); ?></option>
-																		<option value="editor" <?php if($uCFields['type'][$f] == 'editor'){ echo 'selected'; }; ?>><?php echo $brtext->__('CONTENTEDITOR'); ?></option>
-																		<option value="file" <?php if($uCFields['type'][$f] == 'file'){ echo 'selected'; }; ?>><?php echo $brtext->__('FILEIMAGEUPLOAD'); ?></option>
-																		<option value="hidden" <?php if($uCFields['type'][$f] == 'hidden'){ echo 'selected'; }; ?>><?php echo $brtext->__('HIDDEN'); ?></option>
-																		<option value="numbers" <?php if($uCFields['type'][$f] == 'numbers'){ echo 'selected'; }; ?>><?php echo $brtext->__('NUMBERS'); ?></option>
-																		<option value="integer" <?php if($uCFields['type'][$f] == 'integer'){ echo 'selected'; }; ?>><?php echo $brtext->__('INTEGER'); ?></option>
-																		<option value="list" <?php if($uCFields['type'][$f] == 'list'){ echo 'selected'; }; ?>><?php echo $brtext->__('LIST'); ?></option>
-																		<option value="radio" <?php if($uCFields['type'][$f] == 'radio'){ echo 'selected'; }; ?>><?php echo $brtext->__('RADIO'); ?></option>
-																		<option value="text" <?php if($uCFields['type'][$f] == 'text'){ echo 'selected'; }; ?>><?php echo $brtext->__('TEXTBOX'); ?></option>
-																		<option value="textarea" <?php if($uCFields['type'][$f] == 'textarea'){ echo 'selected'; }; ?>><?php echo $brtext->__('TEXTAREA'); ?></option>
+																		<option value="calendar" <?php if ($uCFields['type'][$f] == 'calendar'){ echo 'selected'; }; ?>><?php echo $brtext->__('CALENDAR'); ?></option>
+																		<option value="category" <?php if ($uCFields['type'][$f] == 'category'){ echo 'selected'; }; ?>><?php echo $brtext->__('CATEGORY'); ?></option>
+																		<option value="checkbox" <?php if ($uCFields['type'][$f] == 'checkbox'){ echo 'selected'; }; ?>><?php echo $brtext->__('CHECKBOX'); ?></option>
+																		<option value="editor" <?php if ($uCFields['type'][$f] == 'editor'){ echo 'selected'; }; ?>><?php echo $brtext->__('CONTENTEDITOR'); ?></option>
+																		<option value="file" <?php if ($uCFields['type'][$f] == 'file'){ echo 'selected'; }; ?>><?php echo $brtext->__('FILEIMAGEUPLOAD'); ?></option>
+																		<option value="hidden" <?php if ($uCFields['type'][$f] == 'hidden'){ echo 'selected'; }; ?>><?php echo $brtext->__('HIDDEN'); ?></option>
+																		<option value="numbers" <?php if ($uCFields['type'][$f] == 'numbers'){ echo 'selected'; }; ?>><?php echo $brtext->__('NUMBERS'); ?></option>
+																		<option value="integer" <?php if ($uCFields['type'][$f] == 'integer'){ echo 'selected'; }; ?>><?php echo $brtext->__('INTEGER'); ?></option>
+																		<option value="list" <?php if ($uCFields['type'][$f] == 'list'){ echo 'selected'; }; ?>><?php echo $brtext->__('LIST'); ?></option>
+																		<option value="radio" <?php if ($uCFields['type'][$f] == 'radio'){ echo 'selected'; }; ?>><?php echo $brtext->__('RADIO'); ?></option>
+																		<option value="text" <?php if ($uCFields['type'][$f] == 'text'){ echo 'selected'; }; ?>><?php echo $brtext->__('TEXTBOX'); ?></option>
+																		<option value="textarea" <?php if ($uCFields['type'][$f] == 'textarea'){ echo 'selected'; }; ?>><?php echo $brtext->__('TEXTAREA'); ?></option>
 																	</optgroup>
 																</select>
 															</td>
@@ -589,7 +591,7 @@ if(isset($_REQUEST['msg'])) {
 								</div><!-- /mainview -->
 							</div><!-- /accordion-group -->
 							<?php
-							if($_POST && Access::loggedIn() && Access::paid() && $userComponentViews):
+							if ($_POST && Access::loggedIn() && Access::paid() && $userComponentViews):
 								for($v=1; $v < count($userComponentViews); $v++):
 									$userComponentView	= $userComponentViews[$v];
 									$uCFields			= unserialize($userComponentView->fields);
@@ -610,17 +612,17 @@ if(isset($_REQUEST['msg'])) {
 													<td></td>
 												</tr>
 												<?php
-												if($uCFields):
+												if ($uCFields):
 													for($f=0; $f < count($uCFields['name']); $f++):
 														$findex = $f + 1;
 														$fshow = $frequired = '';
-														if(is_array($uCFields['show'])):
-															if(array_key_exists($f, $uCFields['show'])):
+														if (is_array($uCFields['show'])):
+															if (array_key_exists($f, $uCFields['show'])):
 																$fshow = 'checked';
 															endif;
 														endif;
-														if(is_array($uCFields['required'])):
-															if(array_key_exists($f, $uCFields['required'])):
+														if (is_array($uCFields['required'])):
+															if (array_key_exists($f, $uCFields['required'])):
 																$frequired = 'checked';
 															endif;
 														endif;
@@ -633,18 +635,18 @@ if(isset($_REQUEST['msg'])) {
 																</div>
 																<select name="view-<?php echo $v; ?>-fieldtype[]" id="view-<?php echo $v; ?>-fieldtype" class="input input-block-level">
 																	<optgroup label="Standard Fields">
-																		<option value="calendar" <?php if($uCFields['type'][$f] == 'calendar'){ echo 'selected'; }; ?>><?php echo $brtext->__('CALENDAR'); ?></option>
-																		<option value="category" <?php if($uCFields['type'][$f] == 'category'){ echo 'selected'; }; ?>><?php echo $brtext->__('CATEGORY'); ?></option>
-																		<option value="checkbox" <?php if($uCFields['type'][$f] == 'checkbox'){ echo 'selected'; }; ?>><?php echo $brtext->__('CHECKBOX'); ?></option>
-																		<option value="editor" <?php if($uCFields['type'][$f] == 'editor'){ echo 'selected'; }; ?>><?php echo $brtext->__('CONTENTEDITOR'); ?></option>
-																		<option value="file" <?php if($uCFields['type'][$f] == 'file'){ echo 'selected'; }; ?>><?php echo $brtext->__('FILEIMAGEUPLOAD'); ?></option>
-																		<option value="hidden" <?php if($uCFields['type'][$f] == 'hidden'){ echo 'selected'; }; ?>><?php echo $brtext->__('HIDDEN'); ?></option>
-																		<option value="numbers" <?php if($uCFields['type'][$f] == 'numbers'){ echo 'selected'; }; ?>><?php echo $brtext->__('NUMBERS'); ?></option>
-																		<option value="integer" <?php if($uCFields['type'][$f] == 'integer'){ echo 'selected'; }; ?>><?php echo $brtext->__('INTEGER'); ?></option>
-																		<option value="list" <?php if($uCFields['type'][$f] == 'list'){ echo 'selected'; }; ?>><?php echo $brtext->__('LIST'); ?></option>
-																		<option value="radio" <?php if($uCFields['type'][$f] == 'radio'){ echo 'selected'; }; ?>><?php echo $brtext->__('RADIO'); ?></option>
-																		<option value="text" <?php if($uCFields['type'][$f] == 'text'){ echo 'selected'; }; ?>><?php echo $brtext->__('TEXTBOX'); ?></option>
-																		<option value="textarea" <?php if($uCFields['type'][$f] == 'textarea'){ echo 'selected'; }; ?>><?php echo $brtext->__('TEXTAREA'); ?></option>
+																		<option value="calendar" <?php if ($uCFields['type'][$f] == 'calendar'){ echo 'selected'; }; ?>><?php echo $brtext->__('CALENDAR'); ?></option>
+																		<option value="category" <?php if ($uCFields['type'][$f] == 'category'){ echo 'selected'; }; ?>><?php echo $brtext->__('CATEGORY'); ?></option>
+																		<option value="checkbox" <?php if ($uCFields['type'][$f] == 'checkbox'){ echo 'selected'; }; ?>><?php echo $brtext->__('CHECKBOX'); ?></option>
+																		<option value="editor" <?php if ($uCFields['type'][$f] == 'editor'){ echo 'selected'; }; ?>><?php echo $brtext->__('CONTENTEDITOR'); ?></option>
+																		<option value="file" <?php if ($uCFields['type'][$f] == 'file'){ echo 'selected'; }; ?>><?php echo $brtext->__('FILEIMAGEUPLOAD'); ?></option>
+																		<option value="hidden" <?php if ($uCFields['type'][$f] == 'hidden'){ echo 'selected'; }; ?>><?php echo $brtext->__('HIDDEN'); ?></option>
+																		<option value="numbers" <?php if ($uCFields['type'][$f] == 'numbers'){ echo 'selected'; }; ?>><?php echo $brtext->__('NUMBERS'); ?></option>
+																		<option value="integer" <?php if ($uCFields['type'][$f] == 'integer'){ echo 'selected'; }; ?>><?php echo $brtext->__('INTEGER'); ?></option>
+																		<option value="list" <?php if ($uCFields['type'][$f] == 'list'){ echo 'selected'; }; ?>><?php echo $brtext->__('LIST'); ?></option>
+																		<option value="radio" <?php if ($uCFields['type'][$f] == 'radio'){ echo 'selected'; }; ?>><?php echo $brtext->__('RADIO'); ?></option>
+																		<option value="text" <?php if ($uCFields['type'][$f] == 'text'){ echo 'selected'; }; ?>><?php echo $brtext->__('TEXTBOX'); ?></option>
+																		<option value="textarea" <?php if ($uCFields['type'][$f] == 'textarea'){ echo 'selected'; }; ?>><?php echo $brtext->__('TEXTAREA'); ?></option>
 																	</optgroup>
 																</select>
 															</td>
@@ -706,7 +708,7 @@ if(isset($_REQUEST['msg'])) {
 								</div><!-- /.control-group -->
 
 								<?php
-								if($_POST && Access::loggedIn() && Access::paid() && $userComponentViews):
+								if ($_POST && Access::loggedIn() && Access::paid() && $userComponentViews):
 									for($v=1; $v < count($userComponentViews); $v++):
 									$viewCount = $v + 1;
 								?>
@@ -761,7 +763,7 @@ if(isset($_REQUEST['msg'])) {
 			</div>
 		</div><!-- /.row -->
 		<?php
-		if(Access::notLoggedInOrPaid()) {
+		if (Access::notLoggedInOrPaid()) {
 		?>
 			<span class="hidden-phone">
 				<br /><br />

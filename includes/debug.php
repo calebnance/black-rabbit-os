@@ -30,64 +30,64 @@ class Debug
 		//echo '<br /><br />';
 
 		// is object
-		if(is_object($array)){
+		if (is_object($array)){
 			self::_objectArray($return);
 		}
 		// is array
-		if(is_array($array)){
+		if (is_array($array)){
 			self::_array($return);
 		}
 
 		echo '<span class="white">(</span>' . $return;
 		foreach($array as $key => $value){
-			if(is_object($value) || is_array($value)){
+			if (is_object($value) || is_array($value)){
 				echo $tab1;
 				echo '<span class="tan">[' . $key . ']</span> <span class="yellow">=></span> ';
 				// is object
-				if(is_object($value)){
+				if (is_object($value)){
 					self::_objectArray($return);
 				}
 				// is array
-				if(is_array($value)){
+				if (is_array($value)){
 					self::_array($return);
 				}
 				echo $tab2 . '<span class="white">(</span>' . $return;
 				foreach($value as $ke => $valu){
-					if(is_object($valu) || is_array($valu)){
+					if (is_object($valu) || is_array($valu)){
 						echo $tab3;
 						echo '<span class="tan">[' . $ke . ']</span> <span class="yellow">=></span> ';
 						// is object
-						if(is_object($valu)){
+						if (is_object($valu)){
 							self::_objectArray($return);
 						}
 						// is array
-						if(is_array($valu)){
+						if (is_array($valu)){
 							self::_array($return);
 						}
 						echo $tab4 . '<span class="white">(</span>' . $return;
 						foreach($valu as $k => $val){
-							if(is_object($val) || is_array($val)){
+							if (is_object($val) || is_array($val)){
 								echo $tab5;
 								echo '<span class="tan">[' . $k . ']</span> <span class="yellow">=></span> ';
 								// is object
-								if(is_object($val)){
+								if (is_object($val)){
 									self::_objectArray($return);
 								}
 								// is array
-								if(is_array($val)){
+								if (is_array($val)){
 									self::_array($return);
 								}
 								echo $tab6 . '<span class="white">(</span>' . $return;
 								foreach($val as $keys => $va){
-									if(is_object($va) || is_array($va)){
+									if (is_object($va) || is_array($va)){
 										echo $tab7;
 										echo '<span class="tan">[' . $keys . ']</span> <span class="yellow">=></span> ';
 										// is object
-										if(is_object($va)){
+										if (is_object($va)){
 											self::_objectArray($return);
 										}
 										// is array
-										if(is_array($va)){
+										if (is_array($va)){
 											self::_array($return);
 										}
 									} else {

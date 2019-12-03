@@ -26,27 +26,27 @@ $(document).ready(function(){
 			var password = $("#password").val();
 			var password2 = $("#password2").val();
 			
-			if(this_id == 'password' || this_id == 'password2'){
-				if(this_input == ''){
+			if (this_id == 'password' || this_id == 'password2'){
+				if (this_input == ''){
 					$(this).next().html('<img src="images/bad.png" />');
 					empty_count++;
 				} else {
-					if(password != password2){
+					if (password != password2){
 						$(this).next().html('<img src="images/bad.png" /> Make sure the passwords match!');
 					} else {
 						$(this).next().html('<img src="images/good.png" />');
 					}
 				}
 			} else {
-				if(this_id == 'email' && this_input != ''){
-					if(validateEmail(this_input)){
+				if (this_id == 'email' && this_input != ''){
+					if (validateEmail(this_input)){
 						$(this).next().html('<img src="images/good.png" />');		
 					} else {
 						$(this).next().html('<img src="images/bad.png" /> valid e-mail required!');
 						empty_count++;
 					}
 				} else {
-					if(this_input == ''){
+					if (this_input == ''){
 						$(this).next().html('<img src="images/bad.png" />');
 						empty_count++;
 					} else {
@@ -60,17 +60,17 @@ $(document).ready(function(){
 			var this_id = $.trim($(this).attr("id"));
 			var this_input = $.trim($(this).val());
 			var checked = $('#agree2:checked').val();
-			if(checked != 1){
+			if (checked != 1){
 				empty_count1++;
 			}
 		});
 		
-		if(empty_count == 0){
+		if (empty_count == 0){
 			display = '<span class="badge badge-success">0</span>';
 		} else {
 			display = '<span class="badge badge-important">' + empty_count + '</span>';
 		}
-		if(empty_count1 == 0){
+		if (empty_count1 == 0){
 			display1 = '<span class="badge badge-success">0</span>';
 		} else {
 			display1 = '<span class="badge badge-important">' + empty_count1 + '</span>';
@@ -90,7 +90,7 @@ $(document).ready(function(){
 		var width = ( 100 * parseFloat($('.bar').css('width')) / parseFloat($('.bar').parent().css('width')) );
 		width = Math.round(width);
 		
-		if(width == 100) {
+		if (width == 100) {
 			return true;
 		} else {
 			alert('Please fill in all required fields.');

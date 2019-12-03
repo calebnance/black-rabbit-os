@@ -79,7 +79,7 @@ class Helpers
  			'fifty',
  		);
 
- 		if(array_key_exists($number, $text)) {
+ 		if (array_key_exists($number, $text)) {
  			$return = $text[$number];
  		} else {
  			$characters = 'abcdefghijklmnopqrstuvwxyz';

@@ -1,8 +1,8 @@
 function validateNumberDecimal(number) {
 	var valid = (number.match(/^\d{1,2}\.\d{1,2}\.\d{1,2}$/));
-	if(valid == null){
+	if (valid == null){
 		valid = (number.match(/^\d{1,2}\.\d{1,2}$/));
-		if(valid == null){
+		if (valid == null){
 			valid = (number.match(/^\d+$/));
 		}
 	}
@@ -25,7 +25,7 @@ $(document).ready(function(){
 		$('#jversionselect button').removeClass();
 		$('#jversionselect button').addClass('btn');
 		$value = $(this).val().split('.').join('');
-		if($value == '250'){
+		if ($value == '250'){
 			$value = '25';
 		}
 		$value = 'label-j' + $value;
@@ -40,7 +40,7 @@ $(document).ready(function(){
 		var url		= 'module.php';
 		var input	= $('<input>').attr('type', 'hidden').attr('name', 'mid').val(mid);
 
-		if(action == 'edit') {
+		if (action == 'edit') {
 			var pid	= $(this).attr('pid');
 			var input2 = $('<input>').attr('type', 'hidden').attr('name', 'pid').val(pid);
 			url = 'module.php';
@@ -48,7 +48,7 @@ $(document).ready(function(){
 			$(formID).append($(input2));
 			$(formID).attr('action', url).attr('method','POST');
 			$(formID).submit();
-		} else if(action == 'download') {
+		} else if (action == 'download') {
 			var input2	= $('<input>').attr('type', 'hidden').attr('name', 'task').val('mdownload');
 			$(formID).append($(input));
 			$(formID).append($(input2));
@@ -102,26 +102,26 @@ $(document).ready(function(){
 		$('.required').each(function(index){
 			var this_id = $.trim($(this).attr('id'));
 			var this_input = $.trim($(this).val());
-			if(this_input == ''){
+			if (this_input == ''){
 				inputError($(this).closest('.control-group'));
 				empty_count++;
 			} else {
-				if(this_id == 'author_email'){
-					if(validateEmail(this_input)){
+				if (this_id == 'author_email'){
+					if (validateEmail(this_input)){
 						inputSuccess($(this).closest('.control-group'));
 					} else {
 						inputError($(this).closest('.control-group'));
 						empty_count++;
 					}
-				} else if(this_id == 'author_url'){
-					if(validateURL(this_input)){
+				} else if (this_id == 'author_url'){
+					if (validateURL(this_input)){
 						inputSuccess($(this).closest('.control-group'));
 					} else {
 						inputError($(this).closest('.control-group'));
 						empty_count++;
 					}
-				} else if(this_id == 'filename'){
-					if(this_input.length > 3){
+				} else if (this_id == 'filename'){
+					if (this_input.length > 3){
 						inputSuccess($(this).closest('.control-group'));
 					} else {
 						inputError($(this).closest('.control-group'));
@@ -133,7 +133,7 @@ $(document).ready(function(){
 			}
 		});
 
-		if(empty_count > 0){
+		if (empty_count > 0){
 			return false;
 		}
 	});
@@ -141,28 +141,28 @@ $(document).ready(function(){
 	// only once they have tried to submit the page
 	// and there were errors of course...
 	$('input, textarea').on('keyup keydown change', function(){
-		if($('.error').length > 0){
+		if ($('.error').length > 0){
 			$('.required').each(function(index){
 				var this_id = $.trim($(this).attr('id'));
 				var this_input = $.trim($(this).val());
-				if(this_input == ''){
+				if (this_input == ''){
 					inputError($(this).closest('.control-group'));
 				} else {
-					if(this_id == 'author_email'){
-						if(validateEmail(this_input)){
+					if (this_id == 'author_email'){
+						if (validateEmail(this_input)){
 							inputSuccess($(this).closest('.control-group'));
 						} else {
 							inputError($(this).closest('.control-group'));
 						}
-					} else if(this_id == 'author_url'){
-						if(validateURL(this_input)){
+					} else if (this_id == 'author_url'){
+						if (validateURL(this_input)){
 							inputSuccess($(this).closest('.control-group'));
 						} else {
 							inputError($(this).closest('.control-group'));
 						}
-					} else if(this_id == 'filename'){
+					} else if (this_id == 'filename'){
 						console.log(this_input.length);
-						if(this_input.length >= 3){
+						if (this_input.length >= 3){
 							inputSuccess($(this).closest('.control-group'));
 						} else {
 							inputError($(this).closest('.control-group'));

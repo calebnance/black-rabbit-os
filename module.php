@@ -1,7 +1,7 @@
 <?php
 include('master.php');
 
-if(Access::notLoggedIn()) {
+if (Access::notLoggedIn()) {
 	header('Location: index.php?msg=7');
 	exit();
 } else {
@@ -12,13 +12,13 @@ $database = new Database(HOST, DBNAME, DBUSER, DBPASS);
 $uid = $_SESSION['uid'];
 
 // If the module is being downloaded
-if(isset($_POST['task']) && $_POST['task'] == 'mdownload'):
+if (isset($_POST['task']) && $_POST['task'] == 'mdownload'):
 	$downloadModule = $database->select('br_modules', '*', 'uid="'.$uid.'" AND id="'.$_POST['mid'].'"', 'object');
-	if($downloadModule):
+	if ($downloadModule):
 		$downloadModule = $downloadModule[0];
 		$packagename = 'mod_' . $downloadModule->m_file_name . '-v.' . $downloadModule->version . '-joomla_' . $downloadModule->jversion . '.zip';
 		$filecreatedpath	= 'users' . DS . $uid . DS . 'modules' . DS . $downloadModule->id . DS . $packagename;
-		if(file_exists($filecreatedpath)):
+		if (file_exists($filecreatedpath)):
 			header('Location: ' . $filecreatedpath);
 			exit();
 		else:
@@ -43,7 +43,7 @@ $textModules = $userModulesCount > 1 || $userModulesCount == 0 ? 'modules' : 'mo
 include('template/header.php');
 
 $msg = '';
-if(isset($_REQUEST['msg'])){
+if (isset($_REQUEST['msg'])){
 	switch($_REQUEST['msg']) {
 		case '1':
 			$msg = 'Please fill in all fields...';
@@ -65,7 +65,7 @@ $uMCopyright	= 'Copyright (C) ' . date('Y') . '. All Rights Reserved';
 $uMLicense		= 'GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html';
 
 // If the module is being updated.
-if(isset($_POST['mid'])):
+if (isset($_POST['mid'])):
 	$editModule 	= $database->select('br_modules', '*', 'uid="'.$uid.'" AND id="'.$_POST['mid'].'"', 'object'); // get module to update!
 	$editModule 	= $editModule[0];
 	// Set values
@@ -106,7 +106,7 @@ switch($uMJVersion){
 				<h1><i class="icon-paper-clip"></i> Create Module</h1>
 			</div><!-- /.span12 -->
 			<?php
-			if(Access::paid()):
+			if (Access::paid()):
 			?>
 			<div id="modules-list">
 				<div class="span12">
@@ -213,7 +213,7 @@ switch($uMJVersion){
 			</div><!-- /#modules-list -->
 			<?php
 			else:
-				if($_SESSION['emailv']):
+				if ($_SESSION['emailv']):
 				?>
 					<div class="span12">
 						<div class="well center">

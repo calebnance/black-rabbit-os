@@ -4,14 +4,14 @@ $(document).ready(function(){
 			var parent = $(this).parent().parent();
 			var this_input = $.trim($(this).val());
 			var id = $(this).attr('id');
-			if(this_input == ''){
+			if (this_input == ''){
 				$(this).next().html('<img src="images/bad.png" />');
 				$(parent).addClass('error');
 			} else {
 				$(this).next().html('<img src="images/good.png" />');
 				$(parent).removeClass('error');
-				if(id == 'email'){
-					if(isValidEmailAddress(this_input))
+				if (id == 'email'){
+					if (isValidEmailAddress(this_input))
 					{
 						$(this).next().html('<img src="images/good.png" />');
 						$(parent).removeClass('error');
@@ -47,7 +47,7 @@ $(document).ready(function(){
 			good = false;
 		}
 		
-		if(good == true){ 
+		if (good == true){ 
 			return true; 
 		} else { 
 			alert('Please fill in all required fields.');

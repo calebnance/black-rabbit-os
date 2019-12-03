@@ -7,7 +7,7 @@
 	 */
 	$post = $_POST;
 
-	if($post['send']):
+	if ($post['send']):
 		$to  = '';
 		$subject = $post['subject'];
 

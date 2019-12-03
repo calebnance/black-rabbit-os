@@ -14,7 +14,7 @@ class AdminFiles
 		$access[] = $varObject->tab1.'</section>'.$varObject->return;
 
 		// If categories is a view, make sure to add it to the access file
-		if(in_array('categories',$varObject->views) || in_array('category',$varObject->views) || $varObject->includeCat):
+		if (in_array('categories',$varObject->views) || in_array('category',$varObject->views) || $varObject->includeCat):
 			$access[] = $varObject->tab1.'<section name="category">'.$varObject->return;
 			$access[] = $varObject->tab2.'<action name="core.create" title="JACTION_CREATE" description="COM_CATEGORIES_ACCESS_CREATE_DESC" />'.$varObject->return;
 			$access[] = $varObject->tab2.'<action name="core.delete" title="JACTION_DELETE" description="COM_CATEGORIES_ACCESS_DELETE_DESC" />'.$varObject->return;
@@ -49,7 +49,7 @@ class AdminFiles
 		$config[] = $varObject->tab2.'/>'.$varObject->return;
 		$config[] = $varObject->tab1.'</fieldset>'.$varObject->return;
 
-		if($varObject->imageUpload):
+		if ($varObject->imageUpload):
 			$config[] = $varObject->tab1.'<fieldset'.$varObject->return;
 			$config[] = $varObject->tab2.'name="image_params"'.$varObject->return;
 			$config[] = $varObject->tab2.'label="Images"'.$varObject->return;
@@ -99,9 +99,9 @@ class AdminFiles
 		$componentlines[] = $varObject->return;
 
 		// Check if Joomla 3.0
-		if($varObject->j_version == '3.0' || $varObject->j_version == '3.2'):
+		if ($varObject->j_version == '3.0' || $varObject->j_version == '3.2'):
 			$componentlines[] = '// Added for Joomla 3.0'.$varObject->return;
-			$componentlines[] = 'if(!defined(\'DS\')){'.$varObject->return;
+			$componentlines[] = 'if (!defined(\'DS\')){'.$varObject->return;
 			$componentlines[] = $varObject->tab1.'define(\'DS\',DIRECTORY_SEPARATOR);'.$varObject->return;
 			$componentlines[] = '};'.$varObject->return;
 			$componentlines[] = $varObject->return;
@@ -114,7 +114,7 @@ class AdminFiles
 		$componentlines[] = $varObject->return;
 
 		// Only Joomla 3.0 supported
-		if($varObject->j_version == '3.0' || $varObject->j_version == '3.2'):
+		if ($varObject->j_version == '3.0' || $varObject->j_version == '3.2'):
 			$componentlines[] = '// Load cms libraries'.$varObject->return;
 			$componentlines[] = 'JLoader::registerPrefix(\'J\', JPATH_PLATFORM . \'/cms\');'.$varObject->return;
 			$componentlines[] = '// Load joomla libraries without overwrite'.$varObject->return;
@@ -138,7 +138,7 @@ class AdminFiles
 		$componentlines[] = $varObject->return;
 		$componentlines[] = '// Perform the Request task'.$varObject->return;
 
-		if($varObject->j_version == '3.0' || $varObject->j_version == '3.2'):
+		if ($varObject->j_version == '3.0' || $varObject->j_version == '3.2'):
 			$componentlines[] = '$controller->execute(JFactory::getApplication()->input->get(\'task\'));'.$varObject->return;
 		else:
 			$componentlines[] = '$controller->execute(JRequest::getCmd(\'task\'));'.$varObject->return;
@@ -214,7 +214,7 @@ class AdminFiles
 		// Handle views
 		foreach($varObject->allViews as $view):
 			// Check for categories view
-			if($view['plural']['safe'] == 'categories' || $view['plural']['safe'] == 'category'):
+			if ($view['plural']['safe'] == 'categories' || $view['plural']['safe'] == 'category'):
 				$helperlines[] = $varObject->tab2.$varObject->j_helper_sub_menu_type.'::addEntry(JText::_(\''.$view['plural']['cap'].'\'), \'index.php?option=com_categories&view=categories&extension='.$varObject->com_main.'\', $submenu == \''.$view['plural']['safe'].'\');'.$varObject->return;
 				$categories = 1;
 			else:
@@ -223,13 +223,13 @@ class AdminFiles
 		endforeach;
 
 		// Check for categories include
-		if($varObject->includeCat):
+		if ($varObject->includeCat):
 			$helperlines[] = $varObject->tab2.$varObject->j_helper_sub_menu_type.'::addEntry(JText::_(\'Categories\'), \'index.php?option=com_categories&view=categories&extension='.$varObject->com_main.'\', $submenu == \'categories\');'.$varObject->return;
 			$categories = 1;
 		endif;
 
 		// If categories are being used, set the title
-		if($categories):
+		if ($categories):
 			$helperlines[] = $varObject->return;
 			$helperlines[] = $varObject->tab2.'// set some global property'.$varObject->return;
 			$helperlines[] = $varObject->tab2.'$document = JFactory::getDocument();'.$varObject->return;
@@ -266,7 +266,7 @@ class AdminFiles
 		$helperlines[] = $varObject->tab1.'}'.$varObject->return;
 
 
-		if($varObject->imageUpload):
+		if ($varObject->imageUpload):
 			$helperlines[] = $varObject->return;
 			$helperlines[] = $varObject->tab1.'/**'.$varObject->return;
 			$helperlines[] = $varObject->tab1.' *	File Uploader'.$varObject->return;
@@ -296,7 +296,7 @@ class AdminFiles
 			$helperlines[] = $varObject->return;
 			$helperlines[] = $varObject->tab2.'// File size limit 10000000kb or 10MB'.$varObject->return;
 			$helperlines[] = $varObject->tab2.'$fileSize = $file[\'size\'][$fieldname];'.$varObject->return;
-			$helperlines[] = $varObject->tab2.'if($fileSize > 10000000){'.$varObject->return;
+			$helperlines[] = $varObject->tab2.'if ($fileSize > 10000000){'.$varObject->return;
 			$helperlines[] = $varObject->tab3.'$info[\'error\']	= 1;'.$varObject->return;
 			$helperlines[] = $varObject->tab3.'$info[\'msg\']	= JText::_(\'Can not upload a file over 10MB, please make this file smaller so that it is under the limit\');'.$varObject->return;
 			$helperlines[] = $varObject->tab3.'return $info;'.$varObject->return;
@@ -327,13 +327,13 @@ class AdminFiles
 			$helperlines[] = $varObject->tab2.'}'.$varObject->return;
 			$helperlines[] = $varObject->return;
 			$helperlines[] = $varObject->tab2.'// Create folders if they do not exist'.$varObject->return;
-			$helperlines[] = $varObject->tab2.'if(!JFolder::exists($mediaFolder)){'.$varObject->return;
+			$helperlines[] = $varObject->tab2.'if (!JFolder::exists($mediaFolder)){'.$varObject->return;
 			$helperlines[] = $varObject->tab3.'JFolder::create($mediaFolder);'.$varObject->return;
 			$helperlines[] = $varObject->tab2.'}'.$varObject->return;
-			$helperlines[] = $varObject->tab2.'if(!JFolder::exists($thumbFolder)){'.$varObject->return;
+			$helperlines[] = $varObject->tab2.'if (!JFolder::exists($thumbFolder)){'.$varObject->return;
 			$helperlines[] = $varObject->tab3.'JFolder::create($thumbFolder);'.$varObject->return;
 			$helperlines[] = $varObject->tab2.'}'.$varObject->return;
-			$helperlines[] = $varObject->tab2.'if(!JFolder::exists($tmpFolder)){'.$varObject->return;
+			$helperlines[] = $varObject->tab2.'if (!JFolder::exists($tmpFolder)){'.$varObject->return;
 			$helperlines[] = $varObject->tab3.'JFolder::create($tmpFolder);'.$varObject->return;
 			$helperlines[] = $varObject->tab2.'}'.$varObject->return;
 			$helperlines[] = $varObject->return;
@@ -357,14 +357,14 @@ class AdminFiles
 			$helperlines[] = $varObject->tab2.'//go through every ok extension, if the ok extension matches the file extension (case insensitive)'.$varObject->return;
 			$helperlines[] = $varObject->tab2.'//then the file extension is ok'.$varObject->return;
 			$helperlines[] = $varObject->tab2.'foreach($validFileExts as $key => $value){'.$varObject->return;
-			$helperlines[] = $varObject->tab3.'if(preg_match("/$value/i", $uploadedFileExtension )){'.$varObject->return;
+			$helperlines[] = $varObject->tab3.'if (preg_match("/$value/i", $uploadedFileExtension )){'.$varObject->return;
 			$helperlines[] = $varObject->tab4.'$extOk			= true;'.$varObject->return;
 			$helperlines[] = $varObject->tab4.'$fileExtension	= $value;'.$varObject->return;
 			$helperlines[] = $varObject->tab3.'}'.$varObject->return;
 			$helperlines[] = $varObject->tab2.'}'.$varObject->return;
 			$helperlines[] = $varObject->return;
 			$helperlines[] = $varObject->tab2.'// Check if acceptable extension'.$varObject->return;
-			$helperlines[] = $varObject->tab2.'if($extOk == false){'.$varObject->return;
+			$helperlines[] = $varObject->tab2.'if ($extOk == false){'.$varObject->return;
 			$helperlines[] = $varObject->tab3.'$info[\'error\']	= 1;'.$varObject->return;
 			$helperlines[] = $varObject->tab3.'$info[\'msg\']	= JText::_(\'Not acceptable image extension\');'.$varObject->return;
 			$helperlines[] = $varObject->return;
@@ -375,38 +375,38 @@ class AdminFiles
 			$helperlines[] = $varObject->tab2.'list($width, $height, $type, $attr) = getimagesize($fileTemp);'.$varObject->return;
 			$helperlines[] = $varObject->return;
 			$helperlines[] = $varObject->tab2.'// Check if there is a file'.$varObject->return;
-			$helperlines[] = $varObject->tab2.'if($fileName){'.$varObject->return;
+			$helperlines[] = $varObject->tab2.'if ($fileName){'.$varObject->return;
 			$helperlines[] = $varObject->tab3.'// Try to upload file'.$varObject->return;
-			$helperlines[] = $varObject->tab3.'if(!JFile::upload($fileTemp, $filePath)){'.$varObject->return;
+			$helperlines[] = $varObject->tab3.'if (!JFile::upload($fileTemp, $filePath)){'.$varObject->return;
 			$helperlines[] = $varObject->tab4.'$info[\'error\']	= 1;'.$varObject->return;
 			$helperlines[] = $varObject->tab4.'$info[\'msg\']	= JText::_(\'There was an error uploading your image, please try again\');'.$varObject->return;
 			$helperlines[] = $varObject->return;
 			$helperlines[] = $varObject->tab4.'return $info;'.$varObject->return;
 			$helperlines[] = $varObject->tab3.'} else { // Else file has been uploaded!'.$varObject->return;
 			$helperlines[] = $varObject->tab4.'// restrictions taken into account'.$varObject->return;
-			$helperlines[] = $varObject->tab4.'if($maxWidth > 900){'.$varObject->return;
+			$helperlines[] = $varObject->tab4.'if ($maxWidth > 900){'.$varObject->return;
 			$helperlines[] = $varObject->tab5.'$maxWidth = 900;'.$varObject->return;
 			$helperlines[] = $varObject->tab4.'}'.$varObject->return;
-			$helperlines[] = $varObject->tab4.'if($maxHeight > 700){'.$varObject->return;
+			$helperlines[] = $varObject->tab4.'if ($maxHeight > 700){'.$varObject->return;
 			$helperlines[] = $varObject->tab5.'$maxHeight = 700;'.$varObject->return;
 			$helperlines[] = $varObject->tab4.'}'.$varObject->return;
-			$helperlines[] = $varObject->tab4.'if($maxThumbWidth > 400){'.$varObject->return;
+			$helperlines[] = $varObject->tab4.'if ($maxThumbWidth > 400){'.$varObject->return;
 			$helperlines[] = $varObject->tab5.'$maxThumbWidth = 400;'.$varObject->return;
 			$helperlines[] = $varObject->tab4.'}'.$varObject->return;
-			$helperlines[] = $varObject->tab4.'if($maxThumbHeight > 400){'.$varObject->return;
+			$helperlines[] = $varObject->tab4.'if ($maxThumbHeight > 400){'.$varObject->return;
 			$helperlines[] = $varObject->tab5.'$maxThumbHeight = 400;'.$varObject->return;
 			$helperlines[] = $varObject->tab4.'}'.$varObject->return;
 			$helperlines[] = $varObject->return;
 			$helperlines[] = $varObject->tab4.'// Full Image'.$varObject->return;
 			$helperlines[] = $varObject->tab4.'// if the image is huge, then we need to resize on the fly'.$varObject->return;
 			$helperlines[] = $varObject->tab4.'// so that wideimage library can do its thing'.$varObject->return;
-			$helperlines[] = $varObject->tab4.'if($width > 900 || $height > 700){'.$varObject->return;
-			$helperlines[] = $varObject->tab5.'if($uploadedFileExtension == "jpg" || $uploadedFileExtension == "jpeg" ){'.$varObject->return;
+			$helperlines[] = $varObject->tab4.'if ($width > 900 || $height > 700){'.$varObject->return;
+			$helperlines[] = $varObject->tab5.'if ($uploadedFileExtension == "jpg" || $uploadedFileExtension == "jpeg" ){'.$varObject->return;
 			$helperlines[] = $varObject->tab6.'$src = imagecreatefromjpeg($filePath);'.$varObject->return;
-			$helperlines[] = $varObject->tab5.'} elseif($uploadedFileExtension == "png"){'.$varObject->return;
+			$helperlines[] = $varObject->tab5.'} elseif ($uploadedFileExtension == "png"){'.$varObject->return;
 			$helperlines[] = $varObject->tab6.'$src = imagecreatefrompng($filePath);'.$varObject->return;
 			$helperlines[] = $varObject->tab5.'} else {'.$varObject->return;
-			$helperlines[] = $varObject->tab6.'$src = imagecreatefromgif($filePath);'.$varObject->return;
+			$helperlines[] = $varObject->tab6.'$src = imagecreatefromgif ($filePath);'.$varObject->return;
 			$helperlines[] = $varObject->tab5.'}'.$varObject->return;
 			$helperlines[] = $varObject->return;
 			$helperlines[] = $varObject->tab5.'list($width, $height) = getimagesize($filePath);'.$varObject->return;
@@ -479,21 +479,21 @@ class AdminFiles
 		$languagesyslines[] = $varObject->com_language . '="' . $varObject->comp_m_view_cap . '"'.$varObject->return;
 		$languagesyslines[] = $varObject->com_language_menu . '="' . $varObject->comp_m_view_cap . ' Manager"';
 
-		if($varObject->allViews):
+		if ($varObject->allViews):
 			$languagesyslines[] = $varObject->return . $varObject->return;
 			foreach($varObject->allViews as $view):
 				$languagesyslines[] = $varObject->com_language_menu.'_'.$view['plural']['language'].'="'.$view['plural']['cap'].'"';
 				$languagesyslines[] = $varObject->return;
 			endforeach;
 			// Check for include of categories
-			if($varObject->includeCat):
+			if ($varObject->includeCat):
 				$languagesyslines[] = $varObject->com_language_menu.'_MENU_CATEGORIES="Categories"';
 				$languagesyslines[] = $varObject->return;
 			endif;
 			array_pop($languagesyslines);
 		endif;
 
-		if(!empty($extraSysLanguageLines)):
+		if (!empty($extraSysLanguageLines)):
 			$languagesyslines[] = $varObject->return . $varObject->return;
 			foreach($extraSysLanguageLines as $extraSysLanguageLine):
 				$languagesyslines[] = $extraSysLanguageLine;
@@ -510,11 +510,11 @@ class AdminFiles
 	{
 		$csslines[] = '';
 		// Check for views
-		if(count($varObject->allViews)):
+		if (count($varObject->allViews)):
 			// Parse through the views
 			foreach($varObject->allViews as $view):
 				// Check if there are images in the object, if so, add them
-				if(isset($varObject->imagesUploaded[$view['plural']['orig']])):
+				if (isset($varObject->imagesUploaded[$view['plural']['orig']])):
 					$csslines[] = '.icon-48-' . $view['plural']['safe'] . ' { background-image: url(\'../images/icons/'.$varObject->imagesUploaded[$view['plural']['orig']]->mana.'\'); }';
 					$csslines[] = $varObject->return;
 					$csslines[] = '.icon-48-' . $view['singular']['safe'] . ' { background-image: url(\'../images/icons/'.$varObject->imagesUploaded[$view['plural']['orig']]->mana.'\'); }';
@@ -550,7 +550,7 @@ class AdminFiles
 		$viewhtmllines[] = $varObject->tab1.'{'.$varObject->return;
 
 		// start - added v.0.6.0
-		if($varObject->useDatabase):
+		if ($varObject->useDatabase):
 			$viewhtmllines[] = $varObject->tab2.'// Get data from the model'.$varObject->return;
 			$viewhtmllines[] = $varObject->tab2.'$items = $this->get(\'Items\');'.$varObject->return;
 			$viewhtmllines[] = $varObject->tab2.'$pagination = $this->get(\'Pagination\');'.$varObject->return;
@@ -569,7 +569,7 @@ class AdminFiles
 		// end - added v.0.6.0
 
 		// Don't need a toolbar if this is just a view by itself
-		if(!is_numeric($view['singular']['safe'])):
+		if (!is_numeric($view['singular']['safe'])):
 			$viewhtmllines[] = $varObject->tab2.'// Set the toolbar'.$varObject->return;
 			$viewhtmllines[] = $varObject->tab2.'$this->addToolBar();'.$varObject->return;
 			$viewhtmllines[] = $varObject->return;
@@ -584,7 +584,7 @@ class AdminFiles
 		$viewhtmllines[] = $varObject->return;
 
 		// Don't need a toolbar if this is just a view by itself
-		if(!is_numeric($view['singular']['safe'])):
+		if (!is_numeric($view['singular']['safe'])):
 			$viewhtmllines[] = $varObject->tab1.'/**'.$varObject->return;
 			$viewhtmllines[] = $varObject->tab1.' * Setting the toolbar'.$varObject->return;
 			$viewhtmllines[] = $varObject->tab1.' */'.$varObject->return;
@@ -592,7 +592,7 @@ class AdminFiles
 			$viewhtmllines[] = $varObject->tab1.'{'.$varObject->return;
 
 			// start - added v.0.6.0
-			if($varObject->useDatabase):
+			if ($varObject->useDatabase):
 				$viewhtmllines[] = $varObject->tab2.'$canDo = '.$varObject->comp_m_view_cap.'Helper::getActions();'.$varObject->return;
 			endif;
 			// end - added v.0.6.0
@@ -600,17 +600,17 @@ class AdminFiles
 			$viewhtmllines[] = $varObject->tab2.'JToolBarHelper::title(JText::_(\''.$varObject->comp_m_view_cap.' Manager\'), \''.$varObject->comp_m_view.'\');'.$varObject->return;
 
 			// start - added v.0.6.0
-			if($varObject->useDatabase):
-				$viewhtmllines[] = $varObject->tab2.'if($canDo->get(\'core.create\')){'.$varObject->return;
+			if ($varObject->useDatabase):
+				$viewhtmllines[] = $varObject->tab2.'if ($canDo->get(\'core.create\')){'.$varObject->return;
 				$viewhtmllines[] = $varObject->tab3.'JToolBarHelper::addNew(\''.$view['singular']['safe'].'.add\', \'JTOOLBAR_NEW\');'.$varObject->return;
 				$viewhtmllines[] = $varObject->tab2.'};'.$varObject->return;
-				$viewhtmllines[] = $varObject->tab2.'if($canDo->get(\'core.edit\')){'.$varObject->return;
+				$viewhtmllines[] = $varObject->tab2.'if ($canDo->get(\'core.edit\')){'.$varObject->return;
 				$viewhtmllines[] = $varObject->tab3.'JToolBarHelper::editList(\''.$view['singular']['safe'].'.edit\', \'JTOOLBAR_EDIT\');'.$varObject->return;
 				$viewhtmllines[] = $varObject->tab2.'};'.$varObject->return;
-				$viewhtmllines[] = $varObject->tab2.'if($canDo->get(\'core.delete\')){'.$varObject->return;
+				$viewhtmllines[] = $varObject->tab2.'if ($canDo->get(\'core.delete\')){'.$varObject->return;
 				$viewhtmllines[] = $varObject->tab3.'JToolBarHelper::deleteList(\'\', \''.$view['plural']['safe'].'.delete\', \'JTOOLBAR_DELETE\');'.$varObject->return;
 				$viewhtmllines[] = $varObject->tab2.'};'.$varObject->return;
-				$viewhtmllines[] = $varObject->tab2.'if($canDo->get(\'core.admin\')){'.$varObject->return;
+				$viewhtmllines[] = $varObject->tab2.'if ($canDo->get(\'core.admin\')){'.$varObject->return;
 				$viewhtmllines[] = $varObject->tab3.'JToolBarHelper::divider();'.$varObject->return;
 				$viewhtmllines[] = $varObject->tab3.'JToolBarHelper::preferences(\''.$varObject->com_main.'\');'.$varObject->return;
 				$viewhtmllines[] = $varObject->tab2.'};'.$varObject->return;
@@ -663,7 +663,7 @@ class AdminFiles
 		$viewhtmllines[] = $varObject->return;
 
 		// start - added v.0.6.0
-		if($varObject->useDatabase):
+		if ($varObject->useDatabase):
 			$viewhtmllines[] = $varObject->tab2.'// Get data from the model'.$varObject->return;
 			$viewhtmllines[] = $varObject->tab2.'$items = $this->get(\'Items\');'.$varObject->return;
 			$viewhtmllines[] = $varObject->tab2.'$pagination = $this->get(\'Pagination\');'.$varObject->return;
@@ -682,7 +682,7 @@ class AdminFiles
 		// end - added v.0.6.0
 
 		// Don't need a toolbar if this is just a view by itself
-		if(!is_numeric($view['singular']['safe'])):
+		if (!is_numeric($view['singular']['safe'])):
 			$viewhtmllines[] = $varObject->tab2.'// Set the toolbar'.$varObject->return;
 			$viewhtmllines[] = $varObject->tab2.'$this->addToolBar();'.$varObject->return;
 			$viewhtmllines[] = $varObject->tab2.'// Show sidebar'.$varObject->return;
@@ -699,7 +699,7 @@ class AdminFiles
 		$viewhtmllines[] = $varObject->return;
 
 		// Don't need a toolbar if this is just a view by itself
-		if(!is_numeric($view['singular']['safe'])):
+		if (!is_numeric($view['singular']['safe'])):
 			$viewhtmllines[] = $varObject->tab1.'/**'.$varObject->return;
 			$viewhtmllines[] = $varObject->tab1.' * Setting the toolbar'.$varObject->return;
 			$viewhtmllines[] = $varObject->tab1.' */'.$varObject->return;
@@ -707,7 +707,7 @@ class AdminFiles
 			$viewhtmllines[] = $varObject->tab1.'{'.$varObject->return;
 
 			// start - added v.0.6.0
-			if($varObject->useDatabase):
+			if ($varObject->useDatabase):
 				$viewhtmllines[] = $varObject->tab2.'$canDo = '.$varObject->comp_m_view_cap.'Helper::getActions();'.$varObject->return;
 			endif;
 			// end - added v.0.6.0
@@ -715,17 +715,17 @@ class AdminFiles
 			$viewhtmllines[] = $varObject->tab2.'JToolBarHelper::title(JText::_(\''.$varObject->comp_m_view_cap.' Manager\'), \''.$varObject->comp_m_view.'\');'.$varObject->return;
 
 			// start - added v.0.6.0
-			if($varObject->useDatabase):
-				$viewhtmllines[] = $varObject->tab2.'if($canDo->get(\'core.create\')){'.$varObject->return;
+			if ($varObject->useDatabase):
+				$viewhtmllines[] = $varObject->tab2.'if ($canDo->get(\'core.create\')){'.$varObject->return;
 				$viewhtmllines[] = $varObject->tab3.'JToolBarHelper::addNew(\''.$view['singular']['safe'].'.add\', \'JTOOLBAR_NEW\');'.$varObject->return;
 				$viewhtmllines[] = $varObject->tab2.'};'.$varObject->return;
-				$viewhtmllines[] = $varObject->tab2.'if($canDo->get(\'core.edit\')){'.$varObject->return;
+				$viewhtmllines[] = $varObject->tab2.'if ($canDo->get(\'core.edit\')){'.$varObject->return;
 				$viewhtmllines[] = $varObject->tab3.'JToolBarHelper::editList(\''.$view['singular']['safe'].'.edit\', \'JTOOLBAR_EDIT\');'.$varObject->return;
 				$viewhtmllines[] = $varObject->tab2.'};'.$varObject->return;
-				$viewhtmllines[] = $varObject->tab2.'if($canDo->get(\'core.delete\')){'.$varObject->return;
+				$viewhtmllines[] = $varObject->tab2.'if ($canDo->get(\'core.delete\')){'.$varObject->return;
 				$viewhtmllines[] = $varObject->tab3.'JToolBarHelper::deleteList(\'\', \''.$view['plural']['safe'].'.delete\', \'JTOOLBAR_DELETE\');'.$varObject->return;
 				$viewhtmllines[] = $varObject->tab2.'};'.$varObject->return;
-				$viewhtmllines[] = $varObject->tab2.'if($canDo->get(\'core.admin\')){'.$varObject->return;
+				$viewhtmllines[] = $varObject->tab2.'if ($canDo->get(\'core.admin\')){'.$varObject->return;
 				$viewhtmllines[] = $varObject->tab3.'JToolBarHelper::divider();'.$varObject->return;
 				$viewhtmllines[] = $varObject->tab3.'JToolBarHelper::preferences(\''.$varObject->com_main.'\');'.$varObject->return;
 				$viewhtmllines[] = $varObject->tab2.'};'.$varObject->return;
@@ -764,7 +764,7 @@ class AdminFiles
 		$viewhtmldefaultlines[] = '?>'.$varObject->return;
 
 		// start - added v.0.6.0
-		if($varObject->useDatabase):
+		if ($varObject->useDatabase):
 			$viewhtmldefaultlines[] = '<form action="<?php echo JRoute::_(\'index.php?option='.$varObject->com_main.'&view='.$view['plural']['safe'].'\'); ?>" method="post" name="adminForm" id="adminForm">'.$varObject->return;
 			$viewhtmldefaultlines[] = $varObject->tab1.'<table class="adminlist">'.$varObject->return;
 			$viewhtmldefaultlines[] = $varObject->tab2.'<thead><?php echo $this->loadTemplate(\'head\');?></thead>'.$varObject->return;
@@ -796,7 +796,7 @@ class AdminFiles
 		$viewhtmldefaultlines[] = 'JHtml::_(\'formbehavior.chosen\', \'select\');'.$varObject->return;
 		$viewhtmldefaultlines[] = '?>'.$varObject->return;
 		$viewhtmldefaultlines[] = '<form action="<?php echo JRoute::_(\'index.php?option='.$varObject->com_main.'&view='.$view['plural']['safe'].'\'); ?>" method="post" name="adminForm" id="adminForm">'.$varObject->return;
-		$viewhtmldefaultlines[] = '<?php if(!empty( $this->sidebar)){ ?>'.$varObject->return;
+		$viewhtmldefaultlines[] = '<?php if (!empty( $this->sidebar)){ ?>'.$varObject->return;
 		$viewhtmldefaultlines[] = $varObject->tab1.'<div id="j-sidebar-container" class="span2">'.$varObject->return;
 		$viewhtmldefaultlines[] = $varObject->tab2.'<?php echo $this->sidebar; ?>'.$varObject->return;
 		$viewhtmldefaultlines[] = $varObject->tab1.'</div>'.$varObject->return;
@@ -806,7 +806,7 @@ class AdminFiles
 		$viewhtmldefaultlines[] = '<?php }; ?>'.$varObject->return;
 
 		// start - added v.0.6.0
-		if($varObject->useDatabase):
+		if ($varObject->useDatabase):
 			$viewhtmldefaultlines[] = $varObject->tab2.'<table class="table table-striped">'.$varObject->return;
 			$viewhtmldefaultlines[] = $varObject->tab3.'<thead><?php echo $this->loadTemplate(\'head\');?></thead>'.$varObject->return;
 			$viewhtmldefaultlines[] = $varObject->tab3.'<tfoot><?php echo $this->loadTemplate(\'foot\');?></tfoot>'.$varObject->return;
@@ -842,12 +842,12 @@ class AdminFiles
 		$viewhtmldefaultheadlines[] = $varObject->tab1.'</th>'.$varObject->return;
 
 		// Make sure there is formfields
-		if($formfields->name):
+		if ($formfields->name):
 			$shown = 0;
 			// Parse through fields
 			foreach($formfields->name as $key=>$field):
 				// Check if field is required to show on manager
-				if($formfields->show):
+				if ($formfields->show):
 					if (array_key_exists($key, $formfields->show)):
 						$field = ucwords($field);
 						$viewhtmldefaultheadlines[] = $varObject->tab1.'<th>'.$varObject->return;
@@ -858,7 +858,7 @@ class AdminFiles
 				endif;
 			endforeach;
 			// default at least the first field to be the edit field
-			if($shown != 1):
+			if ($shown != 1):
 				$viewhtmldefaultheadlines[] = $varObject->tab1.'<th>'.$varObject->return;
 				$viewhtmldefaultheadlines[] = $varObject->tab2.'<?php echo JText::_(\''.$formfields->name[0].'\'); ?>'.$varObject->return;
 				$viewhtmldefaultheadlines[] = $varObject->tab1.'</th>'.$varObject->return;
@@ -877,8 +877,8 @@ class AdminFiles
 		$categoryField	= '';
 
 		// Make sure there is formfields
-		if($formfields->type):
-			if(array_search("category", $formfields->type) && $varObject->includeCat):
+		if ($formfields->type):
+			if (array_search("category", $formfields->type) && $varObject->includeCat):
 				$categoryField = array_search("category", $formfields->type);
 				$categoryField = strtolower($formfields->name_safe[$categoryField]);
 				$categoryLookUp = 1;
@@ -894,7 +894,7 @@ class AdminFiles
 		$viewhtmldefaultbodylines[] = '$user = JFactory::getUser();'.$varObject->return;
 		$viewhtmldefaultbodylines[] = '$userId = $user->get(\'id\');'.$varObject->return;
 
-		if($categoryLookUp):
+		if ($categoryLookUp):
 			$viewhtmldefaultbodylines[] = $varObject->return;
 			$viewhtmldefaultbodylines[] = '// Connect to database'.$varObject->return;
 			$viewhtmldefaultbodylines[] = '$db = JFactory::getDBO();'.$varObject->return;
@@ -905,7 +905,7 @@ class AdminFiles
 		$viewhtmldefaultbodylines[] = $varObject->tab1.'$canCheckin	= $user->authorise(\'core.manage\', \'com_checkin\') || $item->checked_out == $userId || $item->checked_out == 0;'.$varObject->return;
 		$viewhtmldefaultbodylines[] = $varObject->tab1.'$userChkOut	= JFactory::getUser($item->checked_out);'.$varObject->return;
 
-		if($categoryLookUp):
+		if ($categoryLookUp):
 			$viewhtmldefaultbodylines[] = $varObject->tab1.'$categoryTitle = $db->setQuery(\'SELECT #__categories.title FROM #__categories WHERE #__categories.id = "\'.$item->'.$categoryField.'.\'"\')->loadResult();'.$varObject->return;
 		endif;
 
@@ -919,22 +919,22 @@ class AdminFiles
 		$viewhtmldefaultbodylines[] = $varObject->tab2.'</td>'.$varObject->return;
 
 		// Make sure there are formfields
-		if($formfields->name_safe):
+		if ($formfields->name_safe):
 			$shown = 0;
 			// Parse through fields
 			foreach($formfields->name_safe as $key=>$field):
 				// Check if field is required
-				if($formfields->show):
+				if ($formfields->show):
 					if (array_key_exists($key, $formfields->show)):
 						$viewhtmldefaultbodylines[] = $varObject->tab2.'<td>'.$varObject->return;
-						if($firstfield == 1):
+						if ($firstfield == 1):
 							$viewhtmldefaultbodylines[] = $varObject->tab3.'<?php echo $item->'.$field.'; ?> - (<a href="<?php echo $edit; ?>&id=<?php echo $item->id; ?>"><?php echo \'Edit\'; ?></a>)'.$varObject->return;
 							$viewhtmldefaultbodylines[] = $varObject->tab3.'<?php if ($item->checked_out){ ?>'.$varObject->return;
 							$viewhtmldefaultbodylines[] = $varObject->tab4.'<?php echo JHtml::_(\'jgrid.checkedout\', $i, $userChkOut->name, $item->checked_out_time, \''.$view['plural']['safe'].'.\', $canCheckin); ?>'.$varObject->return;
 							$viewhtmldefaultbodylines[] = $varObject->tab3.'<?php } ?>'.$varObject->return;
 							$firstfield++;
 						else:
-							if($formfields->type[$key] == 'category' && $categoryLookUp):
+							if ($formfields->type[$key] == 'category' && $categoryLookUp):
 								$viewhtmldefaultbodylines[] = $varObject->tab3.'<a href="index.php?option=com_categories&task=category.edit&id=<?php echo $item->'.$field.'; ?>&extension='.$varObject->com_main.'"><?php echo $categoryTitle; ?></a>'.$varObject->return;
 							else:
 								$viewhtmldefaultbodylines[] = $varObject->tab3.'<?php echo $item->'.$field.'; ?>'.$varObject->return;
@@ -946,7 +946,7 @@ class AdminFiles
 				endif;
 			endforeach;
 			// default at least the first field to be the edit field
-			if($shown != 1):
+			if ($shown != 1):
 				$viewhtmldefaultbodylines[] = $varObject->tab2.'<td>'.$varObject->return;
 				$viewhtmldefaultbodylines[] = $varObject->tab3.'<?php echo $item->'.$formfields->name_safe[0].'; ?> - (<a href="<?php echo $edit; ?>&id=<?php echo $item->id; ?>"><?php echo \'Edit\'; ?></a>)'.$varObject->return;
 				$viewhtmldefaultbodylines[] = $varObject->tab3.'<?php if ($item->checked_out){ ?>'.$varObject->return;
@@ -968,11 +968,11 @@ class AdminFiles
 		$colspan = 0;
 
 		// Make sure there is formfields
-		if($formfields->name):
+		if ($formfields->name):
 			// Parse through fields
 			foreach($formfields->name as $key=>$field):
 				// Check if field is required
-				if($formfields->show):
+				if ($formfields->show):
 					if (array_key_exists($key, $formfields->show)):
 						$colspan++;
 					endif;
@@ -981,7 +981,7 @@ class AdminFiles
 		endif;
 
 		// default at least the first field to be the edit field
-		if($colspan == 0):
+		if ($colspan == 0):
 			$colspan++;
 		endif;
 
@@ -1158,14 +1158,14 @@ class AdminFiles
 		$viewsingularhtmledit[] = 'JHtml::_(\'behavior.formvalidation\');'.$varObject->return;
 		$viewsingularhtmledit[] = '$params = $this->form->getFieldsets(\'params\');'.$varObject->return;
 
-		if($varObject->imageUpload):
+		if ($varObject->imageUpload):
 			$viewsingularhtmledit[] = '$componentParams = JComponentHelper::getParams(\''.$varObject->com_main.'\');'.$varObject->return;
 		endif;
 
 		$viewsingularhtmledit[] = $varObject->return;
 		$viewsingularhtmledit[] = '?>'.$varObject->return;
 
-		if($varObject->imageUpload):
+		if ($varObject->imageUpload):
 			$viewsingularhtmledit[] = '<style type="text/css">'.$varObject->return;
 			$viewsingularhtmledit[] = $varObject->tab1.'.full, .thumb { border: 1px solid #CCC; float: left; margin: 0 10px 0 0; padding: 10px; }'.$varObject->return;
 			$viewsingularhtmledit[] = $varObject->tab1.'.full h2, .thumb h2 { margin: 0; padding: 0; }'.$varObject->return;
@@ -1181,10 +1181,10 @@ class AdminFiles
 		$viewsingularhtmledit[] = $varObject->tab5.'<div>'.$varObject->return;
 		$viewsingularhtmledit[] = $varObject->tab6.'<?php echo $field->label; echo $field->input;?>'.$varObject->return;
 
-		if($varObject->imageUpload):
-			if(is_array($varObject->imageFields[$view_count])){
+		if ($varObject->imageUpload):
+			if (is_array($varObject->imageFields[$view_count])){
 				foreach($varObject->imageFields[$view_count] as $image_name):
-					$viewsingularhtmledit[] = $varObject->tab6.'<?php if($field->fieldname == \''.$image_name['fieldnamesafe'].'\' && $field->value){ ?>'.$varObject->return;
+					$viewsingularhtmledit[] = $varObject->tab6.'<?php if ($field->fieldname == \''.$image_name['fieldnamesafe'].'\' && $field->value){ ?>'.$varObject->return;
 					$viewsingularhtmledit[] = $varObject->tab6.'<label>Delete Image</label><input type="checkbox" name="'.$image_name['fieldnamesafe'].'_delete" value="1" />'.$varObject->return;
 					$viewsingularhtmledit[] = $varObject->tab6.'<div class="' . $varObject->j_clear_class . '"></div>'.$varObject->return;
 					$viewsingularhtmledit[] = $varObject->tab6.'<?php } ?>'.$varObject->return;
@@ -1194,8 +1194,8 @@ class AdminFiles
 
 		$viewsingularhtmledit[] = $varObject->tab5.'</div>'.$varObject->return;
 
-		if($varObject->imageUpload):
-			$viewsingularhtmledit[] = $varObject->tab5.'<?php if($field->fieldname == \''.$image_name['fieldnamesafe'].'\' && $field->value){ ?>'.$varObject->return;
+		if ($varObject->imageUpload):
+			$viewsingularhtmledit[] = $varObject->tab5.'<?php if ($field->fieldname == \''.$image_name['fieldnamesafe'].'\' && $field->value){ ?>'.$varObject->return;
 			$viewsingularhtmledit[] = $varObject->tab5.'<label>Image Preview</label>'.$varObject->return;
 			$viewsingularhtmledit[] = $varObject->tab5.'<div class="full">'.$varObject->return;
 			$viewsingularhtmledit[] = $varObject->tab6.'<h2>Full Image</h2>'.$varObject->return;
@@ -1236,14 +1236,14 @@ class AdminFiles
 		$viewsingularhtmledit[] = 'JHtml::_(\'behavior.keepalive\');'.$varObject->return;
 		$viewsingularhtmledit[] = '$params = $this->form->getFieldsets(\'params\');'.$varObject->return;
 
-		if($varObject->imageUpload):
+		if ($varObject->imageUpload):
 			$viewsingularhtmledit[] = '$componentParams = JComponentHelper::getParams(\''.$varObject->com_main.'\');'.$varObject->return;
 		endif;
 
 		$viewsingularhtmledit[] = $varObject->return;
 		$viewsingularhtmledit[] = '?>'.$varObject->return;
 
-		if($varObject->imageUpload):
+		if ($varObject->imageUpload):
 			$viewsingularhtmledit[] = '<style type="text/css">'.$varObject->return;
 			$viewsingularhtmledit[] = $varObject->tab1.'.full, .thumb { border: 1px solid #CCC; float: left; margin: 0 10px 0 0; padding: 10px; }'.$varObject->return;
 			$viewsingularhtmledit[] = $varObject->tab1.'.full h2, .thumb h2 { margin: 0; padding: 0; }'.$varObject->return;
@@ -1263,10 +1263,10 @@ class AdminFiles
 		$viewsingularhtmledit[] = $varObject->tab6.'<div>'.$varObject->return;
 		$viewsingularhtmledit[] = $varObject->tab7.'<?php echo $field->label; echo $field->input;?>'.$varObject->return;
 
-		if($varObject->imageUpload):
-			if(is_array($varObject->imageFields[$view_count])){
+		if ($varObject->imageUpload):
+			if (is_array($varObject->imageFields[$view_count])){
 				foreach($varObject->imageFields[$view_count] as $image_name):
-					$viewsingularhtmledit[] = $varObject->tab7.'<?php if($field->fieldname == \''.$image_name['fieldnamesafe'].'\' && $field->value){ ?>'.$varObject->return;
+					$viewsingularhtmledit[] = $varObject->tab7.'<?php if ($field->fieldname == \''.$image_name['fieldnamesafe'].'\' && $field->value){ ?>'.$varObject->return;
 					$viewsingularhtmledit[] = $varObject->tab7.'<label>Delete Image</label><input type="checkbox" name="'.$image_name['fieldnamesafe'].'_delete" value="1" />'.$varObject->return;
 					$viewsingularhtmledit[] = $varObject->tab7.'<div class="' . $varObject->j_clear_class . '"></div>'.$varObject->return;
 					$viewsingularhtmledit[] = $varObject->tab7.'<?php } ?>'.$varObject->return;
@@ -1276,10 +1276,10 @@ class AdminFiles
 
 		$viewsingularhtmledit[] = $varObject->tab6.'</div>'.$varObject->return;
 
-		if($varObject->imageUpload):
-			if(is_array($varObject->imageFields[$view_count])){
+		if ($varObject->imageUpload):
+			if (is_array($varObject->imageFields[$view_count])){
 				foreach($varObject->imageFields[$view_count] as $image_name):
-					$viewsingularhtmledit[] = $varObject->tab6.'<?php if($field->fieldname == \''.$image_name['fieldnamesafe'].'\' && $field->value){ ?>'.$varObject->return;
+					$viewsingularhtmledit[] = $varObject->tab6.'<?php if ($field->fieldname == \''.$image_name['fieldnamesafe'].'\' && $field->value){ ?>'.$varObject->return;
 					$viewsingularhtmledit[] = $varObject->tab6.'<label>Image Preview</label>'.$varObject->return;
 					$viewsingularhtmledit[] = $varObject->tab6.'<div class="full">'.$varObject->return;
 					$viewsingularhtmledit[] = $varObject->tab7.'<h2>Full Image</h2>'.$varObject->return;
@@ -1381,47 +1381,47 @@ class AdminFiles
 		$adminControllerSingular[] = $varObject->tab2.'$application = JFactory::getApplication();'.$varObject->return;
 		$adminControllerSingular[] = $varObject->return;
 
-		if($varObject->datemodified):
+		if ($varObject->datemodified):
 			$adminControllerSingular[] = $varObject->tab2.'$date = date(\'Y-m-d H:i:s\');'.$varObject->return;
-			$adminControllerSingular[] = $varObject->tab2.'if($validData[\'date_created\'] == \'0000-00-00 00:00:00\'){'.$varObject->return;
+			$adminControllerSingular[] = $varObject->tab2.'if ($validData[\'date_created\'] == \'0000-00-00 00:00:00\'){'.$varObject->return;
 			$adminControllerSingular[] = $varObject->tab3.'$data[\'date_created\'] = $date;'.$varObject->return;
 			$adminControllerSingular[] = $varObject->tab2.'}'.$varObject->return;
 			$adminControllerSingular[] = $varObject->tab2.'$data[\'date_modified\'] = $date;'.$varObject->return;
 			$adminControllerSingular[] = $varObject->return;
 		endif;
 
-		if($varObject->usermodified):
+		if ($varObject->usermodified):
 			$adminControllerSingular[] = $varObject->tab2.'$user = JFactory::getUser();'.$varObject->return;
-			$adminControllerSingular[] = $varObject->tab2.'if($validData[\'user_created\'] == 0){'.$varObject->return;
+			$adminControllerSingular[] = $varObject->tab2.'if ($validData[\'user_created\'] == 0){'.$varObject->return;
 			$adminControllerSingular[] = $varObject->tab3.'$data[\'user_created\'] = $user->id;'.$varObject->return;
 			$adminControllerSingular[] = $varObject->tab2.'}'.$varObject->return;
 			$adminControllerSingular[] = $varObject->tab2.'$data[\'user_modified\'] = $user->id;'.$varObject->return;
 			$adminControllerSingular[] = $varObject->return;
 		endif;
 
-		if($varObject->imageUpload):
-			if(is_array($varObject->imageFields[$view_count])){
+		if ($varObject->imageUpload):
+			if (is_array($varObject->imageFields[$view_count])){
 				foreach($varObject->imageFields[$view_count] as $image_name):
 					$adminControllerSingular[] = $varObject->tab2.'// Delete Image Checked'.$varObject->return;
-					$adminControllerSingular[] = $varObject->tab2.'if(array_key_exists(\''.$image_name['fieldnamesafe'].'_delete\', $_POST)){'.$varObject->return;
+					$adminControllerSingular[] = $varObject->tab2.'if (array_key_exists(\''.$image_name['fieldnamesafe'].'_delete\', $_POST)){'.$varObject->return;
 					$adminControllerSingular[] = $varObject->tab3.'$data[\''.$image_name['fieldnamesafe'].'\'] = \'\'; // set image to nothing in database'.$varObject->return;
 					$adminControllerSingular[] = $varObject->tab3.'// Delete Image Entirely Check'.$varObject->return;
 					$adminControllerSingular[] = $varObject->tab3.'$db = JFactory::getDBO();'.$varObject->return;
 					$adminControllerSingular[] = $varObject->tab3.'$query = $db->getQuery(true)->select(\''.$image_name['fieldnamesafe'].'\')->from(\'#__'.$varObject->comp_m_view.'_'.$view['singular']['safe'].'\')->where(\'id="\' . $validData[\'id\'] . \'"\');'.$varObject->return;
 					$adminControllerSingular[] = $varObject->tab3.'$db->setQuery((string)$query);'.$varObject->return;
 					$adminControllerSingular[] = $varObject->tab3.'$'.$image_name['fieldnamesafe'].' = $db->loadResult();'.$varObject->return;
-					$adminControllerSingular[] = $varObject->tab3.'if($'.$image_name['fieldnamesafe'].'){'.$varObject->return;
+					$adminControllerSingular[] = $varObject->tab3.'if ($'.$image_name['fieldnamesafe'].'){'.$varObject->return;
 					$adminControllerSingular[] = $varObject->tab4.'$query = $db->getQuery(true)->select(\'CASE WHEN COUNT(*) > 0 THEN 1 ELSE 0 END\')->from(\'#__'.$varObject->comp_m_view.'_'.$view['singular']['safe'].'\')->where(\''.$image_name['fieldnamesafe'].'="\' . $'.$image_name['fieldnamesafe'].' . \'" AND id!="\' . $validData[\'id\'] . \'"\');'.$varObject->return;
 					$adminControllerSingular[] = $varObject->tab4.'$db->setQuery((string)$query);'.$varObject->return;
 					$adminControllerSingular[] = $varObject->tab4.'$using = $db->loadResult();'.$varObject->return;
-					$adminControllerSingular[] = $varObject->tab4.'if($using == 0){ // free to delete'.$varObject->return;
+					$adminControllerSingular[] = $varObject->tab4.'if ($using == 0){ // free to delete'.$varObject->return;
 					$adminControllerSingular[] = $varObject->tab5.'// Include file system helpers'.$varObject->return;
 					$adminControllerSingular[] = $varObject->tab5.'jimport(\'joomla.filesystem.file\');'.$varObject->return;
 					$adminControllerSingular[] = $varObject->tab5.'jimport(\'joomla.filesystem.folder\');'.$varObject->return;
 					$adminControllerSingular[] = $varObject->tab5.'$full_image = JPATH_SITE . DS . \'images\' . DS . \''.$varObject->com_main.'\' . DS . $'.$image_name['fieldnamesafe'].';'.$varObject->return;
 					$adminControllerSingular[] = $varObject->tab5.'$thum_image = JPATH_SITE . DS . \'images\' . DS . \''.$varObject->com_main.'\' . DS . \'thumb\' . DS . $'.$image_name['fieldnamesafe'].';'.$varObject->return;
 					$adminControllerSingular[] = $varObject->tab5.'JFile::delete($thum_image);'.$varObject->return;
-					$adminControllerSingular[] = $varObject->tab5.'if(JFile::delete($full_image)){'.$varObject->return;
+					$adminControllerSingular[] = $varObject->tab5.'if (JFile::delete($full_image)){'.$varObject->return;
 					$adminControllerSingular[] = $varObject->tab6.'// Add a message to the message queue'.$varObject->return;
 					$adminControllerSingular[] = $varObject->tab6.'$application->enqueueMessage(\'Image has been deleted!\', \'notice\');'.$varObject->return;
 					$adminControllerSingular[] = $varObject->tab5.'} else {'.$varObject->return;
@@ -1437,9 +1437,9 @@ class AdminFiles
 					$adminControllerSingular[] = $varObject->return;
 					$adminControllerSingular[] = $varObject->tab2.'// Upload Image'.$varObject->return;
 					$adminControllerSingular[] = $varObject->tab2.'$file = JRequest::getVar(\'jform\', array(), \'files\', \'array\');'.$varObject->return;
-					$adminControllerSingular[] = $varObject->tab2.'if($file[\'name\'][\''.$image_name['fieldnamesafe'].'\']){'.$varObject->return;
+					$adminControllerSingular[] = $varObject->tab2.'if ($file[\'name\'][\''.$image_name['fieldnamesafe'].'\']){'.$varObject->return;
 					$adminControllerSingular[] = $varObject->tab3.'$info = '.$varObject->comp_m_view_cap.'Helper::imageUpload($file, $data, \''.$image_name['fieldnamesafe'].'\');'.$varObject->return;
-					$adminControllerSingular[] = $varObject->tab3.'if($info[\'error\'] == 0){'.$varObject->return;
+					$adminControllerSingular[] = $varObject->tab3.'if ($info[\'error\'] == 0){'.$varObject->return;
 					$adminControllerSingular[] = $varObject->tab4.'$data[\''.$image_name['fieldnamesafe'].'\'] = $info[\''.$image_name['fieldnamesafe'].'\'];'.$varObject->return;
 					$adminControllerSingular[] = $varObject->tab3.'} else {'.$varObject->return;
 					$adminControllerSingular[] = $varObject->tab4.'// Add a message to the message queue'.$varObject->return;
@@ -1478,7 +1478,7 @@ class AdminFiles
 		$adminModelPlural[] = '{'.$varObject->return;
 
 		// start - added v.0.6.0
-		if($varObject->useDatabase):
+		if ($varObject->useDatabase):
 			$adminModelPlural[] = $varObject->tab1.'/**'.$varObject->return;
 			$adminModelPlural[] = $varObject->tab1.' * Method to build an SQL query to load the list data.'.$varObject->return;
 			$adminModelPlural[] = $varObject->tab1.' *'.$varObject->return;
@@ -1617,14 +1617,14 @@ class AdminFiles
 		$adminModelFormsForm[] = $varObject->tab3.'type="hidden"'.$varObject->return;
 		$adminModelFormsForm[] = $varObject->tab2.'/>'.$varObject->return;
 
-		if($varObject->datemodified):
+		if ($varObject->datemodified):
 			$adminModelFormsForm[] = $varObject->tab2.'<field'.$varObject->return;
 			$adminModelFormsForm[] = $varObject->tab3.'name="date_created"'.$varObject->return;
 			$adminModelFormsForm[] = $varObject->tab3.'type="hidden"'.$varObject->return;
 			$adminModelFormsForm[] = $varObject->tab2.'/>'.$varObject->return;
 		endif;
 
-		if($varObject->usermodified):
+		if ($varObject->usermodified):
 			$adminModelFormsForm[] = $varObject->tab2.'<field'.$varObject->return;
 			$adminModelFormsForm[] = $varObject->tab3.'name="user_created"'.$varObject->return;
 			$adminModelFormsForm[] = $varObject->tab3.'type="hidden"'.$varObject->return;
@@ -1632,7 +1632,7 @@ class AdminFiles
 		endif;
 
 		// Make sure there is formfields
-		if($formfields->name):
+		if ($formfields->name):
 			// Parse through fields
 			foreach($formfields->name as $key=>$field):
 				// Set variables to empty
@@ -1646,19 +1646,19 @@ class AdminFiles
 				$field_lower = $formfields->name_safe[$key];
 
 				// Check if field has a default
-				if(array_key_exists($key, $formfields->default)):
+				if (array_key_exists($key, $formfields->default)):
 					$default = $formfields->default[$key];
 				endif;
 
 				// Check if field is to be on the manager
-				if($formfields->show):
-					if(array_key_exists($key, $formfields->show)):
+				if ($formfields->show):
+					if (array_key_exists($key, $formfields->show)):
 						//echo 'show in manager';
 					endif;
 				endif;
 
 				// Check if field is required
-				if($formfields->required):
+				if ($formfields->required):
 					if (array_key_exists($key, $formfields->required)):
 						//echo 'required'.$key;
 						$required = $varObject->tab3.'required="true"'.$varObject->return;
@@ -1689,7 +1689,7 @@ class AdminFiles
 					case 'integer':
 					case 'list':
 						// Check for number list
-						if(strpos($default, '##')):
+						if (strpos($default, '##')):
 							$numbers = explode('##', $default);
 							$first = $varObject->tab3.'first="'.$numbers[0].'"'.$varObject->return;
 							$last = $varObject->tab3.'last="'.$numbers[1].'"'.$varObject->return;
@@ -1697,11 +1697,11 @@ class AdminFiles
 							$default = $numbers[0];
 						endif;
 						// Check for word list
-						if(strpos($default, ',')):
+						if (strpos($default, ',')):
 							$options = explode(',', $default);
 							foreach($options as $newkey=>$option):
 								$option = trim($option);
-								if(strpos($option, '[') == 0 && strpos($option, ']')):
+								if (strpos($option, '[') == 0 && strpos($option, ']')):
 									$option = str_replace('[', '', $option);
 									$option = str_replace(']', '', $option);
 									$options[$newkey] = $option;
@@ -1712,11 +1712,11 @@ class AdminFiles
 						endif;
 						break;
 					case 'radio':
-						if(strpos($default, ',')):
+						if (strpos($default, ',')):
 							$options = explode(',', $default);
 							foreach($options as $newkey=>$option):
 								$option = trim($option);
-								if(strpos($option, '[') == 0 && strpos($option, ']')):
+								if (strpos($option, '[') == 0 && strpos($option, ']')):
 									$option = str_replace('[', '', $option);
 									$option = str_replace(']', '', $option);
 									$options[$newkey] = $option;
@@ -1756,14 +1756,14 @@ class AdminFiles
 				$adminModelFormsForm[] = $rows;
 				$adminModelFormsForm[] = $cols;
 				$adminModelFormsForm[] = $varObject->tab3.'type="'.$type.'"'.$varObject->return;
-				if($validate):
+				if ($validate):
 					$adminModelFormsForm[] = $varObject->tab3.'validate="'.$field_lower.'"'.$varObject->return;;
 				endif;
 
 				// end of field
-				if($end == 1):
+				if ($end == 1):
 					$adminModelFormsForm[] = $varObject->tab2.'/>'.$varObject->return;
-				elseif($end == 2):
+				elseif ($end == 2):
 					$adminModelFormsForm[] = $varObject->tab2.'>'.$varObject->return;
 					foreach($options as $key=>$option):
 						$option = trim($option);
@@ -1801,12 +1801,12 @@ class AdminFiles
 		$adminModelFormsFormJS[] = 'window.addEvent(\'domready\', function() {'.$varObject->return;
 
 		// Make sure there is formfields
-		if($formfields->name):
+		if ($formfields->name):
 			// Parse through fields
 			foreach($formfields->name as $key=>$field):
 				$field_lower = $formfields->name_safe[$key];
 				// Check if field is required
-				if($formfields->required):
+				if ($formfields->required):
 					if (array_key_exists($key, $formfields->required)):
 						$adminModelFormsFormJS[] = $varObject->tab1.'document.formvalidator.setHandler(\''.$field_lower.'\','.$varObject->return;
 						$adminModelFormsFormJS[] = $varObject->tab2.'function (value) {'.$varObject->return;
@@ -1862,7 +1862,7 @@ class AdminFiles
 		$adminModuleFieldsFieldLine[] = $varObject->tab2.'$db->setQuery((string)$query);'.$varObject->return;
 		$adminModuleFieldsFieldLine[] = $varObject->tab2.'$items = $db->loadObjectList();'.$varObject->return;
 		$adminModuleFieldsFieldLine[] = $varObject->tab2.'$options = array();'.$varObject->return;
-		$adminModuleFieldsFieldLine[] = $varObject->tab2.'if($items){'.$varObject->return;
+		$adminModuleFieldsFieldLine[] = $varObject->tab2.'if ($items){'.$varObject->return;
 		$adminModuleFieldsFieldLine[] = $varObject->tab3.'foreach($items as $item){'.$varObject->return;
 		$adminModuleFieldsFieldLine[] = $varObject->tab4.'$options[] = JHtml::_(\'select.option\', $item->id, ucwords($item->'.$field.'));'.$varObject->return;
 		$adminModuleFieldsFieldLine[] = $varObject->tab3.'};'.$varObject->return;
@@ -1914,7 +1914,7 @@ class JFormFieldproductsone extends JFormFieldList
 		$db->setQuery((string)$query);
 		$items = $db->loadObjectList();
 		$options = array();
-		if($items){
+		if ($items){
 			foreach($items as $item){
 				$options[] = JHtml::_('select.option', $item->id, ucwords($item->title));
 			};
@@ -1960,7 +1960,7 @@ class JFormFieldproductsone extends JFormFieldList
 		$adminModuleFieldsFieldLine[] = $varObject->tab2.'$db->setQuery((string)$query);'.$varObject->return;
 		$adminModuleFieldsFieldLine[] = $varObject->tab2.'$items = $db->loadObjectList();'.$varObject->return;
 		$adminModuleFieldsFieldLine[] = $varObject->tab2.'$options = array();'.$varObject->return;
-		$adminModuleFieldsFieldLine[] = $varObject->tab2.'if($items){'.$varObject->return;
+		$adminModuleFieldsFieldLine[] = $varObject->tab2.'if ($items){'.$varObject->return;
 		$adminModuleFieldsFieldLine[] = $varObject->tab3.'foreach($items as $item){'.$varObject->return;
 		$adminModuleFieldsFieldLine[] = $varObject->tab4.'$options[] = JHtml::_(\'select.option\', $item->id, ucwords($item->title));'.$varObject->return;
 		$adminModuleFieldsFieldLine[] = $varObject->tab3.'};'.$varObject->return;
@@ -1977,15 +1977,16 @@ class JFormFieldproductsone extends JFormFieldList
 
 	public static function adminModelRulesRule($formfields, $varObject)
 	{
+		$adminModelRulesRule = '';
 		// Make sure you don't overwrite a rule
 		$created_rule = 0;
 		// Make sure there is formfields
-		if($formfields->name):
+		if ($formfields->name):
 			// Parse through fields
 			foreach($formfields->name as $key=>$field):
 				$field_lower = $formfields->name_safe[$key];
 				// Check if field is required
-				if($formfields->required):
+				if ($formfields->required):
 					if (array_key_exists($key, $formfields->required)):
 						$filename = $field_lower . '.php';
 						$adminModelRulesRule[$created_rule]['filename'] = $filename;
@@ -2024,7 +2025,7 @@ class JFormFieldproductsone extends JFormFieldList
 		$adminSQLInstallLine[] = 'CREATE TABLE IF NOT EXISTS `#__'.$varObject->comp_m_view.'_'.$view['singular']['safe'].'` (';
 		$adminSQLInstallLine[] = $varObject->space2 . '`id` int(11) NOT NULL AUTO_INCREMENT,';
 		// Make sure there is formfields
-		if($formfields->name):
+		if ($formfields->name):
 			foreach($formfields->name as $key=>$field):
 				$field			= strtolower($field);
 				$field			= ucwords($field);
@@ -2057,11 +2058,11 @@ class JFormFieldproductsone extends JFormFieldList
 		endif;
 
 		// User & Date Created/Modified
-		if($varObject->usermodified):
+		if ($varObject->usermodified):
 			$adminSQLInstallLine[] = $varObject->space2 . '`user_created` int(11) NOT NULL DEFAULT \'0\',';
 			$adminSQLInstallLine[] = $varObject->space2 . '`user_modified` int(11) NOT NULL DEFAULT \'0\',';
 		endif;
-		if($varObject->datemodified):
+		if ($varObject->datemodified):
 			$adminSQLInstallLine[] = $varObject->space2 . '`date_created` DATETIME NOT NULL,';
 			$adminSQLInstallLine[] = $varObject->space2 . '`date_modified` DATETIME NOT NULL,';
 		endif;

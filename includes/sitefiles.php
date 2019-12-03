@@ -30,9 +30,9 @@ class SiteFiles
 		$componentFileLines[] = Helpers::nodirectaccess($varObject);
 		$componentFileLines[] = $varObject->return;
 		// Check if Joomla 3.0
-		if($varObject->j_version == '3.0' || $varObject->j_version == '3.2'):
+		if ($varObject->j_version == '3.0' || $varObject->j_version == '3.2'):
 			$componentFileLines[] = '// Added for Joomla 3.0'.$varObject->return;
-			$componentFileLines[] = 'if(!defined(\'DS\')){'.$varObject->return;
+			$componentFileLines[] = 'if (!defined(\'DS\')){'.$varObject->return;
 			$componentFileLines[] = $varObject->tab1.'define(\'DS\',DIRECTORY_SEPARATOR);'.$varObject->return;
 			$componentFileLines[] = '};'.$varObject->return;
 			$componentFileLines[] = $varObject->return;
@@ -89,12 +89,12 @@ class SiteFiles
 		$routerFileLines[] = '{'.$varObject->return;
 		$routerFileLines[] = $varObject->tab1.'$segments = array();'.$varObject->return;
 		$routerFileLines[] = $varObject->return;
-		$routerFileLines[] = $varObject->tab1.'if(isset($query[\'view\'])){'.$varObject->return;
+		$routerFileLines[] = $varObject->tab1.'if (isset($query[\'view\'])){'.$varObject->return;
 		$routerFileLines[] = $varObject->tab2.'$segments[] = $query[\'view\'];'.$varObject->return;
 		$routerFileLines[] = $varObject->tab2.'unset($query[\'view\']);'.$varObject->return;
 		$routerFileLines[] = $varObject->tab1.'};'.$varObject->return;
 		$routerFileLines[] = $varObject->return;
-		$routerFileLines[] = $varObject->tab1.'if(isset($query[\'id\'])){'.$varObject->return;
+		$routerFileLines[] = $varObject->tab1.'if (isset($query[\'id\'])){'.$varObject->return;
 		$routerFileLines[] = $varObject->tab2.'$segments[] = $query[\'id\'];'.$varObject->return;
 		$routerFileLines[] = $varObject->tab2.'unset($query[\'id\']);'.$varObject->return;
 		$routerFileLines[] = $varObject->tab1.'};'.$varObject->return;
@@ -215,8 +215,8 @@ class SiteFiles
 		$categoryField	= '';
 
 		// Make sure there is formfields
-		if($formfields->type):
-			if(array_search("category", $formfields->type) && $varObject->includeCat):
+		if ($formfields->type):
+			if (array_search("category", $formfields->type) && $varObject->includeCat):
 				$categoryField = array_search("category", $formfields->type);
 				$categoryField = strtolower($formfields->name_safe[$categoryField]);
 				$categoryLookUp = 1;
@@ -226,7 +226,7 @@ class SiteFiles
 		$defaultPHP[] = '<?php'.$varObject->return;
 		$defaultPHP[] = Helpers::phpheader($filename, $varObject);
 		$defaultPHP[] = Helpers::nodirectaccess($varObject);
-		if($categoryLookUp):
+		if ($categoryLookUp):
 			$defaultPHP[] = $varObject->return;
 			$defaultPHP[] = '// Connect to database'.$varObject->return;
 			$defaultPHP[] = '$db = JFactory::getDBO();'.$varObject->return;
@@ -236,10 +236,10 @@ class SiteFiles
 		$defaultPHP[] = '<div id="'.$varObject->comp_m_view.'-'.$view['plural']['safe'].'">'.$varObject->return;
 		$defaultPHP[] = $varObject->tab1.'<?php foreach($this->items as $item){ ?>'.$varObject->return;
 		$defaultPHP[] = $varObject->tab2.'<?php'.$varObject->return;
-		if($categoryLookUp):
+		if ($categoryLookUp):
 			$defaultPHP[] = $varObject->tab2.'$item->'.$categoryField.' = $db->setQuery(\'SELECT #__categories.title FROM #__categories WHERE #__categories.id = "\'.$item->'.$categoryField.'.\'"\')->loadResult();'.$varObject->return;
 		endif;
-		$defaultPHP[] = $varObject->tab2.'if(empty($item->alias)){'.$varObject->return;
+		$defaultPHP[] = $varObject->tab2.'if (empty($item->alias)){'.$varObject->return;
 
 		$link = $formfields->name_safe[0];
 
@@ -250,18 +250,18 @@ class SiteFiles
 		$defaultPHP[] = $varObject->tab2.'?>'.$varObject->return;
 
 		// Make sure there is formfields
-		if($formfields->name):
+		if ($formfields->name):
 			// Parse through fields and just display them
 			foreach($formfields->name as $key=>$field):
 				$field			= strtolower($field);
 				$field			= ucwords($field);
 				$field_lower	= $formfields->name_safe[$key];
-				if($varObject->imageUpload):
+				if ($varObject->imageUpload):
 					$foundImage = false;
-					if(is_array($varObject->imageFields[$view_count])){
+					if (is_array($varObject->imageFields[$view_count])){
 						foreach($varObject->imageFields[$view_count] as $image_name):
-							if($image_name['fieldnamesafe'] == $field_lower):
-								$defaultPHP[] = $varObject->tab2.'<?php if($item->'.$field_lower.'){ ?>'.$varObject->return;
+							if ($image_name['fieldnamesafe'] == $field_lower):
+								$defaultPHP[] = $varObject->tab2.'<?php if ($item->'.$field_lower.'){ ?>'.$varObject->return;
 								$defaultPHP[] = $varObject->tab3.'<p><strong>'.$field.'</strong>: <img src="images/'.$varObject->com_main.'/thumb/<?php echo $item->'.$field_lower.'; ?>" /></p>'.$varObject->return;
 								$defaultPHP[] = $varObject->tab2.'<?php } ?>'.$varObject->return;
 								$foundImage = true;
@@ -269,9 +269,9 @@ class SiteFiles
 						endforeach;
 					}
 
-					if($foundImage == false):
+					if ($foundImage == false):
 						//check for first field and put at link on it.
-						if($field_lower == $link):
+						if ($field_lower == $link):
 							$defaultPHP[] = $varObject->tab2.'<p><strong>'.$field.'</strong>: <a href="<?php echo $item->linkURL; ?>"><?php echo $item->'.$field_lower.'; ?></a></p>'.$varObject->return;
 						else:
 							$defaultPHP[] = $varObject->tab2.'<p><strong>'.$field.'</strong>: <?php echo $item->'.$field_lower.'; ?></p>'.$varObject->return;
@@ -279,7 +279,7 @@ class SiteFiles
 					endif;
 				else:
 					//check for first field and put at link on it.
-					if($field_lower == $link):
+					if ($field_lower == $link):
 						$defaultPHP[] = $varObject->tab2.'<p><strong>'.$field.'</strong>: <a href="<?php echo $item->linkURL; ?>"><?php echo $item->'.$field_lower.'; ?></a></p>'.$varObject->return;
 					else:
 						$defaultPHP[] = $varObject->tab2.'<p><strong>'.$field.'</strong>: <?php echo $item->'.$field_lower.'; ?></p>'.$varObject->return;
@@ -405,8 +405,8 @@ class SiteFiles
 		$categoryField	= '';
 
 		// Make sure there is formfields
-		if($formfields->type):
-			if(array_search("category", $formfields->type) && $varObject->includeCat):
+		if ($formfields->type):
+			if (array_search("category", $formfields->type) && $varObject->includeCat):
 				$categoryField	= array_search("category", $formfields->type);
 				$categoryField	= strtolower($formfields->name_safe[$categoryField]);
 				$categoryLookUp	= 1;
@@ -430,7 +430,7 @@ class SiteFiles
 		$viewHTML[] = $varObject->tab1.'{'.$varObject->return;
 		$viewHTML[] = $varObject->tab2.'// Assign data to the view'.$varObject->return;
 		$viewHTML[] = $varObject->tab2.'$this->item = $this->get(\'Item\');'.$varObject->return;
-		if($categoryLookUp):
+		if ($categoryLookUp):
 			$viewHTML[] = $varObject->tab2.'$db = JFactory::getDBO();'.$varObject->return;
 			$viewHTML[] = $varObject->tab2.'$this->item->'.$categoryField.' = $db->setQuery(\'SELECT #__categories.title FROM #__categories WHERE #__categories.id = "\'.$this->item->'.$categoryField.'.\'"\')->loadResult();'.$varObject->return;
 		endif;
@@ -459,18 +459,18 @@ class SiteFiles
 		$defaultPHP[] = '?>'.$varObject->return;
 		$defaultPHP[] = '<div id="'.$varObject->comp_m_view.'-content">'.$varObject->return;
 		// Make sure there is formfields
-		if($formfields->name):
+		if ($formfields->name):
 			// Parse through fields and just display them
 			foreach($formfields->name as $key=>$field):
 				$field			= strtolower($field);
 				$field			= ucwords($field);
 				$field_lower	= $formfields->name_safe[$key];
-				if($varObject->imageUpload):
+				if ($varObject->imageUpload):
 					$imageFound = false;
-					if(is_array($varObject->imageFields[$view_count])){
+					if (is_array($varObject->imageFields[$view_count])){
 						foreach($varObject->imageFields[$view_count] as $image_name):
-							if($image_name['fieldnamesafe'] == $field_lower):
-								$defaultPHP[] = $varObject->tab1.'<?php if($this->item->'.$field_lower.'){ ?>'.$varObject->return;
+							if ($image_name['fieldnamesafe'] == $field_lower):
+								$defaultPHP[] = $varObject->tab1.'<?php if ($this->item->'.$field_lower.'){ ?>'.$varObject->return;
 								$defaultPHP[] = $varObject->tab2.'<p><strong>'.$field.'</strong>: <img src="images/'.$varObject->com_main.'/<?php echo $this->item->'.$field_lower.'; ?>" /></p>'.$varObject->return;
 								$defaultPHP[] = $varObject->tab1.'<?php } ?>'.$varObject->return;
 								$imageFound = true;
@@ -478,7 +478,7 @@ class SiteFiles
 						endforeach;
 					}
 
-					if($imageFound == false):
+					if ($imageFound == false):
 						$defaultPHP[] = $varObject->tab1.'<p><strong>'.$field.'</strong>: <?php echo $this->item->'.$field_lower.'; ?></p>'.$varObject->return;
 					endif;
 				else:
@@ -617,18 +617,18 @@ class SiteFiles
 		$defaultPHP[] = '<div id="category-'.$varObject->comp_m_view.'-content">'.$varObject->return;
 		$defaultPHP[] = '<?php foreach($this->items as $item){ ?>'.$varObject->return;
 		// Make sure there is formfields
-		if($formfields->name):
+		if ($formfields->name):
 			// Parse through fields and just display them
 			foreach($formfields->name as $key=>$field):
 				$field			= strtolower($field);
 				$field			= ucwords($field);
 				$field_lower	= $formfields->name_safe[$key];
 				$imageFound		= false;
-				if($varObject->imageUpload):
-					if(is_array($varObject->imageFields[$view_count])){
+				if ($varObject->imageUpload):
+					if (is_array($varObject->imageFields[$view_count])){
 						foreach($varObject->imageFields[$view_count] as $image_name):
-							if($image_name['fieldnamesafe'] == $field_lower):
-								$defaultPHP[] = $varObject->tab1.'<?php if($item->'.$field_lower.'){ ?>'.$varObject->return;
+							if ($image_name['fieldnamesafe'] == $field_lower):
+								$defaultPHP[] = $varObject->tab1.'<?php if ($item->'.$field_lower.'){ ?>'.$varObject->return;
 								$defaultPHP[] = $varObject->tab2.'<p><strong>'.$field.'</strong>: <img src="images/'.$varObject->com_main.'/<?php echo $item->'.$field_lower.'; ?>" /></p>'.$varObject->return;
 								$defaultPHP[] = $varObject->tab1.'<?php } ?>'.$varObject->return;
 								$imageFound = true;
@@ -637,7 +637,7 @@ class SiteFiles
 					}
 				endif;
 
-				if($imageFound == false):
+				if ($imageFound == false):
 					$defaultPHP[] = $varObject->tab1.'<p><strong>'.$field.'</strong>: <?php echo $item->'.$field_lower.'; ?></p>'.$varObject->return;
 				endif;
 			endforeach;

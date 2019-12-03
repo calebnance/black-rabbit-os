@@ -1,7 +1,7 @@
 <?php
 include('master.php');
 
-if(Access::notLoggedIn()) {
+if (Access::notLoggedIn()) {
 	header('Location: index.php?msg=7');
 	exit();
 } else {
@@ -21,7 +21,7 @@ $textModules = $userModulesCount > 1 || $userModulesCount == 0 ? 'modules' : 'mo
 include('template/header.php');
 
 $msg = '';
-if(isset($_REQUEST['msg'])){
+if (isset($_REQUEST['msg'])){
 	switch($_REQUEST['msg']) {
 		case '1':
 			$msg = 'Please complete membership before you can continue with the module creator!';
@@ -43,14 +43,14 @@ if(isset($_REQUEST['msg'])){
 				Msg::alert($msg, 'error');
 				?>
 				<h1><i class="icon-paper-clip"></i> My Modules</h1>
-				<?php if(Access::paid()): ?>
+				<?php if (Access::paid()): ?>
 					<p class="lead">You have <?php echo $userModulesCount . ' ' . $textModules; ?> in your work area!</p>
 				<?php endif; ?>
 			</div><!-- /.span12 -->
 		</div><!-- /.row -->
 		<div class="row">
 			<?php
-			if(Access::paid()):
+			if (Access::paid()):
 			?>
 			<div id="modules-list" class="span12">
 				<p>
@@ -58,7 +58,7 @@ if(isset($_REQUEST['msg'])){
 					<a href="module.php" class="btn btn-success pull-right"><i class="icon icon-white icon-plus"></i> Create Module</a>
 				</p>
 				<p class="clearfix"></p>
-				<?php if($userModules): ?>
+				<?php if ($userModules): ?>
 					<table class="table table-bordered table-striped table-hover">
 						<thead>
 							<tr>
@@ -77,7 +77,7 @@ if(isset($_REQUEST['msg'])){
 						foreach($userModules as $userModule):
 							// grab all components under parent
 							$userModuleHistory = $database->select('br_modules', '*', 'uid="'.$uid.'" AND midparent="'.$userModule->id.'"', 'object');
-							if($userModuleHistory):
+							if ($userModuleHistory):
 								$modCount	= count($userModuleHistory) - 1;
 								$userModule	= $userModuleHistory[$modCount];
 							endif;
@@ -111,7 +111,7 @@ if(isset($_REQUEST['msg'])){
 			</div><!-- /#modules-list -->
 			<?php
 			else:
-				if($_SESSION['emailv']):
+				if ($_SESSION['emailv']):
 				?>
 					<div class="span12">
 						<div class="well center">

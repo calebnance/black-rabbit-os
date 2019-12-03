@@ -7,7 +7,7 @@ session_start();
 // display errors on localhost
 $whitelist = array('locathost');
 
-if(!in_array($_SERVER['SERVER_NAME'], $whitelist)) {
+if (!in_array($_SERVER['SERVER_NAME'], $whitelist)) {
     // this is localhost!
     // ini_set('display_errors', 1);
     error_reporting(E_ALL);
@@ -54,7 +54,7 @@ require_once(INCLUDESDIR . 'fieldtypes.php');
 require_once(INCLUDESDIR . 'modulehelper.php');
 
 // Debug mode
-if(CREATE_PACKAGE == false){
+if (CREATE_PACKAGE == false){
     require_once(INCLUDESDIR . 'debug.php');
 }
 ?>

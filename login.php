@@ -8,8 +8,8 @@ $pageActiveBreadcrumb = '<li class="active">Login</li>';
 $msg = '';
 
 // lets do some checking
-if(empty($_POST['email']) || empty($_POST['password'])):
-	if(isset($_POST['email']) || isset($_POST['password'])):
+if (empty($_POST['email']) || empty($_POST['password'])):
+	if (isset($_POST['email']) || isset($_POST['password'])):
 		$msg = 'Make sure you fill in your e-mail and password.';
 	endif;
 else:
@@ -21,9 +21,9 @@ else:
 	$database = new Database(HOST, DBNAME, DBUSER, DBPASS);
 	$user_info = $database->select('br_users', '*', 'email="'.$email.'"');
 
-	if($user_info):
+	if ($user_info):
 		$user_pass = $user_info[0]['password'];
-		if($user_pass === md5($pass)):
+		if ($user_pass === md5($pass)):
 			FileHelper::startsession($user_info);
 			header('location: dashboard.php');
 			exit();
@@ -52,7 +52,7 @@ include('template/header.php');
 			<div class="span6">
 				<div class="well">
 					<?php
-					if(Access::loggedIn()) {
+					if (Access::loggedIn()) {
 					?>
 						<h3><?php echo $_SESSION['fname'] . ' ' . $_SESSION['lname']; ?></h3>
 						<a href="logout.php" class="btn btn-info login"><i class="icon icon-off icon-white"></i> <?php echo $brtext->__('LOGOUT'); ?></a>
@@ -78,7 +78,7 @@ include('template/header.php');
 				</div><!-- /.well -->
 			</div><!-- /.span6 -->
 			<?php
-			if(Access::notLoggedIn()) {
+			if (Access::notLoggedIn()) {
 			?>
 				<div class="span6">
 					<div class="well">

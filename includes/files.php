@@ -29,7 +29,7 @@ class Files
 		$install[] = $varObject->return;
 
 		// start - added v.0.6.0
-		if($varObject->useDatabase):
+		if ($varObject->useDatabase):
 			// Install Section - Joomla 1.5/2.5/3.0
 			$install[] = $varObject->tab1.'<!-- Runs on install; New in Joomla 1.5 -->'.$varObject->return;
 			$install[] = $varObject->tab1.'<install>'.$varObject->return;
@@ -53,7 +53,7 @@ class Files
 		$install[] = $varObject->return;
 
 		// start - added v.0.6.0
-		if($varObject->useDatabase):
+		if ($varObject->useDatabase):
 			// Update Section - Joomla 2.5 / 3.0
 			$install[] = $varObject->tab1.'<!-- Update Schema; New in Joomla 2.5 -->'.$varObject->return;
 			$install[] = $varObject->tab1.'<update>'.$varObject->return;
@@ -83,7 +83,7 @@ class Files
 
 		// start - added v.0.6.0
 		$main_view_image = '';
-		if($varObject->imagesUploaded[$varObject->comp_m_view]):
+		if ($varObject->imagesUploaded[$varObject->comp_m_view]):
 			//<menu img="../media/com_helloworld/images/tux-16x16.png">COM_HELLOWORLD_MENU</menu>
 			$main_view_image = ' img="components/'.$varObject->com_main.'/assets/images/icons/'.$varObject->imagesUploaded[$varObject->comp_m_view]->menu.'"';
 		endif;
@@ -93,20 +93,20 @@ class Files
 
 		// handle submenu if other views are set!
 		$imageIndex	= 1;
-		if(count($varObject->allViews)):
+		if (count($varObject->allViews)):
 			$install[] = $varObject->tab2.'<submenu>'.$varObject->return;
 			$install[] = $varObject->tab3.'<!-- Instead of link you can specify individual link attributes -->'.$varObject->return;
 			foreach($varObject->allViews as $view):
 				// start - added v.0.6.0
 				$view_image = '';
-				if($varObject->imagesUploaded[$view['plural']['orig']]):
+				if ($varObject->imagesUploaded[$view['plural']['orig']]):
 					$view_image = ' img="components/'.$varObject->com_main.'/assets/images/icons/'.$varObject->imagesUploaded[$view['plural']['orig']]->menu.'"';
 				endif;
 				// end - added v.0.6.0
 				$install[] = $varObject->tab3.'<menu option="'.$varObject->com_main.'" view="'.$view['plural']['safe'].'"'.$view_image.'>'.$varObject->com_language_menu.'_'.$view['plural']['language'].'</menu>'.$varObject->return; // added v.0.6.0
 			endforeach;
 			// Check for include of categories
-			if($varObject->includeCat):
+			if ($varObject->includeCat):
 				$install[] = $varObject->tab3.'<menu link="option=com_categories&amp;extension='.$varObject->com_main.'">'.$varObject->com_language_menu.'_MENU_CATEGORIES</menu>'.$varObject->return;
 			endif;
 			$install[] = $varObject->tab2.'</submenu>'.$varObject->return;
@@ -123,7 +123,7 @@ class Files
 		$install[] = $varObject->tab3.'<folder>models</folder>'.$varObject->return;
 
 		// start - added v.0.6.0
-		if($varObject->useDatabase):
+		if ($varObject->useDatabase):
 			$install[] = $varObject->tab3.'<folder>sql</folder>'.$varObject->return;
 			$install[] = $varObject->tab3.'<folder>tables</folder>'.$varObject->return;
 		endif;

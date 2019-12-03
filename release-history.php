@@ -225,7 +225,7 @@ foreach($items as $item){
 							</div><!-- /.tabbable -->
 
 							<?php
-							if(Access::notLoggedInOrPaid()) {
+							if (Access::notLoggedInOrPaid()) {
 							?>
 								<span class="hidden-phone">
 									<div class="page-ad well pull-right" style="margin-top: 15px;">

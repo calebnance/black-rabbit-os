@@ -3,7 +3,7 @@ $(document).ready(function(){
 	$('.show-more').click(function(){
 		var id = $(this).attr('id');
 		$('.show-more').removeClass('active');
-		if($('#' + id + '-more').is(':visible')){
+		if ($('#' + id + '-more').is(':visible')){
 			
 			$('#' + id + '-more').slideUp('slow');
 		} else {
@@ -20,7 +20,7 @@ $(document).ready(function(){
 		var url		= 'create.php';
 		var input	= $('<input>').attr('type', 'hidden').attr('name', 'cid').val(cid);
 		
-		if(action == 'edit') {
+		if (action == 'edit') {
 			var pid	= $(this).attr('pid');
 			var input2 = $('<input>').attr('type', 'hidden').attr('name', 'pid').val(pid);
 			url = 'index.php#start';
@@ -28,9 +28,9 @@ $(document).ready(function(){
 			$(formID).append($(input2));
 			$(formID).attr('action', url).attr('method','POST');
 			$(formID).submit();
-		} else if(action == 'download') {
+		} else if (action == 'download') {
 			var checkifmodal = $(this).attr('update');
-			if(checkifmodal){
+			if (checkifmodal){
 				var downloadcount = parseInt($('#' + checkifmodal).html());
 				downloadcount = downloadcount + 1;
 				$('#' + checkifmodal).html('').hide().html(downloadcount).fadeIn(1000);
@@ -40,9 +40,9 @@ $(document).ready(function(){
 			$(formID).append($(input2));
 			$(formID).attr('action', url).attr('method','POST');
 			$(formID).submit();
-		} else if(action == 'delete') {
+		} else if (action == 'delete') {
 			var agree = confirm('Are you sure? This will DELETE all zip files and history for this component!');
-			if(agree){
+			if (agree){
 				var input2	= $('<input>').attr('type', 'hidden').attr('name', 'task').val('cdelete');
 				$(formID).append($(input));
 				$(formID).append($(input2));

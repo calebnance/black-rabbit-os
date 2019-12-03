@@ -1,7 +1,7 @@
 <?php
 include('master.php');
 
-if(Access::notLoggedIn()) {
+if (Access::notLoggedIn()) {
 	header('Location: index.php?msg=7');
 	exit();
 } else {
@@ -31,7 +31,7 @@ $userAllModules		= $database->select('br_modules', '*', 'uid="'.$uid.'"', 'objec
 // Components
 $filesizetotal = 0;
 $componentversionstotal = 0;
-if(is_array($userAllComponents)):
+if (is_array($userAllComponents)):
 	foreach($userAllComponents as $userAllComponent):
 		$filesizetotal += $userAllComponent->filesize;
 		$componentversionstotal += 1;
@@ -44,7 +44,7 @@ $textComponents 	= $userComponentsCount > 1 || $userComponentsCount == 0 ? 'comp
 // Modules
 $filesizetotalmod = 0;
 $moduleversionstotal = 0;
-if(is_array($userAllModules)):
+if (is_array($userAllModules)):
 	foreach($userAllModules as $userAllModule):
 		$filesizetotalmod 		+= (int) $userAllModule->filesize;
 		$moduleversionstotal 	+= 1;
@@ -61,9 +61,9 @@ include('template/header.php');
 		<div class="row">
 			<div class="span12">
 				<h1><?php echo $greeting; ?>!</h1>
-				<?php if(Access::paid()): ?>
+				<?php if (Access::paid()): ?>
 					<p class="lead">You have <?php echo $userComponentsCount . ' ' . $textComponents; ?>
-					<?php if($userModulesCount): ?>
+					<?php if ($userModulesCount): ?>
 						<?php echo ' and ' . $userModulesCount . ' ' . $textModules; ?>
 					<?php endif; ?>
 					in your work area!</p>
@@ -73,7 +73,7 @@ include('template/header.php');
 
 		<div class="row">
 			<?php
-			if(Access::paid()):
+			if (Access::paid()):
 			?>
 			<div class="span6">
 				<div class="well">
@@ -107,7 +107,7 @@ include('template/header.php');
 			</div><!-- /.span6 -->
 			<?php
 			else:
-				if($_SESSION['emailv']):
+				if ($_SESSION['emailv']):
 				?>
 				<div class="span12">
 					<div class="well center">

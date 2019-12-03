@@ -3,8 +3,8 @@ class Msg
 {
 	public static function alert($msg, $type)
 	{
-        if(!empty($msg)) {
-            if(empty($type)) {
+        if (!empty($msg)) {
+            if (empty($type)) {
                 $type = 'success';
             }
             ?>

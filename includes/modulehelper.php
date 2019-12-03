@@ -8,13 +8,13 @@ class ModuleHelper
 		$phpheader .= '# '.$filename.' - '.$varObject->name.' Module'.$varObject->return;
 		$phpheader .= '# ------------------------------------------------------------------------'.$varObject->return;
 		$phpheader .= '# author    '.$varObject->author.$varObject->return;
-		if($varObject->copyright){
+		if ($varObject->copyright){
 		$phpheader .= '# copyright '.$varObject->copyright.$varObject->return;
 		}
-		if($varObject->license){
+		if ($varObject->license){
 		$phpheader .= '# license   '.$varObject->license.$varObject->return;
 		}
-		if($varObject->author_url){
+		if ($varObject->author_url){
 		$phpheader .= '# website   '.$varObject->author_url.$varObject->return;
 		}
 		$phpheader .= '-------------------------------------------------------------------------*/'.$varObject->return;
@@ -38,7 +38,7 @@ class ModuleHelper
 		$modulefile[]	= ModuleHelper::nodirectaccess($varObject);
 		$modulefile[]	= $varObject->return;
 		$modulefile[]	= '// Include the syndicate functions only once'.$varObject->return;
-		if($varObject->jversion == '3.0'){
+		if ($varObject->jversion == '3.0'){
 			$modulefile[]	= 'require_once __DIR__ . \'/helper.php\';'.$varObject->return;
 		} else {
 			$modulefile[]	= 'require_once( dirname(__FILE__).DS.\'helper.php\' );'.$varObject->return;

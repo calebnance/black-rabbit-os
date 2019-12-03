@@ -10,45 +10,45 @@ include('master.php');
 // get post
 $post = $_POST;
 
-if(!empty($post)):
+if (!empty($post)):
 	// Connect to database and open it
 	$database = new Database(HOST, DBNAME, DBUSER, DBPASS);
 
 	// validate all information
 	$good = true;
-	if($post['fname'] == ''):
+	if ($post['fname'] == ''):
 		$good = false;
 	endif;
-	if($post['lname'] == ''):
+	if ($post['lname'] == ''):
 		$good = false;
 	endif;
-	if($post['email'] == ''):
+	if ($post['email'] == ''):
 		$good = false;
 	endif;
-	if($post['password'] == ''):
+	if ($post['password'] == ''):
 		$good = false;
 	endif;
-	if($post['password2'] == ''):
+	if ($post['password2'] == ''):
 		$good = false;
 	endif;
-	if($post['country'] == ''):
+	if ($post['country'] == ''):
 		$good = false;
 	endif;
-	if($post['agree'] != 1):
+	if ($post['agree'] != 1):
 		$good = false;
 	endif;
-	if($post['password'] != $post['password2']):
+	if ($post['password'] != $post['password2']):
 		$good = false;
 	endif;
 
 	// if good, send e-mail and add to database
-	if($good):
+	if ($good):
 
 		// check if e-mail is already in use
 		$noemail = 0;
 		$noemail = $database->select('br_users', 'COUNT(DISTINCT email) as count', 'email="'.strtolower($post['email']).'"', 'object');
 		$noemail = $noemail[0]->count;
-		if($noemail == 0):
+		if ($noemail == 0):
 			$user = array();
 			$user['fname']					= ucwords(FileHelper::safeString($post['fname']));
 			$user['lname']					= ucwords(FileHelper::safeString($post['lname']));
