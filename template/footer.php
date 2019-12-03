@@ -30,7 +30,7 @@
 									<li <?php echo $terms; ?>><a href="terms.php"><i class="icon-briefcase"></i> Terms</a></li>
 									<li <?php echo $contact; ?>><a href="contact.php"><i class="icon-smile"></i> <?php echo $brtext->__('CONTACT'); ?></a></li>
 									<?php
-									if($loggedin):
+									if ($loggedin):
 									?>
 									<li <?php echo $dashboard; ?>><a href="dashboard.php"><i class="icon-dashboard"></i> <?php echo $brtext->__('DASHBOARD'); ?></a></li>
 									<li <?php echo $components; ?>><a href="components.php"><i class="icon-cogs"></i> <?php echo $brtext->__('COMPONENTS'); ?></a></li>
@@ -86,7 +86,7 @@
 					var $table	= $(this).closest('table');
 					var $id		= $table.attr('id');
 					$.each($table.find('tr'), function(i, item){
-						if(i != 0){
+						if (i != 0){
 							var f = i - 1;
 							$(item).find('td:first').html(i);
 							$(item).find('.removeField').attr('id', 'remove-' + i);
@@ -104,7 +104,7 @@
 			reSortable();
 
 			$('#show-standard').on('click', function(e){
-				if($('.add-some-standard').is(':visible')){
+				if ($('.add-some-standard').is(':visible')){
 					$(this).html('<i class="icon-chevron-down"></i> Show</small>');
 					$('.add-some-standard').slideUp(400);
 				} else {
@@ -114,7 +114,7 @@
 			});
 
 			$('#login-area-btn').click(function(){
-				if($('#login-area-form').is(':visible')){
+				if ($('#login-area-form').is(':visible')){
 					$('#login-area-form').hide('slide', {direction: 'left'}, 1000);
 					$(this).html('<i class="icon icon-chevron-right"></i>');
 				} else {
@@ -131,7 +131,7 @@
 				}, 1000);
 			});
 
-			<?php if($pageActive == 'home'){ ?>
+			<?php if ($pageActive == 'home'){ ?>
 			// Take tour
 			$('#take-tour').on('click', function(e){
 				e.preventDefault();
@@ -178,16 +178,16 @@
 		});
 		</script>
 
-		<?php if($pageActive == 'contact'): ?>
+		<?php if ($pageActive == 'contact'): ?>
 		<script src="js/mail.js<?php echo '?v=' . $br_version; ?>"></script>
-		<?php elseif($pageActive == 'signup'): ?>
+		<?php elseif ($pageActive == 'signup'): ?>
 		<script src="js/signup.js<?php echo '?v=' . $br_version; ?>"></script>
-		<?php elseif($pageActive == 'components'): ?>
+		<?php elseif ($pageActive == 'components'): ?>
 		<script src="js/components.js<?php echo '?v=' . $br_version; ?>"></script>
-		<?php elseif($pageActive == 'modules'): ?>
+		<?php elseif ($pageActive == 'modules'): ?>
 		<script src="js/modules.js<?php echo '?v=' . $br_version; ?>"></script>
 		<?php else: ?>
-		<script src="js/javascript.min.js<?php echo '?v=' . $br_version; ?>.1"></script>
+		<script src="js/javascript.js<?php echo '?v=' . $br_version; ?>.1"></script>
 		<?php endif; ?>
 	</body>
 </html>

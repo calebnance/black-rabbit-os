@@ -1,20 +1,20 @@
 <?php
 include('master.php');
 
-if(Access::loggedIn()) {
+if (Access::loggedIn()) {
 	FileHelper::checksession();
 }
 
 // check to see if there is even data to GET
-if(isset($_GET)):
+if (isset($_GET)):
 	// make sure its coming from paypal
-	if(array_key_exists('tx', $_GET)):
+	if (array_key_exists('tx', $_GET)):
 		$output = FileHelper::curl_request(PAYPAL_URL, "tx=".$_GET['tx']."&cmd=_notify-synch&at=".PAYPAL_PDT);
 
 		$lines = explode("\n", $output);
 		$keyarray = array();
 
-		if(strcmp($lines[0], 'SUCCESS') == 0):
+		if (strcmp($lines[0], 'SUCCESS') == 0):
 			for($i = 1; $i < count($lines); $i++):
 				list($key,$val)				= explode('=', $lines[$i]);
 				$keyarray[urldecode($key)]	= urldecode($val);
@@ -48,7 +48,7 @@ if(isset($_GET)):
 
 			// redirect to components, should be able to save them now!
 			header('location: components.php?msg=4');
-		elseif(strcmp($lines[0], 'FAIL') == 0):
+		elseif (strcmp($lines[0], 'FAIL') == 0):
 			header('location: components.php?msg=5');
 		endif;
 

@@ -64,13 +64,13 @@
 	}
 
 	$loggedin = 0;
-	if(Access::loggedIn()) {
+	if (Access::loggedIn()) {
 		$loggedin = 1;
 	}
 
 	// handle language
 	$usa = $germany = $spain = $france = '';
-	if(isset($_SESSION['language'])):
+	if (isset($_SESSION['language'])):
 		// handle language start
 		$brtext = new Translator($_SESSION['language']);
 		switch($_SESSION['language']){
@@ -126,7 +126,7 @@
 	<body>
 		<?php
 		// print at top of page
-	 	if(DEBUG):
+	 	if (DEBUG):
 	 		echo '<div class="debug">IN DEBUG MODE</div>';
 	 	endif;
 	 	?>
@@ -142,7 +142,7 @@
 							<li <?php echo $home; ?>><a href="index.php"><?php echo $brtext->__('HOME'); ?></a></li>
 							<li <?php echo $about; ?>><a href="about-joomla-component-creator.php"><?php echo $brtext->__('ABOUT'); ?></a></li>
 							<?php
-							if($loggedin) {
+							if ($loggedin) {
 							?>
 							<li><a href="logout.php"><?php echo $brtext->__('LOGOUT'); ?></a></li>
 							<?php
@@ -161,7 +161,7 @@
 							<li <?php echo $testimonials; ?>><a href="testimonials.php">Testimonials</a></li>
 							<li <?php echo $terms; ?>><a href="terms.php">Terms</a></li>
 							<?php
-							if($loggedin):
+							if ($loggedin):
 							?>
 							<li <?php echo $dashboard; ?>><a href="dashboard.php"><?php echo $brtext->__('DASHBOARD'); ?></a></li>
 							<li <?php echo $components; ?>><a href="components.php"><?php echo $brtext->__('COMPONENTS'); ?></a></li>
@@ -179,7 +179,7 @@
 							<li <?php echo $home; ?>><a href="index.php"><?php echo $brtext->__('HOME'); ?></a></li>
 							<li <?php echo $about; ?>><a href="about-joomla-component-creator.php"><?php echo $brtext->__('ABOUT'); ?></a></li>
 							<?php
-							if($loggedin) {
+							if ($loggedin) {
 							?>
 							<li><a href="logout.php"><?php echo $brtext->__('LOGOUT'); ?></a></li>
 							<?php
@@ -204,7 +204,7 @@
 								</ul>
 							</li>
 							<?php
-							if($loggedin):
+							if ($loggedin):
 							?>
 							<li class="dropdown<?php echo $manager; ?>">
 								<a class="dropdown-toggle" data-toggle="dropdown" href="#"><?php echo $brtext->__('MANAGER'); ?><b class="caret"></b></a>
@@ -242,7 +242,7 @@
 				</form>
 				<div class="clearfix"></div>
 				<?php
-				if(!$loggedin):
+				if (!$loggedin):
 				?>
 				<a href="#login" role="button" class="btn btn-info login" data-toggle="modal"><i class="icon icon-lock icon-white"></i> <?php echo $brtext->__('LOGIN'); ?></a>
 				<?php
@@ -251,7 +251,7 @@
 				<a href="logout.php" class="btn btn-info login"><i class="icon icon-off icon-white"></i> <?php echo $brtext->__('LOGOUT'); ?></a>
 				<?php
 				endif;
-				if(!$loggedin):
+				if (!$loggedin):
 				?>
 				<div id="login" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 					<div class="modal-header">

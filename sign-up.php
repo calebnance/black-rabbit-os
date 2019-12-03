@@ -8,7 +8,7 @@ $pageActiveBreadcrumb = '<li class="active">Sign-up</li>';
 include('template/header.php');
 
 $msg = '';
-if(isset($_REQUEST['msg'])) {
+if (isset($_REQUEST['msg'])) {
 	switch($_REQUEST['msg']) {
 		case "1":
 			$msg = 'Please make sure you fill in all required fields!';
@@ -370,7 +370,7 @@ if(isset($_REQUEST['msg'])) {
 			<div class="span12">
 				<div class="well">
 					<?php
-					if(Access::notLoggedInOrPaid()) {
+					if (Access::notLoggedInOrPaid()) {
 					?>
 						<span class="hidden-phone">
 							<div class="page-ad pull-right">

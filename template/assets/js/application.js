@@ -40,7 +40,7 @@ jQuery(document).ready(function ($) {
   $('.accordion-group .accordion-toggle').click(function() {
       var parent = $(this).parents('.accordion-group');
       parent.siblings().removeClass('active').find('.accordion-body').stop(true,true).hide(300);
-      if(!parent.hasClass('active')) {
+      if (!parent.hasClass('active')) {
         parent.addClass('active').find('.accordion-body').stop(true,true).fadeIn(400);
       } else {
         parent.removeClass('active').find('.accordion-body').stop(true,true).hide(200);

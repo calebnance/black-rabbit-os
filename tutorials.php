@@ -17,7 +17,7 @@ include('template/header.php');
 					<iframe width="100%" height="400" src="http://www.youtube.com/embed/AY40ibGhMs4" frameborder="0" allowfullscreen></iframe>
 				</div><!-- /.well -->
 				<?php
-				if(Access::notLoggedInOrPaid()) {
+				if (Access::notLoggedInOrPaid()) {
 				?>
 					<span class="hidden-phone">
 						<div class="row-fluid">

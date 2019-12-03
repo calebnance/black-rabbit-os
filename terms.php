@@ -13,7 +13,7 @@ include('template/header.php');
 			<div class="span12">
 				<h1>Terms</h1>
 				<?php
-				if(Access::notLoggedInOrPaid()) {
+				if (Access::notLoggedInOrPaid()) {
 				?>
 					<span class="hidden-phone">
 						<div class="page-ad well pull-right">

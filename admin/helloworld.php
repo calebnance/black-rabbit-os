@@ -1,10 +1,10 @@
 <?php
 	include('../master.php');
 
-	if(!isset($_SESSION['logged'])):
+	if (!isset($_SESSION['logged'])) {
 		header('location:login.php');
 		exit();
-	endif;
+	}
 
 	// Database connect
 	$database = new Database(HOST, DBNAME, DBUSER, DBPASS);
@@ -20,31 +20,32 @@
 	$joomla25Downloads = 0;
 	$joomla30Downloads = 0;
 
-	foreach($hellowords as $row):
+	foreach($hellowords as $row) {
 		$totalDownloads = $totalDownloads + $row->downloadcount;
-		if($row->jversion == '2.5'):
+		if ($row->jversion == '2.5') {
 			$joomla25Downloads = $joomla25Downloads + $row->downloadcount;
-		endif;
-		if($row->jversion == '3.0'):
+		}
+
+		if ($row->jversion == '3.0') {
 			$joomla30Downloads = $joomla30Downloads + $row->downloadcount;
-		endif;
-	endforeach;
+		}
+	}
 
 	$hellowords25 = $database->select('br_helloworlds', '*', 'jversion = "2.5"', 'object');
 	$joomla25 = array();
-	foreach($hellowords25 as $row):
+	foreach($hellowords25 as $row) {
 		$joomla25['25'][] = $row->downloadcount;
 		$joomla25['brv'][] = $row->version;
 		$joomla25['last'][] = $row->lastdownloaded;
-	endforeach;
+	}
 
 	$hellowords30 = $database->select('br_helloworlds', '*', 'jversion = "3.0"', 'object');
 	$joomla30 = array();
-	foreach($hellowords30 as $row):
+	foreach($hellowords30 as $row) {
 		$joomla30['30'][] = $row->downloadcount;
 		$joomla30['brv'][] = $row->version;
 		$joomla30['last'][] = $row->lastdownloaded;
-	endforeach;
+	}
 
 	$linesCount = isset($joomla25['25']) ? count($joomla25['25']) : 0;
 
