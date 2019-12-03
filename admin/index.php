@@ -1,7 +1,7 @@
 <?php
 include('../master.php');
 
-if(!isset($_SESSION['logged'])) {
+if (!isset($_SESSION['logged'])) {
 	header('location:login.php');
 	exit();
 }
@@ -61,11 +61,11 @@ $users_money = 0;
 $users_validated = 0;
 
 foreach($usersResult as $row) {
-	if($row->paypal_payment_status) {
+	if ($row->paypal_payment_status) {
 		$users_paid = $users_paid + 1;
 		$users_money = $users_money + (int) $row->paypal_payment_amount;
 	}
-	if($row->email_validated) {
+	if ($row->email_validated) {
 		$users_validated = $users_validated + 1;
 	}
 }

@@ -1,7 +1,7 @@
 <?php
 include('../master.php');
 
-if(!isset($_SESSION['logged'])) {
+if (!isset($_SESSION['logged'])) {
 	header('location:login.php');
 	exit();
 }
@@ -40,7 +40,7 @@ include('template/menu.php');
 						<td><?php echo $user->language; ?></td>
 						<td>
 						<?php
-						if($user->paypal_payment_status) {
+						if ($user->paypal_payment_status) {
 							echo '$ ' . $user->paypal_payment_amount;
 						}
 						?>

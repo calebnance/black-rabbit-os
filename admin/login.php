@@ -4,7 +4,7 @@ include('../master.php');
 $database = new Database(HOST, DBNAME, DBUSER, DBPASS);
 $adminCheck = $database->select('br_admins', '*', '1=1', 'object');
 
-if(!$adminCheck):
+if (!$adminCheck):
 	header('location:welcome.php');
 	exit();
 endif;
@@ -12,10 +12,10 @@ endif;
 $msg = $msgType = '';
 $post = $_POST;
 
-if($post):
-	if($post['username'] && $post['password']):
+if ($post):
+	if ($post['username'] && $post['password']):
 		$result = $database->select('br_admins', '*', 'username="'.$post['username'].'" AND password="'.md5($post['password']).'"', 'object');
-		if($result):
+		if ($result):
 			$loggedin_date = date("Y-m-d H:i:s");
 			$user_update = array(
 				'last_login' => $loggedin_date
@@ -35,7 +35,7 @@ if($post):
 endif;
 
 // check for messages
-if(isset($_REQUEST['msg'])){
+if (isset($_REQUEST['msg'])){
 	switch($_REQUEST['msg']) {
 		case '3':
 			$msg = 'You can now login!';

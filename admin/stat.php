@@ -4,7 +4,7 @@
 	
 	session_start();
 	// store session data
-	if(!isset($_SESSION['logged'])):
+	if (!isset($_SESSION['logged'])):
 		header('location:login.php');
 		exit();
 	endif;
@@ -20,7 +20,7 @@
 	$activeStats = 'class="active"';
 	
 	// Get page ID
-	if($_REQUEST['id']):
+	if ($_REQUEST['id']):
 		$pageID = $_REQUEST['id'];
 	else:
 		header('location:stats.php');

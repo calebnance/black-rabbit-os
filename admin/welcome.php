@@ -6,7 +6,7 @@
 	$database = new Database(HOST, DBNAME, DBUSER, DBPASS);
 	$adminCheck = $database->select('br_admins', '*', '1=1', 'object');
 
-	if($adminCheck):
+	if ($adminCheck):
 		header('location:login.php');
 		exit();
 	endif;
@@ -14,11 +14,11 @@
 	$msg = $msgType = '';
 	$post = $_POST;
 
-	if($post):
-		if($post['password'] != $post['cpassword']):
+	if ($post):
+		if ($post['password'] != $post['cpassword']):
 			$msg = 'Passwords do not match!';
 			$msgType = 'error';
-		elseif($post['username'] && $post['password'] && $post['cpassword']):
+		elseif ($post['username'] && $post['password'] && $post['cpassword']):
 			$posted_date = date("Y-m-d H:i:s");
 			$admin_record = [
 				'username' => $post['username'],
@@ -27,7 +27,7 @@
 			];
 			$record_response = $database->insert('br_admins', $admin_record);
 
-			if($record_response) {
+			if ($record_response) {
 				// success
 				header('location:login.php?msg=3');
 			} else {

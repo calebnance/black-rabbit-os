@@ -1,7 +1,7 @@
 <?php
 include('master.php');
 
-if(Access::notLoggedIn()) {
+if (Access::notLoggedIn()) {
 	header('Location: index.php?msg=7');
 	exit();
 } else {
@@ -20,7 +20,7 @@ $textComponents = $userComponentsCount > 1 || $userComponentsCount == 0 ? 'compo
 
 $msg = $msgType = '';
 
-if(isset($_REQUEST['msg'])) {
+if (isset($_REQUEST['msg'])) {
 	switch($_REQUEST['msg']) {
 		case "1":
 		default:
@@ -55,7 +55,7 @@ include('template/header.php');
 				?>
 				<h1><i class="icon-cogs"></i> My Components</h1>
 				<?php
-				if(Access::paid()) {
+				if (Access::paid()) {
 				?>
 					<p class="lead">You have <?php echo $userComponentsCount . ' ' . $textComponents; ?> in your work area!</p>
 				<?php
@@ -65,7 +65,7 @@ include('template/header.php');
 		</div><!-- /.row -->
 		<div class="row">
 			<?php
-			if(Access::paid()):
+			if (Access::paid()):
 			?>
 			<div id="components-list" class="span12">
 				<p>
@@ -73,7 +73,7 @@ include('template/header.php');
 					<a href="index.php#start" class="btn btn-success pull-right"><i class="icon icon-white icon-plus"></i> Create Component</a>
 				</p>
 				<p class="clearfix"></p>
-				<?php if($userComponents): ?>
+				<?php if ($userComponents): ?>
 					<table class="table table-bordered table-striped table-hover">
 						<thead>
 							<tr>
@@ -94,7 +94,7 @@ include('template/header.php');
 							$userComponentHistory = $database->select('br_components', '*', 'uid="'.$uid.'" AND cidparent="'.$userComponent->id.'"', 'object');
 							$date_created	= $userComponent->date_created;
 							$date_modified	= '';
-							if($userComponentHistory):
+							if ($userComponentHistory):
 								$compCount 		= count($userComponentHistory) - 1;
 								$userComponent	= $userComponentHistory[$compCount];
 								$date_modified	= $userComponent->date_created;
@@ -104,10 +104,10 @@ include('template/header.php');
 							$file_size		= FileHelper::formatBytes($userComponent->filesize);
 							$views			= $database->select('br_components_views', '*', 'cid="'.$userComponent->id.'"', 'object');
 							$views_count	= count($views);
-							if($userComponent->category_view):
+							if ($userComponent->category_view):
 								$views_count += 1;
 							endif;
-							if($userComponent->tags_view):
+							if ($userComponent->tags_view):
 								$views_count += 1;
 							endif;
 							switch($userComponent->jversion){
@@ -207,24 +207,24 @@ include('template/header.php');
 										</div><!-- /#modal-<?php echo $userComponent->id; ?> -->
 										<p><strong>Date Created:</strong> <?php echo $date_created; ?></p>
 										<?php
-										if($date_modified):
+										if ($date_modified):
 										?>
 										<p><strong>Date Modified:</strong> <?php echo $date_modified; ?></p>
 										<?php
 										endif;
 
-										if($userComponent->description):
+										if ($userComponent->description):
 										?>
 											<p><strong>Description:</strong></p>
 											<p><?php echo $userComponent->description; ?></p>
 										<?php
 										endif;
 
-										if($views):
+										if ($views):
 										?>
 										<p><strong>Views (<?php echo $views_count; ?>)</strong></p>
 										<?php
-											if($userComponent->category_view):
+											if ($userComponent->category_view):
 											?>
 											<p>
 												categories<br />
@@ -233,7 +233,7 @@ include('template/header.php');
 											<?php
 											endif;
 
-											if($userComponent->tags_view):
+											if ($userComponent->tags_view):
 											?>
 											<p>
 												tags<br />
@@ -250,7 +250,7 @@ include('template/header.php');
 												<br />
 												&not; <?php echo $view->singular; ?>
 												<?php
-												if($view->fields):
+												if ($view->fields):
 												?>
 													<br />
 													&not; &not;<?php echo ' total fields: <strong>' . count($view->fields['name']) . '</strong>'; ?>
@@ -285,7 +285,7 @@ include('template/header.php');
 			</div><!-- /.span12 -->
 			<?php
 			else:
-				if($_SESSION['emailv']):
+				if ($_SESSION['emailv']):
 				?>
 					<div class="span12">
 						<div class="well center">

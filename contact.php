@@ -12,6 +12,7 @@ include('template/header.php');
 		<div class="row">
 			<div class="span12">
 				<h1>Contact</h1>
+
 				<form action="send.php" method="post" id="contact-form" class="form-horizontal">
 					<div class="control-group">
 						<label class="control-label" for="name">Name *</label>
@@ -51,9 +52,10 @@ include('template/header.php');
 						<button type="submit" class="btn btn-primary">Submit</button>
 					</div>
 				</form>
-                <?php
-                if(Access::notLoggedInOrPaid()) {
-                ?>
+
+        <?php
+        if (Access::notLoggedInOrPaid()) {
+        ?>
 					<span class="hidden-phone">
 						<div class="well page-ad pull-right">
 							<img src="https://via.placeholder.com/250" />
@@ -62,16 +64,19 @@ include('template/header.php');
 						</div><!-- /.page-ad -->
 					</span>
 				<?php
-                }
-                ?>
+        }
+        ?>
+
 				<h3>Like this tool? Show your appreciation</h3>
 				<p>Thank you for all of your support!!</p>
+
 				<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 					<input type="hidden" name="cmd" value="_s-xclick">
 					<input type="hidden" name="hosted_button_id" value="TXCX4DUEAHC6U">
 					<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
 					<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
 				</form>
+
 			</div><!-- /.span12 -->
 		</div><!-- /.row -->
 	</div><!-- /.container -->

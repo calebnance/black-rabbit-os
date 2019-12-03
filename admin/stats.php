@@ -1,7 +1,7 @@
 <?php
 	include('../master.php');
 
-	if(!isset($_SESSION['logged'])):
+	if (!isset($_SESSION['logged'])):
 		header('location:login.php');
 		exit();
 	endif;
@@ -18,16 +18,16 @@
 	//$limit = 10;
 	$limitSet = 10;
 
-	if(isset($_REQUEST['p'])) {
+	if (isset($_REQUEST['p'])) {
 		$currentpage = $_REQUEST['p'];
 	}
 
-	if(isset($_REQUEST['start'])) {
+	if (isset($_REQUEST['start'])) {
 		$start = $_REQUEST['start'];
 	}
 
 	/*
-	if($_REQUEST['limit']):
+	if ($_REQUEST['limit']):
 		$limit = $_REQUEST['limit'];
 	endif;
 	*/
@@ -128,7 +128,7 @@
 					</table>
 
 					<?php
-					if($totalPackages > 10):
+					if ($totalPackages > 10):
 						$totalpages = 1;
 						for ($i = 1; $i <= $totalPackages; $i++):
 							$i = $i + 9;
@@ -137,7 +137,7 @@
 						$laststart = $i - 11;
 						$totalpages = $totalpages - 1;
 
-						if($totalPackages > 10)
+						if ($totalPackages > 10)
 						{
 							$firstActive = ($currentpage == 1) ? " class=\"active\"" : "";
 							$lastActive = ($currentpage == $totalpages) ? " class=\"active\"" : "";
@@ -152,9 +152,9 @@
 								$lower = $currentpage - 3;
 								$upper = $currentpage + 3;
 								$class = ($page == $currentpage) ? " class=\"active\"" : "";
-								if(($page > $lower && $page < $upper) || $page < 2 || $page > ($totalpages - 1))
+								if (($page > $lower && $page < $upper) || $page < 2 || $page > ($totalpages - 1))
 								{
-									if($last_done_page + 1 != $page) $pagination .= '<li class="disabled"><span>...</span></li>';
+									if ($last_done_page + 1 != $page) $pagination .= '<li class="disabled"><span>...</span></li>';
 									$pagination.='<li' . $class . '><a href="stats.php?p=' . $page . '&start=' . $i . '">' . $page . '</a></li>';
 									$last_done_page = $page;
 								}
@@ -167,7 +167,7 @@
 						}
 
 						$last_done_page = 0;
-						if($totalPackages > 10)
+						if ($totalPackages > 10)
 						{
 							$firstActive = ($currentpage == 1) ? " class=\"active\"" : "";
 							$lastActive = ($currentpage == $totalpages) ? " class=\"active\"" : "";
@@ -182,9 +182,9 @@
 								$lower = $currentpage - 3;
 								$upper = $currentpage + 3;
 								$class = ($page == $currentpage) ? " class=\"active\"" : "";
-								if(($page > $lower && $page < $upper) || $page < 2 || $page > ($totalpages - 1))
+								if (($page > $lower && $page < $upper) || $page < 2 || $page > ($totalpages - 1))
 								{
-									if($last_done_page + 1 != $page) $pagination .= '<li class="disabled"><span>...</span></li>';
+									if ($last_done_page + 1 != $page) $pagination .= '<li class="disabled"><span>...</span></li>';
 									$pagination.='<li' . $class . '><a href="stats.php?p=' . $page . '&start=' . $i . '">' . $page . '</a></li>';
 									$last_done_page = $page;
 								}
