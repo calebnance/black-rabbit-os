@@ -65,7 +65,7 @@
 			
 			$blurred = $image->applyConvolution($matrix, 16, 0);
 			
-			if($threshold > 0) {
+			if ($threshold > 0) {
 				// Calculate the difference between the blurred pixels and the original
 				// and set the pixels
 				for ($x = 0; $x < $image->getWidth(); $x++) {
@@ -115,14 +115,14 @@
 						$bBlur = $rgbBlur["blue"];
 						
 						$rNew = ($amount * ($rOrig - $rBlur)) + $rOrig;
-							if($rNew>255){$rNew=255;}
-							elseif($rNew<0){$rNew=0;}
+							if ($rNew>255){$rNew=255;}
+							elseif ($rNew<0){$rNew=0;}
 						$gNew = ($amount * ($gOrig - $gBlur)) + $gOrig;
-							if($gNew>255){$gNew=255;}
-							elseif($gNew<0){$gNew=0;}
+							if ($gNew>255){$gNew=255;}
+							elseif ($gNew<0){$gNew=0;}
 						$bNew = ($amount * ($bOrig - $bBlur)) + $bOrig;
-							if($bNew>255){$bNew=255;}
-							elseif($bNew<0){$bNew=0;}
+							if ($bNew>255){$bNew=255;}
+							elseif ($bNew<0){$bNew=0;}
 						$rgbNew = array("red" => $rNew, "green" => $gNew, "blue" => $bNew, "alpha" => 0);
 						
 						$image->setRGBAt($x, $y, $rgbNew);

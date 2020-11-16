@@ -31,7 +31,7 @@
 	{
 		function load($uri)
 		{
-			return @imagecreatefromgif($uri);
+			return @imagecreatefromgif ($uri);
 		}
 		
 		function save($handle, $uri = null)
@@ -43,8 +43,8 @@
 			// error, of course). And the same thing works fine for imagepng() and 
 			// imagejpeg(). It's a bug! ;)
 			if ($uri)
-				return imagegif($handle, $uri);
+				return imagegif ($handle, $uri);
 			else
-				return imagegif($handle);
+				return imagegif ($handle);
 		}
 	}
