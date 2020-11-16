@@ -4,7 +4,7 @@ class FileHelper
  	public static function filecheck($file)
  	{
  		// check to make sure we want to create, not in test mode
- 		if(CREATE_PACKAGE):
+ 		if (CREATE_PACKAGE):
 	 		if (!file_exists($file)):
 				fopen($file, 'w') or die('can\'t open file');
 				//fclose($file);
@@ -15,7 +15,7 @@ class FileHelper
  	public static function foldercheck($folder)
  	{
  		// check to make sure we want to create, not in test mode
- 		if(CREATE_PACKAGE):
+ 		if (CREATE_PACKAGE):
 		 	if (!file_exists($folder)):
 				mkdir($folder, 0700);
 			endif;
@@ -26,17 +26,22 @@ class FileHelper
  	{
  		$line_count = 0;
 
+    // no lines in this file
+    if (!is_array($lines)) {
+      return $line_count;
+    }
+
  		// check to make sure we want to create, not in test mode
- 		if(CREATE_PACKAGE):
+ 		if (CREATE_PACKAGE):
 	 		FileHelper::filecheck($filepath);
 
 	 		$filepath = fopen($filepath, 'w+') or die('can\'t open file');
-	 		if($lines):
+	 		if ($lines) {
 				foreach($lines as $line):
 					fwrite($filepath, $line);
 					$line_count++;
 				endforeach;
-			endif;
+			}
 			fclose($filepath);
 		else:
 			foreach($lines as $line):
@@ -61,19 +66,19 @@ class FileHelper
  	{
  		$filesreturn = array();
  		// if the zip file already exists and overwrite is false, return false
- 		if(file_exists($destination) && !$overwrite) {
+ 		if (file_exists($destination) && !$overwrite) {
             return false;
         }
 
  		// vars
  		$valid_files = array();
  		// if files were passed in...
- 		if(is_array($files)) {
+ 		if (is_array($files)) {
  			// cycle through each file
  			foreach($files as $file) {
- 				if(CREATE_PACKAGE):
+ 				if (CREATE_PACKAGE):
 	 				// make sure the file exists
-	 				if(file_exists($file)):
+	 				if (file_exists($file)):
 	 					$valid_files[] = $file;
 	 				endif;
 	 			else:
@@ -83,20 +88,27 @@ class FileHelper
  		}
 
  		// if we have good files...
- 		if(count($valid_files)) {
+ 		if (count($valid_files)) {
+      sleep(1);
  			// create the archive
  			$zip = new ZipArchive();
- 			if($zip->open($destination,$overwrite ? ZIPARCHIVE::OVERWRITE : ZIPARCHIVE::CREATE) !== true) {
-                return false;
-            }
+
+ 			if ($zip->open($destination, ZipArchive::OVERWRITE | ZipArchive::CREATE) !== true) {
+        echo 'can not open';
+        return false;
+      }
 
  			// add the files
  			foreach($valid_files as $file) {
  				$local = str_replace($base, '', $file);
  				$filesreturn[] = $local;
+
  				// check to make sure we want to create, not in test mode
- 				if(CREATE_PACKAGE):
- 					$zip->addFile($file,$local);
+ 				if (CREATE_PACKAGE):
+          // only add files that need to be added (no directories)
+          if (file_exists($file) && is_file($file)) {
+            $zip->addFile($file, $local);
+          }
  				endif;
  			}
 
@@ -267,14 +279,14 @@ class FileHelper
 		$user = array();
 
 		// stamp if this is the first time logging in
-		if($user_info[0]['date_logged_in'] == '0000-00-00 00:00:00'):
+		if ($user_info[0]['date_logged_in'] == '0000-00-00 00:00:00'):
 			$user['date_logged_in'] = $date;
 		endif;
 		$user['date_last_logged_in'] = $date;
 		$database->update('br_users', $user, 'id='.$user_info[0]['id']);
 
 		// if they have a language already set, lets use it!
-		if(!empty($user_info[0]['language'])):
+		if (!empty($user_info[0]['language'])):
 			$_SESSION['language']	= $user_info[0]['language'];
 		endif;
 
@@ -283,14 +295,14 @@ class FileHelper
 
 	public static function checksession()
 	{
-		if(Access::loggedIn()){
+		if (Access::loggedIn()){
 			FileHelper::timeoutsession();
 		}
 	}
 
 	public static function timeoutsession()
 	{
-		if($_SESSION['timeout'] + 120 * 60 < time()) {
+		if ($_SESSION['timeout'] + 120 * 60 < time()) {
             // 2 hours of inactive time
 			session_destroy();
 
@@ -312,15 +324,15 @@ class FileHelper
 		$_SESSION['language'] = $language;
 
 		// check if they are logged in
-		if(Access::loggedIn()) {
+		if (Access::loggedIn()) {
 			// make sure we have an id to work with
-			if(isset($_SESSION['uid'])) {
+			if (isset($_SESSION['uid'])) {
 				// connect to database
 				$database = new Database(HOST, DBNAME, DBUSER, DBPASS);
 				// get user information for add or update
 				$user_info = $database->select('br_users', '*', 'id="'.$_SESSION['uid'].'"', 'object');
 				// if empty
-				if(empty($user_info[0]->language) || $user_info[0]->language != $language) {
+				if (empty($user_info[0]->language) || $user_info[0]->language != $language) {
 					$data = array('language' => $language);
 					$database->update('br_users', $data, 'id="'.$_SESSION['uid'].'"');
 				}
@@ -355,7 +367,7 @@ class FileHelper
 		// Send mail
 		mail($to, $subject, $msg, $headers);
 
-		if($to_notify){
+		if ($to_notify){
 			$headers  = 'MIME-Version: 1.0' . "\r\n";
 			$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 			//$headers .= 'To: '.$to_notify.'' . "\r\n";

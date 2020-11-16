@@ -7,7 +7,7 @@ $create_package = true;
 define('LIVE', $live);
 
 // Both
-if(LIVE) {
+if (LIVE) {
 	$host = 'localhost';
 	$db_user = '';
 	$db_pass = '';
@@ -27,6 +27,12 @@ if(LIVE) {
 	$db_name = '';
 	$email_to = '';
 	$email_from = '';
+
+	$db_user = 'root';
+	$db_pass = 'e3_#dRtLc23!2bn-8';
+	$db_name = 'blackrabbit_os_2018';
+	$email_to = 'calebnance@gmail.com';
+	$email_from = 'admin@calebnance.com';
 	$base_url	= 'http://black-rabbit-os/';
 
 	// paypal

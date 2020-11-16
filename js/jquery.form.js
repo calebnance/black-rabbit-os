@@ -281,7 +281,7 @@ $.fn.ajaxSubmit = function(options) {
             var beforeSend = s.beforeSend;
             s.beforeSend = function(xhr, o) {
                 o.data = formdata;
-                if(beforeSend)
+                if (beforeSend)
                     beforeSend.call(this, xhr, o);
         };
         return $.ajax(s);
@@ -456,7 +456,7 @@ $.fn.ajaxSubmit = function(options) {
                     for (var n in s.extraData) {
                         if (s.extraData.hasOwnProperty(n)) {
                            // if using the $.param format that allows for multiple values with the same name
-                           if($.isPlainObject(s.extraData[n]) && s.extraData[n].hasOwnProperty('name') && s.extraData[n].hasOwnProperty('value')) {
+                           if ($.isPlainObject(s.extraData[n]) && s.extraData[n].hasOwnProperty('name') && s.extraData[n].hasOwnProperty('value')) {
                                extraInputs.push(
                                $('<input type="hidden" name="'+s.extraData[n].name+'">').val(s.extraData[n].value)
                                    .appendTo(form)[0]);
@@ -490,7 +490,7 @@ $.fn.ajaxSubmit = function(options) {
             finally {
                 // reset attrs and remove "extra" input elements
                 form.setAttribute('action',a);
-                if(t) {
+                if (t) {
                     form.setAttribute('target', t);
                 } else {
                     $form.removeAttr('target');
@@ -838,7 +838,7 @@ $.fn.formToArray = function(semantic, elements) {
 
         if (semantic && form.clk && el.type == "image") {
             // handle image inputs on the fly when semantic == true
-            if(!el.disabled && form.clk == el) {
+            if (!el.disabled && form.clk == el) {
                 a.push({name: n, value: $(el).val(), type: el.type });
                 a.push({name: n+'.x', value: form.clk_x}, {name: n+'.y', value: form.clk_y});
             }

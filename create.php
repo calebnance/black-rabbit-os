@@ -4,105 +4,105 @@
  * by Caleb Nance
  */
 
-	session_start();
+session_start();
 
-	// Display errors on localhost
-	$whitelist = array('locathost');
-	if(!in_array($_SERVER['SERVER_NAME'], $whitelist)){
-		//this is localhost!
-		ini_set('display_errors', 1);
-		//error_reporting(E_ALL);
-		error_reporting(E_ALL ^ E_NOTICE);
+// Display errors on localhost
+$whitelist = array('locathost');
+if (!in_array($_SERVER['SERVER_NAME'], $whitelist)){
+	//this is localhost!
+	ini_set('display_errors', 1);
+	//error_reporting(E_ALL);
+	error_reporting(E_ALL ^ E_NOTICE);
+}
+
+/*
+ *	Variables
+ */
+$post = $_POST;
+$task = $post['task'];
+
+// Posted data
+$posted_date = date('Y-m-d H:i:s');
+
+/*
+ *	Include Config and Database
+ */
+require_once('master.php');
+
+// Connect to database
+$database = new Database(HOST, DBNAME, DBUSER, DBPASS);
+
+/**
+*	Lets set the language session!
+*
+*/
+if ($task == 'setlanguage') {
+	Filehelper::languagesession($post['submit'], $post['return']);
+	exit();
+}
+
+// Set Black Rabbit Version
+$br_version	= '0.0.0';
+if (isset($post['brversion'])) {
+	$br_version	= $post['brversion'];
+}
+
+if (DEBUG) {
+	// $database->truncate('br_components');
+	// $database->truncate('br_components_views');
+	// $database->truncate('br_components_images');
+	// $database->truncate('br_components_version_history');
+	// $database->truncate('br_packages');
+	// exit();
+	//echo '<div class="debug">Databases could have been truncated!!! Add this feature somewhere, Caleb?</div>';
+}
+
+/*
+ *	Download helloworld task
+ */
+if ($task == 'download') {
+
+	$helloworldscheck = $database->select('br_helloworlds', '*', 'version="'.$post['version'].'" AND jversion="'.$post['jversion'].'"', 'object');
+
+	// is it in the database?
+	if (count($helloworldscheck) > 0) {
+		$downloadcount = $helloworldscheck[0]->downloadcount + 1;
+		$helloworlds_record = array (
+			'downloadcount' => $downloadcount,
+			'lastdownloaded' => $posted_date
+		);
+		$database->update('br_helloworlds', $helloworlds_record, 'version="'.$post['version'].'" AND jversion="'.$post['jversion'].'"');
+	} else {
+		$helloworlds_record = array (
+			'version' => $post['version'],
+			'jversion' => $post['jversion'],
+			'downloadcount' => 1,
+			'lastdownloaded' => $posted_date
+		);
+		$database->insert('br_helloworlds', $helloworlds_record);
 	}
 
-	/*
-	 *	Variables
-	 */
-	$post		= $_POST;
-	$task		= $post['task'];
-
-	// Posted data
-	$posted_date = date('Y-m-d H:i:s');
-
-	/*
-	 *	Include Config and Database
-	 */
-	require_once('master.php');
-
-	// Connect to database
-	$database = new Database(HOST, DBNAME, DBUSER, DBPASS);
-
-	/**
-	 *	Lets set the language session!
-	 *
-	 */
-	if($task == 'setlanguage'):
-		Filehelper::languagesession($post['submit'], $post['return']);
-		exit();
-	endif;
-
-	// Set Black Rabbit Version
-	$br_version	= '0.0.0';
-	if(isset($post['brversion'])) {
-		$br_version	= $post['brversion'];
+	// Which package do they want to download?
+	if ($post['jversion'] == '2.5') {
+		header('location: examples/'.LCOMP25);
+	} elseif ($post['jversion'] == '3.0') {
+		header('location: examples/'.LCOMP30);
+	} elseif ($post['jversion'] == '3.2') {
+		header('location: examples/'.LCOMP32);
 	}
 
-	if(DEBUG):
-		/*
-		$database->truncate('br_components');
-		$database->truncate('br_components_views');
-		$database->truncate('br_components_images');
-		$database->truncate('br_components_version_history');
-		*/
-		//echo '<div class="debug">Databases could have been truncated!!! Add this feature somewhere, Caleb?</div>';
-	endif;
-
-	/*
-	 *	Download helloworld task
-	 */
-	if($task == 'download'):
-
-		$helloworldscheck = $database->select('br_helloworlds', '*', 'version="'.$post['version'].'" AND jversion="'.$post['jversion'].'"', 'object');
-
-		// is it in the database?
-		if(count($helloworldscheck) > 0):
-			$downloadcount = $helloworldscheck[0]->downloadcount + 1;
-			$helloworlds_record = array (
-				'downloadcount' => $downloadcount,
-				'lastdownloaded' => $posted_date
-			);
-			$database->update('br_helloworlds', $helloworlds_record, 'version="'.$post['version'].'" AND jversion="'.$post['jversion'].'"');
-		else:
-			$helloworlds_record = array (
-				'version' => $post['version'],
-				'jversion' => $post['jversion'],
-				'downloadcount' => 1,
-				'lastdownloaded' => $posted_date
-			);
-			$database->insert('br_helloworlds', $helloworlds_record);
-		endif;
-
-		// Which package do they want to download?
-		if($post['jversion'] == '2.5'):
-			header('location: examples/'.LCOMP25);
-		elseif($post['jversion'] == '3.0'):
-			header('location: examples/'.LCOMP30);
-		elseif($post['jversion'] == '3.2'):
-			header('location: examples/'.LCOMP32);
-		endif;
-
-		exit();
-	endif;
+	exit();
+}
 
 	/*
 	 *	Download allfields task
 	 */
-	if($task == 'download_allfields'):
+	if ($task == 'download_allfields'):
 
 		$allfieldscheck = $database->select('br_allfields', '*', 'version="'.$post['version'].'" AND jversion="'.$post['jversion'].'"', 'object');
 
 		// is it in the database?
-		if(count($allfieldscheck) > 0):
+		if (count($allfieldscheck) > 0):
 			$downloadcount = $allfieldscheck[0]->downloadcount + 1;
 			$allfields_record = array (
 				'downloadcount' => $downloadcount,
@@ -120,11 +120,11 @@
 		endif;
 
 		// Which package do they want to download?
-		if($post['jversion'] == '2.5'):
+		if ($post['jversion'] == '2.5'):
 			header('location: examples/'.LAFCOMP25);
-		elseif($post['jversion'] == '3.0'):
+		elseif ($post['jversion'] == '3.0'):
 			header('location: examples/'.LAFCOMP30);
-		elseif($post['jversion'] == '3.2'):
+		elseif ($post['jversion'] == '3.2'):
 			header('location: examples/'.LAFCOMP32);
 		endif;
 
@@ -134,11 +134,11 @@
 	/*
 	 *	Component download and record it in the database
 	 */
-	if($task == 'cdownload'):
+	if ($task == 'cdownload'):
 		session_start();
-		if($post['cid'] && $_SESSION['uid']):
+		if ($post['cid'] && $_SESSION['uid']):
 			$getComponent = $database->select('br_components', '*', 'id="'.$post['cid'].'" AND uid="'.$_SESSION['uid'].'"', 'object');
-			if($getComponent):
+			if ($getComponent):
 				// create the path to the file and save the download counter
 				$getComponent			= $getComponent[0];
 				$componentDownload		= 'users' . DS . $getComponent->uid . DS . $getComponent->id . DS . $getComponent->c_file_name;
@@ -162,28 +162,28 @@
 	 *	Lets delete managed components that the user does not want anymore
 	 *	from the file system and the database.. delete all history of the component!
 	 */
-	if($task == 'cdelete'):
+	if ($task == 'cdelete'):
 		session_start();
-		if($post['cid'] && $_SESSION['uid']):
+		if ($post['cid'] && $_SESSION['uid']):
 			// Get all references first of this component for the user
 			$getComponent		= $database->select('br_components', '*', 'id="'.$post['cid'].'" AND uid="'.$_SESSION['uid'].'"', 'object');
 			$getComponentViews	= $database->select('br_components_views', '*', 'cid="'.$post['cid'].'"', 'object');
 			$dComponentFolder	= 'users' . DS . $_SESSION['uid'] . DS . $post['cid'] . DS;
 
 			// if this is a component and is owned by user
-			if($getComponent):
+			if ($getComponent):
 
 				$getComponents	= $database->select('br_components', '*', 'cidparent="'.$post['cid'].'" AND uid="'.$_SESSION['uid'].'"', 'object');
 
 				// Check if the views are there, if so parse through and delete them
-				if($getComponentViews):
+				if ($getComponentViews):
 					foreach($getComponentViews as $dComponentViews):
 						$database->delete('br_components_views', $dComponentViews->id);
 					endforeach;
 				endif;
 
 				// if more views, delete them
-				if($getComponents):
+				if ($getComponents):
 
 					foreach($getComponents as $dComponent):
 						$dComponentsFolder	= 'users' . DS . $_SESSION['uid'] . DS . $dComponent->id . DS;
@@ -194,7 +194,7 @@
 						$database->delete('br_components', $dComponent->id);
 
 						// Check if the views are there, if so parse through and delete them
-						if($dComponentsViews):
+						if ($dComponentsViews):
 							foreach($dComponentsViews as $dComponentView):
 								$database->delete('br_components_views', $dComponentView->id);
 							endforeach;
@@ -232,15 +232,15 @@
 	/*
 	 *	Default Component variables
 	 */
-	$joomla_version 			= $post['jversion'];
-	$component_name 			= $post['componentname'];
-	$component_main_view 		= FileHelper::safeString($post['filename']);
-	$component_main_view_cap	= ucwords($component_main_view);
-	$com_main_view				= 'com_' . $component_main_view;
-	$com_language				= strtoupper($com_main_view);
-	$com_language_menu			= $com_language . '_MENU';
-	$created_date				= date('F d, Y');
-	$author						= $post['author'];
+	$joomla_version = $post['jversion'];
+	$component_name = $post['componentname'];
+	$component_main_view = FileHelper::safeString($post['filename']);
+	$component_main_view_cap = ucwords($component_main_view);
+	$com_main_view = 'com_' . $component_main_view;
+	$com_language = strtoupper($com_main_view);
+	$com_language_menu = $com_language . '_MENU';
+	$created_date = date('F d, Y');
+	$author	= $post['author'];
 	$authoremail				= $post['authoremail'];
 	$authorurl					= $post['authorurl'];
 	$copyright					= $post['copyright'];
@@ -259,19 +259,19 @@
 	$totallinescreated			= array();
 
 	// Categories check
-	if(array_key_exists('includeCat', $post)):
+	if (array_key_exists('includeCat', $post)):
 		$includeCat = 1;
 	endif;
 
 	// Tags check - Joomla 3.1
-	if(array_key_exists('includeTags', $post)):
+	if (array_key_exists('includeTags', $post)):
 		$includeTags = 1;
 	endif;
 
 	// start - added v.0.6.0
 	$imagesUploaded = 0;
 	// Check if images are uploaded, get them and set the array for them to be added.
-	if(isset($post['imagesUploaded'])):
+	if (isset($post['imagesUploaded'])):
 		$imagesUploaded			= $post['imagesUploaded'];
 		$newImagesUploaded		= array();
 		foreach($imagesUploaded as $viewKey=>$imageUpload):
@@ -321,18 +321,23 @@
 	 */
 	$varObject->usermodified	= 0;
 	$varObject->datemodified	= 0;
-	if($post['use-usermodified']):
+
+	// print_r($post);
+	// exit();
+
+	if (isset($post['use-usermodified'])) {
 		$varObject->usermodified	= 1;
-	endif;
-	if($post['use-datemodified']):
+	}
+
+	if (isset($post['use-datemodified'])) {
 		$varObject->datemodified	= 1;
-	endif;
+	}
 
 	/*
 	 * Format all view variations
 	 */
 	// start - added v.0.6.0
-	if($views):
+	if ($views):
 		// Parse through all views, and create each variation
 		// of the view ALSO add each image to view and create css
 		// lines for css file on administrator side
@@ -344,10 +349,10 @@
 			$varObject->allViews[$view_count]['plural']['safe']		= FileHelper::safeString($view);
 			$varObject->allViews[$view_count]['plural']['language']	= strtoupper($varObject->allViews[$view_count]['plural']['safe']);
 			// Check plural and create
-			if($post['view-single'][$view_count]):
+			if ($post['view-single'][$view_count]):
 				$singular = $post['view-single'][$view_count];
 				// Main view can't equal the singular view
-				if($singular != $view):
+				if ($singular != $view):
 					$singular	= $singular;
 				else:
 					$singular	= substr($view, 0, -1);
@@ -383,7 +388,7 @@
 	$varObject->return			= $return;
 
 	// Handle Joomla Versions
-	if($varObject->j_version == '2.5.0'):
+	if ($varObject->j_version == '2.5.0'):
 		$varObject->j_controller 						= 'JController';
 		$varObject->j_controller_display_function		= 'function display($cachable = false)';
 		$varObject->j_controller_display_function		= 'function display($cachable = false, $urlparams = false)'; // new for Joomla 2.5.7
@@ -395,7 +400,7 @@
 		$varObject->j_view								= 'JView';
 		$varObject->j_view_single_view_html_hide_menu	= 'JRequest::setVar(\'hidemainmenu\', true);';
 		$varObject->j_clear_class						= 'clr';
-	elseif($varObject->j_version == '3.0' || $varObject->j_version == '3.2'):
+	elseif ($varObject->j_version == '3.0' || $varObject->j_version == '3.2'):
 		$varObject->j_controller						= 'JControllerLegacy';
 		$varObject->j_controller_display_function		= 'function display($cachable = false, $urlparams = false)';
 		$varObject->j_helper_sub_menu_type				= 'JHtmlSidebar';
@@ -421,11 +426,11 @@
 	        	// Get type of file
 	        	$typedir = filetype($dir . $file);
 	        	// Check the type is a folder (directory)
-	        	if($typedir == 'dir' && $file != '.' && $file != '..'):
+	        	if ($typedir == 'dir' && $file != '.' && $file != '..'):
 	        		$foldertocheck = explode('-', $file);
 	        		$daycreated = $foldertocheck[0];
 	        		// Is the folder a day old or more? Then delete it off the server
-	        		if(strtotime($daycreated)< strtotime('-1 days')):
+	        		if (strtotime($daycreated)< strtotime('-1 days')):
 	        			$dirpath = $dir . $file;
 	        			FileHelper::deleteDir($dirpath);
 	        		endif;
@@ -438,34 +443,34 @@
 	/*
 	 *	Create Task
 	 */
-	if($task == 'create'):
+	if ($task == 'create'):
 
 		/*
 		 *	Check to make sure there are fields filled out, if not redirect with message.
 		 */
 
-		if(empty($post['componentname'])):
+		if (empty($post['componentname'])):
 			header('location:index.php?msg=1');
 			exit();
-		elseif(empty($post['author'])):
+		elseif (empty($post['author'])):
 			header('location:index.php?msg=1');
 			exit();
-		elseif(empty($post['authoremail'])):
+		elseif (empty($post['authoremail'])):
 			header('location:index.php?msg=1');
 			exit();
-		elseif(empty($post['authorurl'])):
+		elseif (empty($post['authorurl'])):
 			header('location:index.php?msg=1');
 			exit();
-		elseif(empty($post['copyright'])):
+		elseif (empty($post['copyright'])):
 			header('location:index.php?msg=1');
 			exit();
-		elseif(empty($post['license'])):
+		elseif (empty($post['license'])):
 			header('location:index.php?msg=1');
 			exit();
-		elseif(empty($post['version'])):
+		elseif (empty($post['version'])):
 			header('location:index.php?msg=1');
 			exit();
-		elseif(empty($post['description'])):
+		elseif (empty($post['description'])):
 			header('location:index.php?msg=1');
 			exit();
 		endif;
@@ -478,9 +483,9 @@
 		 */
 		// start - added v.0.6.0
 		$useDatabase = 1;
-		if($post['usedatabase'] == 1):
-			if(array_key_exists('main-view-table-field', $post)):
-				if(empty($post['main-view-table-field'][0])):
+		if ($post['usedatabase'] == 1):
+			if (array_key_exists('main-view-table-field', $post)):
+				if (empty($post['main-view-table-field'][0])):
 					$useDatabase = 0;
 				endif;
 			else:
@@ -501,14 +506,14 @@
 		$view_count = 0;
 		foreach($varObject->allViews as $view):
 			// Check if view is not categories and not category
-			if($view['plural']['safe'] != 'categories' && $view['plural']['safe'] != 'category'):
+			if ($view['plural']['safe'] != 'categories' && $view['plural']['safe'] != 'category'):
 				// start - added v.0.6.0
-				if($varObject->useDatabase):
-					if($view_count == 0):
+				if ($varObject->useDatabase):
+					if ($view_count == 0):
 						$name = $post['main-view-table-field'];
 						$type = $post['main-view-table-fieldtype'];
 						foreach($type as $k=>$ty):
-							if($ty == 'file'):
+							if ($ty == 'file'):
 								$varObject->imageUpload = 1;
 								$imageFieldName = preg_replace('/[^A-Za-z0-9]/', ' ', $post['main-view-table-field'][$k]);
 								$imageFieldNameSafe = strtolower(str_replace(' ', '', $imageFieldName));
@@ -520,11 +525,11 @@
 						endforeach;
 					else:
 						// Rest of the views fields
-						if(array_key_exists('view-'.$view_count.'-field', $post)):
+						if (array_key_exists('view-'.$view_count.'-field', $post)):
 							$name = $post['view-'.$view_count.'-field'];
 							$type = $post['view-'.$view_count.'-fieldtype'];
 							foreach($type as $k=>$ty):
-								if($ty == 'file'):
+								if ($ty == 'file'):
 									$varObject->imageUpload = 1;
 									$imageFieldName = preg_replace('/[^A-Za-z0-9]/', ' ', $post['view-'.$view_count.'-field'][$k]);
 									$imageFieldNameSafe = strtolower(str_replace(' ', '', $imageFieldName));
@@ -543,20 +548,20 @@
 
 		// start - added v.1.1.5
 		// Category view form fields
-		if($varObject->includeCat):
+		if ($varObject->includeCat):
 			$varObject->categoryView = 0;
 			$varObject->categoryViewFields = array();
 			$view_count = 0;
 			foreach($varObject->allViews as $view):
 				// Check if view is not categories and not category
-				if($view['plural']['safe'] != 'categories' && $view['plural']['safe'] != 'category'):
+				if ($view['plural']['safe'] != 'categories' && $view['plural']['safe'] != 'category'):
 					// start - added v.0.6.0
-					if($varObject->useDatabase):
-						if($view_count == 0):
+					if ($varObject->useDatabase):
+						if ($view_count == 0):
 							$name = $post['main-view-table-field'];
 							$type = $post['main-view-table-fieldtype'];
 							foreach($type as $k=>$ty):
-								if($ty == 'category'):
+								if ($ty == 'category'):
 									$varObject->categoryView = 1;
 									$varObject->categoryViewFields[$view_count] = array(
 										'plural' => array(
@@ -574,11 +579,11 @@
 							endforeach;
 						else:
 							// Rest of the views fields
-							if(array_key_exists('view-'.$view_count.'-field', $post)):
+							if (array_key_exists('view-'.$view_count.'-field', $post)):
 								$name = $post['view-'.$view_count.'-field'];
 								$type = $post['view-'.$view_count.'-fieldtype'];
 								foreach($type as $k=>$ty):
-									if($ty == 'category'):
+									if ($ty == 'category'):
 										$varObject->categoryView = 1;
 										$varObject->categoryViewFields[$view_count] = array(
 											'plural' => array(
@@ -613,21 +618,21 @@
 		 *	Create the install files
 		 */
 		$installlines	= Files::installFile($varObject);
-		$scriptlines	= Files::scriptFile($varObject, 'script.php');
+		$scriptlines = Files::scriptFile($varObject, 'script.php');
 
 		/*
 		 * Create index file
 		 */
-		$indexlines[]		= Files::indexFile();
+		$indexlines[] = Files::indexFile();
 
 		/*
 		 *	Create ALL the admin files!!!!1
 		 */
-		$access				= AdminFiles::accessFile($varObject);
-		$config				= AdminFiles::configFile($varObject);
-		$componentlines 	= AdminFiles::componentFile($varObject);
-		$controllerlines	= AdminFiles::controllerFile($varObject, 'controller.php');
-		$helperlines		= AdminFiles::helperFile($varObject);
+		$access	= AdminFiles::accessFile($varObject);
+		$config	= AdminFiles::configFile($varObject);
+		$componentlines = AdminFiles::componentFile($varObject);
+		$controllerlines = AdminFiles::controllerFile($varObject, 'controller.php');
+		$helperlines = AdminFiles::helperFile($varObject);
 
 		/*
 		 *	Create ALL the site files!!!!1
@@ -660,7 +665,7 @@
 		$adminmodels			= $adminfolder . 'models' . DS;
 
 		// start - added v.0.6.0
-		if($varObject->useDatabase):
+		if ($varObject->useDatabase):
 			$adminmodelsfields		= $adminmodels . 'fields' . DS;
 			$adminmodelsforms		= $adminmodels . 'forms' . DS;
 			$adminmodelsrules		= $adminmodels . 'rules' . DS;
@@ -697,7 +702,7 @@
 		FileHelper::foldercheck($adminmodels);
 
 		// start - added v.0.6.0
-		if($varObject->useDatabase):
+		if ($varObject->useDatabase):
 			FileHelper::foldercheck($adminmodelsfields);
 			FileHelper::foldercheck($adminmodelsforms);
 			FileHelper::foldercheck($adminmodelsrules);
@@ -766,7 +771,7 @@
 		$languagesysfile		= $adminlanguageengb . 'en-GB.' . $varObject->com_main . '.sys.ini';
 
 		// start - added v.0.6.0
-		if($varObject->useDatabase):
+		if ($varObject->useDatabase):
 			$sqlinstallfile			= $adminsql . 'install.mysql.utf8.sql';
 			$sqluninstallfile		= $adminsql . 'uninstall.mysql.utf8.sql';
 			$sqlupdatesmysqlfile	= $adminsqlupdatesmysql . $varObject->version . '.sql';
@@ -796,7 +801,7 @@
 		$indexpaths[] = $adminmodels . $indexfile;
 
 		// start - added v.0.6.0
-		if($varObject->useDatabase):
+		if ($varObject->useDatabase):
 			$indexpaths[] = $adminsql . $indexfile;
 			$indexpaths[] = $adminsqlupdates . $indexfile;
 			$indexpaths[] = $adminsqlupdatesmysql . $indexfile;
@@ -819,30 +824,32 @@
 		foreach($varObject->allViews as $view):
 
 			// Check if view is not categories and not category
-			if($view['plural']['safe'] != 'categories' && $view['plural']['safe'] != 'category'):
+			if ($view['plural']['safe'] != 'categories' && $view['plural']['safe'] != 'category'):
 
 				// Handle the form fields
 				$formfields = (object) array();
 
 				// start - added v.0.6.0
-				if($varObject->useDatabase):
-					if($view_count == 0):
+				if ($varObject->useDatabase):
+					if ($view_count == 0):
 						// Main view fields
-						$formfields->name		= $post['main-view-table-field'];
+						$formfields->name = $post['main-view-table-field'];
+
 						// start - added v.1.0.0
-						foreach($post['main-view-table-field'] as $field):
+						foreach($post['main-view-table-field'] as $field) {
 							$field = preg_replace('/[^A-Za-z0-9]/', ' ', $field);
 							$formfields->name_safe[] = strtolower(str_replace(' ', '', $field));
-						endforeach;
+						}
 						// end - added v.1.0.0
-						$formfields->count		= count($formfields->name);
-						$formfields->type		= $post['main-view-table-fieldtype'];
-						$formfields->default	= $post['main-view-table-default'];
-						$formfields->show		= $post['main-view-table-show'];
-						$formfields->required	= $post['main-view-table-required'];
+
+						$formfields->count = count($formfields->name);
+						$formfields->type = $post['main-view-table-fieldtype'];
+						$formfields->default = $post['main-view-table-default'];
+						$formfields->show	= isset($post['main-view-table-show']) ? $post['main-view-table-show'] : array();
+						$formfields->required	= isset($post['main-view-table-required']) ? $post['main-view-table-required'] : array();
 					else:
 						// Rest of the views fields
-						if(array_key_exists('view-'.$view_count.'-field', $post)):
+						if (array_key_exists('view-'.$view_count.'-field', $post)):
 							// View fields
 							$formfields->name		= $post['view-'.$view_count.'-field'];
 							// start - added v.1.0.0
@@ -868,7 +875,7 @@
 				// Add paths to index paths array()
 
 				// start - added v.0.6.0
-				if($varObject->useDatabase):
+				if ($varObject->useDatabase):
 					$indexpaths[]				= $adminmodelsfields . $indexfile;
 					$indexpaths[]				= $adminmodelsforms . $indexfile;
 					$indexpaths[]				= $adminmodelsrules . $indexfile;
@@ -903,7 +910,7 @@
 					$adminmodelrules			= AdminFiles::adminModelRulesRule($formfields, $varObject);
 
 					// Parse through all rules for this view
-					if(is_array($adminmodelrules)):
+					if (is_array($adminmodelrules)):
 						foreach($adminmodelrules as $adminmodelrule):
 							$adminmodelrulesrulelines		= array();
 							$rulefilename 					= $adminmodelrule['filename'];
@@ -941,16 +948,16 @@
 				$adminviewsviewtmpldefaultfoot	= $adminviewsviewtmpl . "default_foot.php";
 
 				// Which manager view view.html.php layout needed?
-				if($varObject->j_version == '2.5.0'):
+				if ($varObject->j_version == '2.5.0'):
 					$adminviewsviewhtmllines = AdminFiles::viewsViewHtml25($view, $varObject, 'view.html.php');
-				elseif($varObject->j_version == '3.0' || $varObject->j_version == '3.2'):
+				elseif ($varObject->j_version == '3.0' || $varObject->j_version == '3.2'):
 					$adminviewsviewhtmllines = AdminFiles::viewsViewHtml30($view, $varObject, 'view.html.php');
 				endif;
 
 				// Which manager view default.php layout needed?
-				if($varObject->j_version == '2.5.0'):
+				if ($varObject->j_version == '2.5.0'):
 					$adminviewsviewtmpldefaultlines = AdminFiles::viewsViewDefault25($view, $varObject, 'default.php');
-				elseif($varObject->j_version == '3.0' || $varObject->j_version == '3.2'):
+				elseif ($varObject->j_version == '3.0' || $varObject->j_version == '3.2'):
 					$adminviewsviewtmpldefaultlines = AdminFiles::viewsViewDefault30($view, $varObject, 'default.php');
 				endif;
 
@@ -964,14 +971,14 @@
 				$filestozip[] = $adminviewsviewtmpl;
 
 				// start - added v.0.6.0
-				if($varObject->useDatabase):
+				if ($varObject->useDatabase):
 					// Create SQL install and uninstall files
 					$sqlinstallfilelinesarray[]		= AdminFiles::adminSQLInstallFile($formfields, $view, $varObject);
 					$sqluninstallfilelinesarray[]	= AdminFiles::adminSQLUninstallFile($formfields, $view, $varObject);
 				endif;
 				// end - added v.0.6.0
 
-				if(!is_numeric($view['singular']['safe']) && $varObject->useDatabase): // added - v.0.6.0 - database check
+				if (!is_numeric($view['singular']['safe']) && $varObject->useDatabase): // added - v.0.6.0 - database check
 					/**
 					 *	Admin side
 					 */
@@ -1007,9 +1014,9 @@
 					$singularviewviewhtmllines		= AdminFiles::viewsViewSingularViewHtml($view, $varObject, 'view.html.php');
 					$singularviewviewsubmitlines	= AdminFiles::viewsViewSingularViewSubmitButton($view, $varObject, 'submitbutton.js');
 					// Which edit.php layout needed?
-					if($varObject->j_version == '2.5.0'):
+					if ($varObject->j_version == '2.5.0'):
 						$singularviewviewtmpleditlines = AdminFiles::viewsViewSingularViewEdit25($view, $varObject, 'edit.php', $view_count);
-					elseif($varObject->j_version == '3.0' || $varObject->j_version == '3.2'):
+					elseif ($varObject->j_version == '3.0' || $varObject->j_version == '3.2'):
 						$singularviewviewtmpleditlines = AdminFiles::viewsViewSingularViewEdit30($view, $varObject, 'edit.php', $view_count);
 					endif;
 					// Create files
@@ -1149,7 +1156,7 @@
 				$filestozip[]			= $adminviewsviewhtml;
 				$filestozip[]			= $adminviewsviewtmpldefault;
 
-				if(!is_numeric($view['singular']['safe']) && $varObject->useDatabase):
+				if (!is_numeric($view['singular']['safe']) && $varObject->useDatabase):
 					$totallinescreated[]	= FileHelper::createFile($adminviewsviewtmpldefaulthead, $adminviewsviewtmpldefaultheadlines);
 					$totallinescreated[]	= FileHelper::createFile($adminviewsviewtmpldefaultbody, $adminviewsviewtmpldefaultbodylines);
 					$totallinescreated[]	= FileHelper::createFile($adminviewsviewtmpldefaultfoot, $adminviewsviewtmpldefaultfootlines);
@@ -1169,7 +1176,7 @@
 		 */
 		// start - added v.1.1.5
 		$cat_view_count = 0;
-		if($varObject->includeCat && $varObject->categoryView):
+		if ($varObject->includeCat && $varObject->categoryView):
 			foreach($varObject->categoryViewFields as $categoryView):
 				// Create cat views
 				$sitecatview					= $siteviews . $categoryView['plural']['view_safe'] . "category/";
@@ -1226,7 +1233,7 @@
 		// end - added v.1.1.5
 
 		// If image upload
-		if($varObject->imageUpload):
+		if ($varObject->imageUpload):
 			// include wideimage into the package
 			$toolsfolder = 'tools' . DS;
 			$toolsfolderwideimage = $toolsfolder . 'wideimage' . DS;
@@ -1358,11 +1365,11 @@
 		endforeach;
 
 		// start - added v.0.6.0
-		if($varObject->useDatabase):
+		if ($varObject->useDatabase):
 			$sqlinstallfilelines = array();
 			$sqluninstallfilelines = array();
 			// Install & Uninstall array parse and build file
-			if(is_array($sqlinstallfilelinesarray)):
+			if (is_array($sqlinstallfilelinesarray)):
 				foreach($sqlinstallfilelinesarray as $sqlinstallfilegroup):
 					foreach($sqlinstallfilegroup as $sqlinstallfileline):
 						$sqlinstallfilelines[]	= $sqlinstallfileline;
@@ -1371,7 +1378,7 @@
 				endforeach;
 			endif;
 
-			if(is_array($sqluninstallfilelinesarray)):
+			if (is_array($sqluninstallfilelinesarray)):
 				foreach($sqluninstallfilelinesarray as $sqluninstallfileline):
 					$sqluninstallfilelines[]	= $sqluninstallfileline;
 					$sqluninstallfilelines[]	= $varObject->return;
@@ -1400,7 +1407,7 @@
 		 *	Handle images to folder admin/assets/images/icons/
 		 *	copies images from temp to new path for packaging
 		 */
-		if($varObject->imagesUploaded):
+		if ($varObject->imagesUploaded):
 			$tempFolder = 'temp' . DS;
 			$origFolder = $tempFolder . 'orig' . DS;
 			$manaFolder = $tempFolder . 'mana' . DS; // 48px X 48px
@@ -1437,7 +1444,7 @@
 		$totallinescreated[] = FileHelper::createFile($controllerfile, $controllerlines);
 
 		// start - added v.0.6.0
-		if($varObject->useDatabase):
+		if ($varObject->useDatabase):
 			$totallinescreated[] = FileHelper::createFile($sqlinstallfile, $sqlinstallfilelines);
 			$totallinescreated[] = FileHelper::createFile($sqluninstallfile, $sqluninstallfilelines);
 			$totallinescreated[] = FileHelper::createFile($sqlupdatesmysqlfile, $sqlinstallfilelines);
@@ -1455,7 +1462,7 @@
 		$filestozip[] = $controllerfile;
 
 		// start - added v.0.6.0
-		if($varObject->useDatabase):
+		if ($varObject->useDatabase):
 			$filestozip[] = $sqlinstallfile;
 			$filestozip[] = $sqluninstallfile;
 			$filestozip[] = $sqlupdatesmysqlfile;
@@ -1510,35 +1517,35 @@
 		$currentdate		= " AND date_created >= '".$currentdate." 00:00:00' AND date_created < '".$currentdate." 23:59:59'";
 		$packagenamecheck	= $database->select('br_packages', '*', 'package="'.$packagename.'"'.$currentdate);
 		// Check if packagename is there today
-		if($packagenamecheck):
+		if ($packagenamecheck):
 			$newpackagename		= str_replace('.zip', '-1.zip', $packagename);
 			$packagenamecheck	= $database->select('br_packages', '*', 'package="'.$newpackagename.'"'.$currentdate);
 			// Check if packagename is there today
-			if($packagenamecheck):
+			if ($packagenamecheck):
 				$newpackagename		= str_replace('.zip', '-2.zip', $packagename);
 				$packagenamecheck	= $database->select('br_packages', '*', 'package="'.$newpackagename.'"'.$currentdate);
 				// Check if packagename is there today
-				if($packagenamecheck):
+				if ($packagenamecheck):
 					$newpackagename		= str_replace('.zip', '-3.zip', $packagename);
 					$packagenamecheck	= $database->select('br_packages', '*', 'package="'.$newpackagename.'"'.$currentdate);
 					// Check if packagename is there today
-					if($packagenamecheck):
+					if ($packagenamecheck):
 						$newpackagename		= str_replace('.zip', '-4.zip', $packagename);
 						$packagenamecheck	= $database->select('br_packages', '*', 'package="'.$newpackagename.'"'.$currentdate);
 						// Check if packagename is there today
-						if($packagenamecheck):
+						if ($packagenamecheck):
 							$newpackagename		= str_replace('.zip', '-5.zip', $packagename);
 							$packagenamecheck	= $database->select('br_packages', '*', 'package="'.$newpackagename.'"'.$currentdate);
 							// Check if packagename is there today
-							if($packagenamecheck):
+							if ($packagenamecheck):
 								$newpackagename		= str_replace('.zip', '-6.zip', $packagename);
 								$packagenamecheck	= $database->select('br_packages', '*', 'package="'.$newpackagename.'"'.$currentdate);
 								// Check if packagename is there today
-								if($packagenamecheck):
+								if ($packagenamecheck):
 									$newpackagename		= str_replace('.zip', '-7.zip', $packagename);
 									$packagenamecheck	= $database->select('br_packages', '*', 'package="'.$newpackagename.'"'.$currentdate);
 									// Check if packagename is there today
-									if($packagenamecheck):
+									if ($packagenamecheck):
 										$newpackagename	= str_replace('.zip', '-8.zip', $packagename);
 									endif;
 								endif;
@@ -1560,7 +1567,7 @@
 		FileHelper::foldercheck($componentsfolder);
 		FileHelper::foldercheck($todaysdatefolder);
 
-		if($filescreatedlist):
+		if ($filescreatedlist):
 			// Format numbers
 			//$filecreatedcount	= number_format($filecreatedcount);
 			$totallinescalculated_format = number_format($totallinescalculated);
@@ -1583,8 +1590,8 @@
 			chmod($filedirectpath, 0777);
 
 			// check to make sure we want to create, not in test mode
-			if(CREATE_PACKAGE):
 
+			if (CREATE_PACKAGE):
 				// Make safe?
 				$varObject->description = str_replace("'", "\'", $varObject->description);
 				$create_package_record = array (
@@ -1625,11 +1632,11 @@
 					//echo 'index.html could not be moved..';
 				endif;
 			else:
-				if($varObject->imageUpload){
+				if ($varObject->imageUpload){
 					print_r('Image upload include:');
 					Debug::printify($varObject->imageFields);
 				}
-				if($varObject->categoryView){
+				if ($varObject->categoryView){
 					print_r('Category view include:');
 					Debug::printify($varObject->categoryViewFields);
 				}
@@ -1640,7 +1647,7 @@
 		endif;
 
 		// Save user record of component and move to their repo
-		if(Access::loggedIn() && Access::paid() && $filescreatedlist):
+		if (Access::loggedIn() && Access::paid() && $filescreatedlist):
 			// get all fields to save and relation
 			$user_component_record = array(
 				'uid' 				=> $_SESSION['uid'],
@@ -1712,10 +1719,10 @@
 
 				$record_view_fields = array();
 				// Make sure there is formfields
-				if($varObject->formFields):
-					if(is_object($varObject->formFields[$c])):
+				if ($varObject->formFields):
+					if (is_object($varObject->formFields[$c])):
 						foreach($varObject->formFields[$c] as $key=>$record_view_field):
-							if($key != 'count'):
+							if ($key != 'count'):
 								$record_view_fields[$key] = $record_view_field;
 							endif;
 						endforeach;
@@ -1746,7 +1753,7 @@
 						<div class="row">
 							<div class="span12">
 								<?php
-								if($filescreatedlist):
+								if ($filescreatedlist):
 								?>
 								<div class="jumbotron">
 									<h2><?php echo $varObject->comp_name; ?> component has been created..</h2>
